@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="Resource-type" content="Document"/>
     <title>东南大学 2024 毕业生大数据</title>
+    <!-- fullPage.js -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.22/fullpage.min.css"
+          integrity="sha512-i5IHYtHBVvbgT6M4ltVKNqF7fh/MTVfGh3ilW1gxxgmlMocsl8aYz28aF0Iph+ceUpun06UW9CpExog9qXqFKQ=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
 </head>
 <body>
-    <h1>东南大学 2024 毕业生大数据</h1>
+<div id="fullpage">
+    <div class="section">Section 1</div>
+    <div class="section">Section 2</div>
+    <div class="section">Section 3</div>
+    <div class="section">Section 4</div>
+</div>
+<!-- fullPage.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.22/fullpage.min.js"
+        integrity="sha512-yHHLi2ZwgtW9QNVZd0asqMyWGJ6Kx73ijKlGWSi3MwYFB5ZzOJV8wPtopKr6muHk5SERgF3OB/2dZj3StlI34w=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+<script>
+    // Initialize fullPage.js (Vanilla JS)
+    new fullpage('#fullpage', {
+        autoScrolling: true,
+        scrollHorizontally: true
+    });
+</script>
 </body>
 </html>
