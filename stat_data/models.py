@@ -3,6 +3,14 @@ from django.db import models
 
 class GraduatePersonalStat(models.Model):
     """毕业生个人统计信息表, 用于数据检索、展示"""
+    # ---------- 枚举 ---------- #
+    # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
+    GRADUATE_TYPE_CHOICES = [
+        (0, "本科毕业生"),
+        (1, "硕士毕业生"),
+        (2, "博士毕业生"),
+    ]
+
     # ---------- 基本 ---------- #
     # 一卡通号
     seu_card_id = models.CharField(max_length=20, primary_key=True, verbose_name="一卡通号", unique=True)
@@ -18,6 +26,16 @@ class GraduatePersonalStat(models.Model):
     dormitory_name = models.CharField(max_length=20, verbose_name="宿舍名称", null=True, blank=True)
     # 入学时间
     enroll_date = models.DateField(verbose_name="入学时间", null=True, blank=True)
+    # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
+    # graduate_type = models.IntegerField(choices=GRADUATE_TYPE_CHOICES, verbose_name="毕业生类型", null=True, blank=True)
+    # 出生日期
+    # birth_date = models.DateField(verbose_name="出生日期", null=True, blank=True)
+    # 相同出生日期的毕业生人数
+    # same_birth_date_num = models.IntegerField(verbose_name="相同出生日期的毕业生人数", null=True, blank=True)
+    # 生源地
+    # origin = models.CharField(max_length=50, verbose_name="生源地", null=True, blank=True)
+    # 相同生源地的毕业生人数
+    # same_origin_num = models.IntegerField(verbose_name="相同生源地的毕业生人数", null=True, blank=True)
 
     # ---------- 网络 ---------- #
     # 网络在线天数
@@ -40,6 +58,12 @@ class GraduatePersonalStat(models.Model):
                                                          blank=True)
     # 最高单次消费日期
     highest_single_consumption_date = models.DateField(verbose_name="最高单次消费日期", null=True, blank=True)
+    # 最常去相同食堂的人数百分比
+    # same_canteen_percentage = models.CharField(max_length=10, verbose_name="去相同食堂的人数百分比", null=True, blank=True)
+    # 最频繁同时、同地消费的人
+    # canteen_friend = models.CharField(max_length=20, verbose_name="最频繁同时、同地消费的人", null=True, blank=True)
+    # 同时、同地消费的次数
+    # canteen_friend_together_times = models.CharField(max_length=10, verbose_name="同时、同地消费的次数", null=True, blank=True)
 
     # ---------- 课程 ---------- #
     # 第一节课日期
@@ -97,6 +121,8 @@ class GraduatePersonalStat(models.Model):
     # 个人借阅书籍中总借阅次数最少书名
     nice_book_name = models.CharField(max_length=50, verbose_name="个人借阅书籍中总借阅次数最少书名", null=True,
                                       blank=True)
+    # 借阅量百分比排名
+    # book_borrowing_percentage_rank = models.CharField(max_length=10, verbose_name="借阅量百分比排名", null=True, blank=True)
 
     # ---------- 体育 ---------- #
     # 场馆预约次数
