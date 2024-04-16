@@ -40,11 +40,11 @@
             ，正式成为了东大人
             <br/>
             在同届中，有
-            【TODO: same_birth_date_num】
+            {{ same_birth_date_cnt }}
             人与你同月同日生
             <br/>
             同届有
-            【TODO: same_origin_num】
+            {{ same_origin_cnt }}
             人与你从同一省份来到东大
             <br/>
             不同时间，你们共同在路途中前进
@@ -71,7 +71,7 @@
             GB
             <br/>
             相当于看了
-            【TODO: network_flow_equivalence】
+            {{ network_flow_equivalence }}
             遍《甄嬛传》！
         </p>
     </div>
@@ -200,6 +200,18 @@
     <!-- 图书馆 -->
     <div class="section" id="section6">
         <p>
+            【TODO if show_borrowing_rank】
+            你累计借阅书籍
+            {{ graduate.total_borrowed_books_num }}
+            本，超过了
+            【TODO: book_borrowing_percentage_rank】
+            的人
+            <br/>
+            【endif】
+            全校借书数量No.1的同学借阅了
+            {{ max_total_borrowed_books_num }}
+            本
+            <br/>
             TODO
         </p>
     </div>
