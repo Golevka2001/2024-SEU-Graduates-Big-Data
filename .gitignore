@@ -1,8 +1,8 @@
 # Mac OS
 .DS_Store
 
-# Database files
-*.db
+# Database configuration
+my.cnf
 
 # Django migration files
 **/migrations/*.py
