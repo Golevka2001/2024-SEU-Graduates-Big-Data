@@ -32,7 +32,7 @@
         <p>
             {{ graduate.enroll_date|date:"Y年m月d日" }}
             ，你从
-            【TODO: origin】
+            {{ graduate.origin }}
             来到东南大学
             <br/>
             你拥有了专属学号
@@ -91,17 +91,17 @@
             {{ graduate.most_frequent_consumption_place }}
             <br/>
             有
-            【TODO: same_canteen_percentage】
+            {{ same_favorite_canteen_percent }}
             的人与你拥有共同喜好
             <br/>
             你和
-            【TODO: canteen_friend】
+            {{ graduate.canteen_friend }}
             全年超过
-            【TODO: canteen_friend_together_times】
+            {{ graduate.canteen_friend_together_times }}
             次，
             在同一时间、地点消费。友情万岁！
             <br/>
-            {{ graduate.highest_single_consumption_date }}
+            {{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}
             ，你创下最高的单次消费记录
             {{ graduate.highest_single_consumption_amount }}
             元
@@ -118,7 +118,7 @@
             {{ graduate.major }}
             <br/>
             在
-            {{ graduate.first_class_date }}
+            {{ graduate.first_class_date|date:"Y年m月d日" }}
             ，
             {{ graduate.first_class_place }}
             ，
@@ -158,15 +158,15 @@
             次讲座
             <br/>
             你在
-            {{ graduate.first_lecture_date }}
+            {{ graduate.first_lecture_date|date:"Y年m月d日" }}
             第一次听了
             {{ graduate.first_lecture_name }}
             讲座，知识拓宽视野
             <br/>
-            【if graduate_type != 0】
-            研究生补：在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门，在东大有无数扇门为你开启~
-            <br/>
-            【endif】
+            {% if graduate.graduate_type != 0 %}
+                在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门，在东大有无数扇门为你开启~
+                <br/>
+            {% endif %}
             你参与完成了
             {{ graduate.srtp_project_num }}
             个SRTP项目
@@ -200,14 +200,14 @@
     <!-- 图书馆 -->
     <div class="section" id="section6">
         <p>
-            【TODO if show_borrowing_rank】
-            你累计借阅书籍
-            {{ graduate.total_borrowed_books_num }}
-            本，超过了
-            【TODO: book_borrowing_percentage_rank】
-            的人
-            <br/>
-            【endif】
+            {% if show_borrowing_rank %}
+                你累计借阅书籍
+                {{ graduate.total_borrowed_books_num }}
+                本，超过了
+                {{ borrowing_rank_percent }}
+                的人
+                <br/>
+            {% endif %}
             全校借书数量No.1的同学借阅了
             {{ max_total_borrowed_books_num }}
             本
@@ -227,7 +227,7 @@
     <div class="section" id="section8">
         <p>
             这是你与东大相逢的第
-            【TODO: days_in_seu】
+            {{ days_in_seu }}
             天，母校将永远成为你的坚强后盾
             <br/>
             你与东大共同完成这份时间地图，回顾你在东大走过的角落，细数你赏过的春光，望过的月亮，邂逅过的人

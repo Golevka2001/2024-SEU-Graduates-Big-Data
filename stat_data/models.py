@@ -27,11 +27,11 @@ class GraduatePersonalStat(models.Model):
     # 入学时间
     enroll_date = models.DateField(verbose_name="入学时间")
     # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
-    # graduate_type = models.IntegerField(choices=GRADUATE_TYPE_CHOICES, verbose_name="毕业生类型")
+    graduate_type = models.IntegerField(choices=GRADUATE_TYPE_CHOICES, verbose_name="毕业生类型")
     # 出生日期（月日，例如：0501）
-    # birth_date = models.CharField(max_length=5, verbose_name="出生日期（月日）")
+    birth_date = models.CharField(max_length=5, verbose_name="出生日期（月日）")
     # 生源地
-    # origin = models.CharField(max_length=50, verbose_name="生源地")
+    origin = models.CharField(max_length=50, verbose_name="生源地")
 
     # ---------- 网络 ---------- #
     # 网络在线天数
@@ -50,12 +50,10 @@ class GraduatePersonalStat(models.Model):
     highest_single_consumption_amount = models.CharField(max_length=10, verbose_name="最高单次消费")
     # 最高单次消费日期
     highest_single_consumption_date = models.DateField(verbose_name="最高单次消费日期")
-    # 【calc】最常去相同食堂的人数百分比
-    # same_canteen_percentage = models.CharField(max_length=10, verbose_name="去相同食堂的人数百分比")
     # 最频繁同时、同地消费的人
-    # canteen_friend = models.CharField(max_length=20, verbose_name="最频繁同时、同地消费的人")
+    canteen_friend = models.CharField(max_length=20, verbose_name="最频繁同时、同地消费的人")
     # 同时、同地消费的次数
-    # canteen_friend_together_times = models.CharField(max_length=10, verbose_name="同时、同地消费的次数")
+    canteen_friend_together_times = models.CharField(max_length=10, verbose_name="同时、同地消费的次数")
 
     # ---------- 课程 ---------- #
     # 第一节课日期
@@ -111,10 +109,6 @@ class GraduatePersonalStat(models.Model):
     longest_book_borrowing_days = models.CharField(max_length=5, verbose_name="最长借阅天数")
     # 个人借阅书籍中总借阅次数最少书名
     nice_book_name = models.CharField(max_length=50, verbose_name="个人借阅书籍中总借阅次数最少书名")
-    # 【calc】是否显示借阅量排名
-    # show_borrowing_rank = models.BooleanField(default=False, verbose_name="是否显示借阅量排名")
-    # 【calc】借阅量百分比排名
-    # book_borrowing_percentage_rank = models.CharField(max_length=10, verbose_name="借阅量百分比排名")
 
     # ---------- 体育 ---------- #
     # 场馆预约次数
@@ -141,7 +135,7 @@ class GraduatePersonalStat(models.Model):
 class BirthDateStat(models.Model):
     """毕业生出生日期统计表"""
     # 出生日期（月日，例如：0501）
-    birth_date = models.DateField(primary_key=True, unique=True, verbose_name="出生日期（月日）")
+    birth_date = models.CharField(max_length=5, primary_key=True, unique=True, verbose_name="出生日期（月日）")
     # 此出生日期的毕业生人数
     count = models.IntegerField(verbose_name="此出生日期的毕业生人数")
 
@@ -167,17 +161,18 @@ class OriginStat(models.Model):
 
 
 class FavoriteCanteenStat(models.Model):
-    """毕业生最喜欢的食堂统计表"""
+    """毕业生最常去的食堂统计表"""
     # 食堂名称
     canteen_name = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name="食堂名称")
-    # 此食堂的毕业生人数
-    count = models.IntegerField(verbose_name="此食堂的毕业生人数")
+    # 最常去此食堂的毕业生人数
+    count = models.IntegerField(verbose_name="最常去此食堂的毕业生人数")
 
     class Meta:
         db_table = "gbd_favorite_canteen_stat"
-        verbose_name = "毕业生最喜欢的食堂统计表"
+        verbose_name = "毕业生最常去的食堂统计表"
         verbose_name_plural = verbose_name
         ordering = ["canteen_name"]
+
 
 class LibraryBorrowingStat(models.Model):
     """图书馆借阅数据表"""
@@ -191,3 +186,9 @@ class LibraryBorrowingStat(models.Model):
     full_name = models.CharField(max_length=20, verbose_name="姓名")
     # 总借阅量
     total_borrowed_books_num = models.CharField(max_length=10, verbose_name="总借阅量")
+
+    class Meta:
+        db_table = "gbd_library_borrowing_stat"
+        verbose_name = "图书馆借阅数据表"
+        verbose_name_plural = verbose_name
+        ordering = ["unit_name", "rank"]
