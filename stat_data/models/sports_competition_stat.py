@@ -10,7 +10,7 @@ class SportsCompetitionStat(models.Model):
     # 姓名
     full_name = models.CharField(max_length=20, verbose_name="姓名")
     # 学院
-    unit_name = models.CharField(max_length=20, primary_key=True, verbose_name="学院")
+    unit_name = models.CharField(max_length=20, verbose_name="学院")
     # 竞赛类型
     competition_type = models.CharField(max_length=5, verbose_name="竞赛类型")
     # 竞赛名称
