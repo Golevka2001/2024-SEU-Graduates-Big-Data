@@ -232,12 +232,8 @@ class CASClientV2(CASClientBase):
 
     def get_verification_response(self, ticket):
         params = {
-            # ----- MODIFIED START ----- #
-            # 'ticket': ticket,
-            # 'service': self.service_url
-            'service': self.service_url,
-            'ticket': ticket
-            # ----- MODIFIED END ----- #
+            'ticket': ticket,
+            'service': self.service_url
         }
         if self.proxy_callback:
             params.update({'pgtUrl': self.proxy_callback})
