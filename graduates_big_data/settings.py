@@ -56,8 +56,8 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
+    # "django.contrib.auth.backends.ModelBackend",
+    "django_cas_ng.backends.CASBackend",
 ]
 
 ROOT_URLCONF = "graduates_big_data.urls"
@@ -86,8 +86,8 @@ WSGI_APPLICATION = "graduates_big_data.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        'OPTIONS': {
-            'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+        "OPTIONS": {
+            "read_default_file": os.path.join(BASE_DIR, "my.cnf"),
         },
     },
 }
@@ -132,8 +132,18 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CAS settings
+# Testing CAS server
 CAS_LOGIN_URL = "https://apitest.seu.edu.cn/dist/#/dist/main/login"
 CAS_SERVICE_VALIDATE_URL = "https://apitest.seu.edu.cn/auth/casapi/serviceValidate"
-CAS_LOGOUT_URL = "https://apitest.seu.edu.cn/dist/#/dist/main/logout"
+CAS_LOGOUT_URL = "https://apitest.seu.edu.cn/dist/#/dist/logOut"
+
+# Production CAS server
+# CAS_LOGIN_URL = "https://auth.seu.edu.cn/dist/#/dist/main/login"
+# CAS_SERVICE_VALIDATE_URL = "https://auth.seu.edu.cn/auth/casapi/serviceValidate"
+# CAS_LOGOUT_URL = "https://auth.seu.edu.cn/dist/#/dist/logOut"
+
 CAS_SERVICE_URL = "https://gradudata2024.seu.edu.cn"
 CAS_LOGIN_NEXT_PAGE = "/"
+CAS_LOGOUT_NEXT_PAGE = "/"
+CAS_APPLY_ATTRIBUTES_TO_USER = True
+CAS_USERNAME_ATTRIBUTE = "mainCardId"
