@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +25,11 @@ SECRET_KEY = "django-insecure-%3e#@30!w*+90b5rn9vo*hcb3^^2vty5-()a=yb)bijmhq!$r%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "gradudata2024.seu.edu.cn",
+]
 
 # Application definition
 
@@ -36,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_cas_ng",
     "stat_data",
 ]
 
@@ -47,6 +52,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_cas_ng.middleware.CASMiddleware",
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
 ]
 
 ROOT_URLCONF = "graduates_big_data.urls"
@@ -119,3 +130,10 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# CAS settings
+CAS_LOGIN_URL = "https://apitest.seu.edu.cn/dist/#/dist/main/login"
+CAS_SERVICE_VALIDATE_URL = "https://apitest.seu.edu.cn/auth/casapi/serviceValidate"
+CAS_LOGOUT_URL = "https://apitest.seu.edu.cn/dist/#/dist/main/logout"
+CAS_SERVICE_URL = "https://gradudata2024.seu.edu.cn"
+CAS_LOGIN_NEXT_PAGE = "/"
