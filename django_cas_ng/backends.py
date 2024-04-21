@@ -32,7 +32,11 @@ class CASBackend(ModelBackend):
 
         if settings.CAS_USERNAME_ATTRIBUTE != 'cas:user' and settings.CAS_VERSION != 'CAS_2_SAML_1_0':
             if attributes:
-                username = attributes.get(settings.CAS_USERNAME_ATTRIBUTE)
+                # ----- MODIFIED START ----- #
+                # username = attributes.get(settings.CAS_USERNAME_ATTRIBUTE)
+                if settings.CAS_USERNAME_ATTRIBUTE in attributes:
+                    username = attributes[settings.CAS_USERNAME_ATTRIBUTE]
+                # ----- MODIFIED END ----- #
             else:
                 return None
 
