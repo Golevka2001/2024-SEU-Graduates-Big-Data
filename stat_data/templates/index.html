@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="Resource-type" content="Document"/>
+    <title>东南大学 2024 毕业生大数据</title>
+</head>
+<body>
+<h1>东南大学 2024 毕业生大数据</h1>
+<h2>首页</h2>
+
+
+{% if is_graduate %}
+    <form action="{% url 'stat_data:personal_view' %}" method="get">
+        <input type="submit" value="点击查看">
+    </form>
+{% else %}
+    <p>非本届毕业生</p>
+{% endif %}
+
+<form action="{% url 'cas_ng_logout' %}" method="get">
+    <input type="submit" value="退出登录">
+</form>
+
+</body>
+</html>
