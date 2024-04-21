@@ -106,7 +106,8 @@ python manage.py runserver
 
 ## 补充说明
 
-项目的 [CAS 认证客户端](./django_cas_ng) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng) 和 [python-cas](https://github.com/python-cas/python-cas)，在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
+项目的 [CAS 认证客户端](./django_cas_ng) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng)
+和 [python-cas](https://github.com/python-cas/python-cas)，在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
 
 修改部分在代码中按照以下形式标注：
 

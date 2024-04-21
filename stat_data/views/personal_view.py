@@ -1,6 +1,6 @@
 import datetime
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from django_cas_ng.decorators import login_required
 from stat_data.models import BirthDateStat, FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, OriginStat
