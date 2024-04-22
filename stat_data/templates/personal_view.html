@@ -6,8 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="Resource-type" content="Document"/>
     <title>东南大学 2024 毕业生大数据</title>
-    <!-- Swiper.js -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    {# Tiny-Swiper #}
+    <script src="https://unpkg.com/tiny-swiper@latest"></script>
+    <script src="https://unpkg.com/tiny-swiper@latest/lib/modules/mousewheel.min.js"></script>
+
     <style>
         html,
         body,
@@ -16,7 +19,8 @@
             height: 100%;
         }
 
-        .swiper {
+
+        .swiper-container {
             width: 100%;
             height: 100%;
         }
@@ -25,16 +29,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
+            font-size: 24px;
             text-align: start;
         }
     </style>
 </head>
 
 <body>
-<div class="swiper">
+<div class="swiper-container">
     <div class="swiper-wrapper">
-        <!-- 开头 -->
+        {# 开头 #}
         <div class="swiper-slide" id="section0">
             <p>
                 时光流转，又是一年盛夏毕业季
@@ -47,7 +51,7 @@
             </p>
         </div>
 
-        <!-- 大门 -->
+        {# 大门 #}
         <div class="swiper-slide" id="section1">
             <p>
                 {{ graduate.enroll_date|date:"Y年m月d日" }}
@@ -72,7 +76,7 @@
             </p>
         </div>
 
-        <!-- 宿舍 -->
+        {# 宿舍 #}
         <div class="swiper-slide" id="section2">
             <p>
                 欢笑喜悦，迷茫困苦，你与室友相互陪伴
@@ -96,7 +100,7 @@
             </p>
         </div>
 
-        <!-- 食堂 -->
+        {# 食堂 #}
         <div class="swiper-slide" id="section3">
             <p>
                 你一共在食堂使用校园卡消费
@@ -135,7 +139,7 @@
             </p>
         </div>
 
-        <!-- 教学楼 -->
+        {# 教学楼 #}
         <div class="swiper-slide" id="section4">
             <p>
                 你选择了
@@ -178,7 +182,7 @@
             </p>
         </div>
 
-        <!-- 大礼堂 -->
+        {# 大礼堂 #}
         <div class="swiper-slide" id="section5">
             <p>
                 {% if show_lectures %}
@@ -232,7 +236,7 @@
             </p>
         </div>
 
-        <!-- 图书馆 -->
+        {# 图书馆 #}
         <div class="swiper-slide" id="section6">
             <p>
                 {% if show_borrowing_rank %}
@@ -279,7 +283,7 @@
             </p>
         </div>
 
-        <!-- 体育馆 -->
+        {# 体育馆 #}
         {% if not show_gyms and not show_morning_exercise and not show %}
             {# 跳过此页 #}
         {% else %}
@@ -375,7 +379,7 @@
             </div>
         {% endif %}
 
-        <!-- 大门 -->
+        {# 大门 #}
         <div class="swiper-slide" id="section8">
             <p>
                 这是你与东大相逢的第
@@ -399,17 +403,15 @@
     </div>
 </div>
 
-<!-- Swiper.js -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
-    // Initialize Swiper.js
-    const swiper = new Swiper('.swiper', {
-        direction: 'vertical',
-        pagination: {
-            el: '.swiper-pagination',
-        },
+    // Initialize TinySwiper
+    const swiper = new Swiper(".swiper-container", {
+        direction: "vertical",
+        centeredSlides: true,
+        mousewheel: true,
+        plugins: [SwiperPluginMousewheel]
     });
 </script>
 </body>
-
 </html>
