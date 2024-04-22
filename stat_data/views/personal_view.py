@@ -1,23 +1,25 @@
 import datetime
 
 from django.shortcuts import render
+from django.conf import settings
 
-from django_cas_ng.decorators import login_required
-from stat_data.models import BirthDateStat, FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, OriginStat
+# from django_cas_ng.decorators import login_required
+from stat_data.models import BirthDateStat, FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, OriginStat, \
+    SportsCompetitionStat
 
 # 只有借阅量排名在前 50% 的毕业生才会显示借阅量排名
 SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
-# 只有场馆预约次数排名在前 50% 的毕业生才会显示场馆预约次数排名
-SHOW_GYM_ORDERING_RANK_THRESHOLD = 0.5
 
-
-@login_required
+# @login_required  # TODO: 生产环境中启用
 def personal_view(request):
     # 获取当前用户的一卡通号
-    seu_card_id = request.user.username
-    # TODO: 测试用，后续删除
-    if seu_card_id == "TEST_USER":
+    if settings.ENABLE_CAS:
+        seu_card_id = request.user.username
+        # TODO: 测试用，后续删除
+        if seu_card_id == "TEST_USER":
+            seu_card_id = "213216666"
+    else:
         seu_card_id = "213216666"
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
@@ -81,11 +83,21 @@ def personal_view(request):
     # 是否显示借阅详情
     show_borrowing_detail = int(graduate.total_borrowed_books_num) > 0
 
+    # 是否显示场馆预约
+    show_gyms = bool(graduate.first_ordered_gym)
+
     # 场馆预约次数排名（gym_ordered_times）
     gym_ordering_rank = GraduatePersonalStat.objects.filter(
         gym_ordered_times__gt=graduate.gym_ordered_times).count()
-    show_gym_ordering_rank = gym_ordering_rank < total_graduate_cnt * SHOW_GYM_ORDERING_RANK_THRESHOLD
     gym_ordering_rank_percent = f'{1 - gym_ordering_rank / total_graduate_cnt:.2%}'
+
+    # 是否显示跑操
+    show_morning_exercise = int(graduate.morning_exercise_times) > 0
+
+    # 是否显示体育竞赛
+    sports_competition_list = SportsCompetitionStat.objects.filter(seu_card_id=seu_card_id)
+    show_sports_competitions = bool(sports_competition_list)
+    sports_competition = sports_competition_list[0] if show_sports_competitions else None
 
     # 在学校的第多少天
     days_in_seu = (datetime.date.today() - graduate.enroll_date).days
@@ -106,6 +118,9 @@ def personal_view(request):
                                                   "max_total_borrowed_books_num": max_total_borrowed_books_num,
                                                   "top_borrower_in_unit": top_borrower_in_unit,
                                                   "show_borrowing_detail": show_borrowing_detail,
-                                                  "show_gym_ordering_rank": show_gym_ordering_rank,
+                                                  "show_gyms": show_gyms,
                                                   "gym_ordering_rank_percent": gym_ordering_rank_percent,
+                                                  "show_morning_exercise": show_morning_exercise,
+                                                  "show_sports_competitions": show_sports_competitions,
+                                                  "sports_competition": sports_competition,
                                                   "days_in_seu": days_in_seu})
