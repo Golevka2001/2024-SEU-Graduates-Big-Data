@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.conf import settings
 
 # from django_cas_ng.decorators import login_required
-from stat_data.models import BirthDateStat, FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, OriginStat, \
+from stat_data.models import FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, OriginStat, \
     SportsCompetitionStat
 
 # 只有借阅量排名在前 50% 的毕业生才会显示借阅量排名
@@ -31,10 +31,6 @@ def personal_view(request):
     # total_graduate_cnt = GraduatePersonalStat.objects.count()
     total_graduate_cnt = 123
 
-    # 相同出生月日的毕业生人数
-    birth_date = graduate.birth_date
-    same_birth_date_cnt = BirthDateStat.objects.get(birth_date=birth_date).count - 1
-
     # 相同生源地的毕业生人数
     origin = graduate.origin
     same_origin_cnt = OriginStat.objects.get(origin=origin).count - 1
@@ -46,9 +42,6 @@ def personal_view(request):
     same_favorite_canteen_cnt = FavoriteCanteenStat.objects.get(
         canteen_name=graduate.most_frequent_consumption_place).count - 1
     same_favorite_canteen_percent = f'{same_favorite_canteen_cnt / total_graduate_cnt:.2%}'
-
-    # 是否显示最频繁同时、同地消费的人
-    show_canteen_friend = bool(graduate.canteen_friend)
 
     # 是否显示论文
     show_papers = int(graduate.papers_num) > 0
@@ -103,11 +96,9 @@ def personal_view(request):
     days_in_seu = (datetime.date.today() - graduate.enroll_date).days
 
     return render(request, "personal_view.html", {"graduate": graduate,
-                                                  "same_birth_date_cnt": same_birth_date_cnt,
                                                   "same_origin_cnt": same_origin_cnt,
                                                   "network_flow_equivalence": network_flow_equivalence,
                                                   "same_favorite_canteen_percent": same_favorite_canteen_percent,
-                                                  "show_canteen_friend": show_canteen_friend,
                                                   "show_papers": show_papers,
                                                   "show_lecture": show_lectures,
                                                   "show_srtp": show_srtp_projects,

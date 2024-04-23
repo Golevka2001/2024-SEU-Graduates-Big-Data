@@ -46,7 +46,9 @@
                 {{ graduate.full_name }}
                 同学，你是否还记得那天第一次相遇？
                 <br/>
-                点击查看毕业报告，来回顾那些独特的校园时光
+                点击查看毕业报告
+                <br/>
+                来回顾那些独特的校园时光
                 <br/>
             </p>
         </div>
@@ -64,7 +66,7 @@
                 ，正式成为了东大人
                 <br/>
                 在同届中，有
-                {{ same_birth_date_cnt }}
+                {{ graduate.same_birthdate_num }}
                 人与你同月同日生
                 <br/>
                 同届有
@@ -118,17 +120,6 @@
                 {{ same_favorite_canteen_percent }}
                 的人与你拥有共同喜好
                 <br/>
-                {% if show_canteen_friend %}
-                    你和
-                    {{ graduate.canteen_friend }}
-                    全年超过
-                    {{ graduate.canteen_friend_together_times }}
-                    次，
-                    在同一时间、地点消费
-                    <br/>
-                    友情万岁！
-                    <br/>
-                {% endif %}
                 {{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}
                 ，你创下最高的单次消费记录
                 {{ graduate.highest_single_consumption_amount }}
@@ -414,4 +405,5 @@
     });
 </script>
 </body>
+
 </html>

@@ -28,10 +28,10 @@ class GraduatePersonalStat(models.Model):
     enroll_date = models.DateField(verbose_name="入学时间")
     # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
     graduate_type = models.IntegerField(choices=GRADUATE_TYPE_CHOICES, verbose_name="毕业生类型")
-    # 出生日期（月日，例如：0501）
-    birth_date = models.CharField(max_length=5, verbose_name="出生日期（月日）")
     # 生源地
     origin = models.CharField(max_length=50, verbose_name="生源地")
+    # 相同生日人数
+    same_birthdate_num = models.CharField(max_length=5, verbose_name="相同生日人数")
 
     # ---------- 网络 ---------- #
     # 网络在线天数
@@ -50,10 +50,6 @@ class GraduatePersonalStat(models.Model):
     highest_single_consumption_amount = models.CharField(max_length=10, verbose_name="最高单次消费")
     # 最高单次消费日期
     highest_single_consumption_date = models.DateField(verbose_name="最高单次消费日期")
-    # 最频繁同时、同地消费的人
-    canteen_friend = models.CharField(max_length=20, verbose_name="最频繁同时、同地消费的人", null=True)
-    # 同时、同地消费的次数
-    canteen_friend_together_times = models.CharField(max_length=10, verbose_name="同时、同地消费的次数", default="0")
 
     # ---------- 课程 ---------- #
     # 第一节课日期
