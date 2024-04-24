@@ -17,27 +17,29 @@ class GraduatePersonalStat(models.Model):
     # 学号
     student_id = models.CharField(max_length=20, verbose_name="学号")
     # 姓名
-    full_name = models.CharField(max_length=20, verbose_name="姓名")
+    full_name = models.CharField(max_length=255, verbose_name="姓名")
     # 学院
-    unit_name = models.CharField(max_length=20, verbose_name="学院")
+    unit_name = models.CharField(max_length=255, verbose_name="学院")
     # 专业
-    major = models.CharField(max_length=20, verbose_name="专业")
-    # 宿舍名称
-    dormitory_name = models.CharField(max_length=20, verbose_name="宿舍名称")
+    major = models.CharField(max_length=255, verbose_name="专业")
+    # 【存在空】宿舍名称
+    dormitory_name = models.CharField(max_length=255, verbose_name="宿舍名称", null=True)
     # 入学时间
     enroll_date = models.DateField(verbose_name="入学时间")
     # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
     graduate_type = models.IntegerField(choices=GRADUATE_TYPE_CHOICES, verbose_name="毕业生类型")
-    # 生源地
-    origin = models.CharField(max_length=50, verbose_name="生源地")
-    # 相同生日人数
-    same_birthdate_num = models.CharField(max_length=5, verbose_name="相同生日人数")
+    # 【存在空】生源地
+    origin = models.CharField(max_length=255, verbose_name="生源地", null=True)
+    # 【存在空】相同生源地人数
+    same_origin_num = models.CharField(max_length=100, verbose_name="相同生源地人数", null=True, default="0")
+    # 【存在空】相同生日人数
+    same_birthdate_num = models.CharField(max_length=100, verbose_name="相同生日人数", null=True, default="0")
 
     # ---------- 网络 ---------- #
-    # 网络在线天数
-    network_online_days = models.CharField(max_length=10, verbose_name="网络在线天数")
-    # 网络总流量（GB）
-    network_flow = models.CharField(max_length=20, verbose_name="网络总流量(GB)")
+    # 【存在空】网络在线天数
+    network_online_days = models.CharField(max_length=255, verbose_name="网络在线天数", null=True)
+    # 【存在空】网络总流量（GB）
+    network_flow = models.CharField(max_length=255, verbose_name="网络总流量(GB)", null=True)
 
     # ---------- 食堂 ---------- #
     # 消费次数
@@ -105,6 +107,10 @@ class GraduatePersonalStat(models.Model):
     longest_book_borrowing_days = models.CharField(max_length=5, verbose_name="最长借阅天数", default="0")
     # 个人借阅书籍中总借阅次数最少书名
     nice_book_name = models.CharField(max_length=50, verbose_name="个人借阅书籍中总借阅次数最少书名", null=True)
+    # 个人借阅书籍中总借阅次数最少的书被多少人借过
+    nice_book_borrowing_person_num = models.CharField(max_length=100, verbose_name="个人借阅书籍中总借阅次数最少的书被多少人借过", null=True)
+    # 借阅时间最长的书名
+    longest_keeping_book_name = models.CharField(max_length=255, verbose_name="借阅时间最长的书名", null=True)
 
     # ---------- 体育 ---------- #
     # 场馆预约次数
@@ -113,6 +119,10 @@ class GraduatePersonalStat(models.Model):
     first_ordered_gym = models.CharField(max_length=20, verbose_name="首次预约场馆", null=True)
     # 首次预约日期
     first_ordered_date = models.DateField(verbose_name="首次预约日期", null=True)
+    # 最常去的场馆
+    favorite_gym = models.CharField(max_length=100, verbose_name="最常去的场馆", null=True)
+    # 最常去的场馆预约次数
+    favorite_gym_ordered_times = models.CharField(max_length=100, verbose_name="最常去的场馆预约次数", default="0")
     # 跑操次数
     morning_exercise_times = models.CharField(max_length=5, verbose_name="跑操次数", default="0")
     # 最早跑操打卡时间
