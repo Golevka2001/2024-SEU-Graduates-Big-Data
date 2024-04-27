@@ -1,0 +1,2 @@
+-- 统计表gbd_graduate_personal_stat中有多少条记录
+SELECT COUNT(DISTINCT seu_card_id) FROM gbd_graduate_personal_stat

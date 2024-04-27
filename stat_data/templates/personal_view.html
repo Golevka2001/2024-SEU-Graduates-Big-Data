@@ -31,171 +31,109 @@
 </head>
 
 <body>
+{% load static %}
 <div class="swiper">
     <div class="swiper-wrapper">
-        {# 开头 #}
-        <div class="swiper-slide" id="section0">
-            {% load static %}
-            <img
-                    class="absolute h-full w-full object-cover"
-                    src="{% static 'stat_data/img/class.jpg' %}"
-                    alt="background image (classroom)"
-            />
-            <p class="relative text-center">
-                时光流转，又是一年盛夏毕业季
-                <br/>
-                {{ graduate.full_name }}
-                同学，你是否还记得那天第一次相遇？
-                <br/>
-                点击查看毕业报告
-                <br/>
-                来回顾那些独特的校园时光
-                <br/>
-            </p>
-        </div>
-
         {# 大门 #}
         <div class="swiper-slide" id="scenario-gate-enter">
-            {% load static %}
             <img
                     class="absolute h-full w-full object-cover"
                     src="{% static 'stat_data/img/gate.jpg' %}"
                     alt="background image (gate)"
             />
-            <p class="relative text-center text-white text-4xl font-bold">
-                {{ graduate.enroll_date|date:"Y年m月d日" }}
-                ，你从
-                {{ graduate.origin }}
-                来到东南大学
-                <br/>
-                你拥有了专属学号
-                {{ graduate.student_id }}
-                ，正式成为了东大人
-                <br/>
-                在同届中，有
-                {{ graduate.same_birthdate_num }}
-                人与你同月同日生
-                <br/>
-                同届有
-                {{ same_origin_cnt }}
-                人与你从同一省份来到东大
-                <br/>
-                不同时间，你们共同在路途中前进
-                <br/>
-            </p>
+            <div class="relative text-center text-white text-4xl font-bold">
+                <p>
+                    {{ graduate.enroll_date|date:"Y年m月d日" }},
+                    {% if graduate.origin %}
+                        你从 {{ graduate.origin }} 来到东南大学
+                    {% else %}
+                        你来到了东南大学
+                    {% endif %}
+                </p>
+                <p>拥有了专属学号 {{ graduate.student_id }}</p>
+                <p>正式成为了东大人</p>
+                <p>在同届中</p>
+                <p>有 {{ graduate.same_birthdate_num }} 人与你同月同日生</p>
+                <p>有 {{ graduate.same_origin_num }} 人与你从同一省份来到东大</p>
+                <p>不同时间，你们共同在路途中前进</p>
+            </div>
         </div>
 
         {# 宿舍 #}
         <div class="swiper-slide" id="scenario-dormitory">
-            {% load static %}
             <img
                     class="absolute h-full w-full object-cover"
                     src="{% static 'stat_data/img/dorm.jpg' %}"
                     alt="background image (dormitory)"
             />
-            <p class="relative text-center text-white text-4xl font-bold">
-                欢笑喜悦，迷茫困苦，你与室友相互陪伴
+            <div class="relative text-center text-white text-4xl font-bold">
+                <p>欢笑喜悦，迷茫困苦</p>
+                <p>你与室友相互陪伴</p>
+                <p>
+                    {% if graduate.dormitory_name %}
+                        在 {{ graduate.dormitory_name }} 中分享青葱岁月
+                    {% else %}
+                        在宿舍中分享青葱岁月
+                    {% endif %}
+                </p>
                 <br/>
-                在
-                {{ graduate.dormitory_name }}
-                宿舍中分享青葱岁月
-                <br/>
-                校园网是你的贴心助手，它陪伴你度过了
-                {{ graduate.network_online_days }}
-                天
-                <br/>
-                总流量
-                {{ graduate.network_flow }}
-                GB
-                <br/>
-                相当于看了
-                {{ network_flow_equivalence }}
-                遍《甄嬛传》！
-                <br/>
-            </p>
+                <p>校园网是你的贴心助手</p>
+                <p>它陪伴你度过了 {{ graduate.network_online_days }} 天 </p>
+                <p>总流量 {{ graduate.network_flow }} GB</p>
+                <p>相当于看了 {{ network_flow_equivalence }} 遍《甄嬛传》！</p>
+            </div>
         </div>
 
         {# 食堂 #}
         <div class="swiper-slide" id="scenario-canteen">
-            {% load static %}
             <img
                     class="absolute h-full w-full object-cover"
                     src="{% static 'stat_data/img/canteen.jpg' %}"
                     alt="background image (canteen)"
             />
-            <p class="relative text-center text-white text-4xl font-bold">
-                你一共在食堂使用校园卡消费
-                {{ graduate.consumption_amount }}
-                元
+            <div class="relative text-center text-white text-4xl font-bold">
+                <p>你一共在食堂使用校园卡消费 {{ graduate.consumption_amount }} 元</p>
+                <p>刷卡 {{ graduate.consumption_times }} 次</p>
+                <p>你最常去 {{ graduate.most_frequent_consumption_place }}</p>
+                <p>有 {{ same_favorite_canteen_percent }} 的人与你拥有共同喜好</p>
                 <br/>
-                刷卡
-                {{ graduate.consumption_times }}
-                次
-                <br/>
-                你最常去
-                {{ graduate.most_frequent_consumption_place }}
-                <br/>
-                有
-                {{ same_favorite_canteen_percent }}
-                的人与你拥有共同喜好
-                <br/>
-                {{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}
-                ，你创下最高的单次消费记录
-                {{ graduate.highest_single_consumption_amount }}
-                元
-                <br/>
-                学校记住了你的变圆之旅和快乐心情
-                <br/>
-            </p>
+                {% if graduate.highest_single_consumption_date %}
+                    <p>{{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}</p>
+                    <p>你创下最高的单次消费记录 {{ graduate.highest_single_consumption_amount }} 元</p>
+                    <p>学校记住了你的变圆之旅和快乐心情</p>
+                {% endif %}
+            </div>
         </div>
 
-        {# 教学楼 #}
+        {# 教室 #}
         <div class="swiper-slide" id="scenario-classroom">
-            {% load static %}
             <img
                     class="absolute h-full w-full object-cover"
                     src="{% static 'stat_data/img/class.jpg' %}"
                     alt="background image (classroom)"
             />
-            <p class="relative text-center text-white text-4xl font-bold">
-                你选择了
-                {{ graduate.unit_name }}
-                的
-                {{ graduate.major }}
-                <br/>
-                在
-                {{ graduate.first_class_date|date:"Y年m月d日" }}
-                ，
-                {{ graduate.first_class_place }}
-                ，
-                <br/>
-                {{ graduate.first_class_teacher }}
-                老师的
-                《{{ graduate.first_class_name }}》
-                ，是你在东大的第一课
-                <br/>
-                你累计选了
-                {{ graduate.course_selected_num }}
-                门课
-                <br/>
-                获得
-                {{ graduate.credits_obtained }}
-                学分
-                <br/>
-                而你成绩最优异的课程是
-                《{{ graduate.highest_score_course }}》
-                <br/>
-                努力终有收获！
-                <br/>
-                {% if show_papers %}
-                    你一共发表过
-                    {{ graduate.papers_num }}
-                    篇科研论文
-                    <br/>
-                    功不唐捐玉汝于成，学术之路上东大为你保驾护航！
-                    <br/>
+            <div class="relative text-center text-white text-4xl font-bold">
+                <p>你选择了 {{ graduate.unit_name }} 的 {{ graduate.major }}</p>
+                {# TODO:  #}
+                {% if first_class_name %}
+                    <p>在 {{ graduate.first_class_date|date:"Y年m月d日" }}，{{ graduate.first_class_place }}</p>
+                    <p>{{ graduate.first_class_teacher }} 老师的《{{ graduate.first_class_name }}》</p>
+                    <p>是你在东大的第一课</p>
                 {% endif %}
-            </p>
+                <br/>
+                <p>累计选了 {{ graduate.course_selected_num }} 门课</p>
+                <p>获得了 {{ graduate.credits_obtained }} 学分</p>
+                {% if graduate.highest_score_course %}
+                    <p>而你成绩最优异的课程是《{{ graduate.highest_score_course }}》</p>
+                {% endif %}
+                <p>努力终有收获！</p>
+                <br/>
+                {% if graduate.show_papers %}
+                    <p>你一共发表过 {{ graduate.papers_num }} 篇科研论文</p>
+                    <p>功不唐捐玉汝于成</p>
+                    <p>学术之路上东大为你保驾护航！</p>
+                {% endif %}
+            </div>
         </div>
 
         {# 大礼堂 #}

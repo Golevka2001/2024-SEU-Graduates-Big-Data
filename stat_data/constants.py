@@ -1,0 +1,2 @@
+# 表中毕业生总数
+GRADUATE_TOTAL_NUM = 11553

@@ -14,47 +14,49 @@ class GraduatePersonalStat(models.Model):
     # ---------- 基本 ---------- #
     # 一卡通号
     seu_card_id = models.CharField(max_length=20, primary_key=True, verbose_name="一卡通号", unique=True)
-    # 学号
-    student_id = models.CharField(max_length=20, verbose_name="学号")
     # 姓名
     full_name = models.CharField(max_length=255, verbose_name="姓名")
-    # 学院
-    unit_name = models.CharField(max_length=255, verbose_name="学院")
-    # 专业
-    major = models.CharField(max_length=255, verbose_name="专业")
-    # 【存在空】宿舍名称
-    dormitory_name = models.CharField(max_length=255, verbose_name="宿舍名称", null=True)
-    # 入学时间
-    enroll_date = models.DateField(verbose_name="入学时间")
     # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
     graduate_type = models.IntegerField(choices=GRADUATE_TYPE_CHOICES, verbose_name="毕业生类型")
+
+    # ---------- 场景1: 大门 ---------- #
+    # 入学时间
+    enroll_date = models.DateField(verbose_name="入学时间")
     # 【存在空】生源地
     origin = models.CharField(max_length=255, verbose_name="生源地", null=True)
-    # 【存在空】相同生源地人数
-    same_origin_num = models.CharField(max_length=100, verbose_name="相同生源地人数", null=True, default="0")
+    # 学号
+    student_id = models.CharField(max_length=20, verbose_name="学号")
     # 【存在空】相同生日人数
     same_birthdate_num = models.CharField(max_length=100, verbose_name="相同生日人数", null=True, default="0")
+    # 【存在空】相同生源地人数
+    same_origin_num = models.CharField(max_length=100, verbose_name="相同生源地人数", null=True, default="0")
 
-    # ---------- 网络 ---------- #
+    # ---------- 场景2: 宿舍 ---------- #
+    # 【存在空】宿舍名称
+    dormitory_name = models.CharField(max_length=255, verbose_name="宿舍名称", null=True)
     # 【存在空】网络在线天数
     network_online_days = models.CharField(max_length=255, verbose_name="网络在线天数", null=True, default="0")
     # 【存在空】网络总流量（GB）
     network_flow = models.CharField(max_length=255, verbose_name="网络总流量(GB)", null=True, default="0.00")
 
-    # ---------- 食堂 ---------- #
-    # 【存在空】消费次数
-    consumption_times = models.CharField(max_length=255, verbose_name="消费次数", null=True, default="0")
+    # ---------- 场景3: 食堂 ---------- #
     # 【存在空】消费金额
     consumption_amount = models.CharField(max_length=255, verbose_name="消费金额", null=True, default="0.00")
+    # 【存在空】消费次数
+    consumption_times = models.CharField(max_length=255, verbose_name="消费次数", null=True, default="0")
     # 最频繁消费地点
     most_frequent_consumption_place = models.CharField(max_length=255, verbose_name="最频繁消费地点", null=True)
+    # 【存在空】最高单次消费日期
+    highest_single_consumption_date = models.DateField(verbose_name="最高单次消费日期", null=True)
     # 【存在空】最高单次消费
     highest_single_consumption_amount = models.CharField(max_length=255, verbose_name="最高单次消费", null=True,
                                                          default="0.00")
-    # 【存在空】最高单次消费日期
-    highest_single_consumption_date = models.DateField(verbose_name="最高单次消费日期", null=True)
 
-    # ---------- 课程 ---------- #
+    # ---------- 场景4: 教室 ---------- #
+    # 学院
+    unit_name = models.CharField(max_length=255, verbose_name="学院")
+    # 专业
+    major = models.CharField(max_length=255, verbose_name="专业")
     # 【存在空】第一节课日期
     first_class_date = models.DateField(verbose_name="第一节课日期", null=True)
     # 【存在空】第一节课地点
@@ -140,3 +142,6 @@ class GraduatePersonalStat(models.Model):
         verbose_name = "毕业生个人统计信息表"
         verbose_name_plural = verbose_name
         ordering = ["seu_card_id"]
+
+    def show_papers(self):
+        return int(self.papers_num) > 0
