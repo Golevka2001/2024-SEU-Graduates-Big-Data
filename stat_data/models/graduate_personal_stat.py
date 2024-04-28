@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 
 class GraduatePersonalStat(models.Model):
@@ -74,27 +75,21 @@ class GraduatePersonalStat(models.Model):
     # 【存在空】论文数量
     papers_num = models.CharField(max_length=255, verbose_name="论文数量", null=True, default="0")
 
-    # ---------- 人文讲座 ---------- #
+    # ---------- 场景5: 大礼堂 ---------- #
     # 【存在空】参加讲座次数
     lecture_attended_times = models.CharField(max_length=255, verbose_name="参加讲座次数", null=True, default="0")
-    # 【存在空】第一次参加讲座名称
-    first_lecture_name = models.CharField(max_length=255, verbose_name="第一次参加讲座名称", null=True)
     # 【存在空】第一次参加讲座日期
     first_lecture_date = models.DateField(verbose_name="第一次参加讲座日期", null=True)
-
-    # ---------- SRTP ---------- #
+    # 【存在空】第一次参加讲座名称
+    first_lecture_name = models.CharField(max_length=255, verbose_name="第一次参加讲座名称", null=True)
     # 【存在空】SRTP项目数
     srtp_project_num = models.CharField(max_length=255, verbose_name="SRTP项目数", null=True, default="0")
     # 【存在空】SRTP学分
     srtp_score = models.CharField(max_length=255, verbose_name="SRTP学分", null=True, default="0.00")
-
-    # ---------- 志愿活动 ---------- #
     # 志愿活动数量
     volunteer_activity_num = models.CharField(max_length=255, verbose_name="志愿活动数量", null=True, default="0")
     # 【存在空】志愿活动时长
     volunteer_duration = models.CharField(max_length=255, verbose_name="志愿活动时长", null=True, default="0.00")
-
-    # ---------- 社会实践 ---------- #
     # 【存在空】实践项目数量
     practice_project_num = models.CharField(max_length=255, verbose_name="实践项目数量", null=True, default="0")
     # 【存在空】第一个实践项目
@@ -103,27 +98,27 @@ class GraduatePersonalStat(models.Model):
     first_practice_project_member = models.CharField(max_length=255,
                                                      verbose_name="第一个实践项目队员（非本人的另一人姓名）", null=True)
 
-    # ---------- 图书馆 ---------- #
+    # ---------- 场景6: 图书馆 ---------- #
     # 【存在空】总借阅量
     total_borrowed_books_num = models.CharField(max_length=255, verbose_name="总借阅量", null=True, default="0")
-    # 【存在空】最长借阅天数
-    longest_book_borrowing_days = models.CharField(max_length=255, verbose_name="最长借阅天数", null=True, default="0")
+    # 【存在空】借阅时间最长的书名
+    longest_keeping_book_name = models.CharField(max_length=255, verbose_name="借阅时间最长的书名", null=True)
     # 【存在空】个人借阅书籍中总借阅次数最少书名
     nice_book_name = models.CharField(max_length=255, verbose_name="个人借阅书籍中总借阅次数最少书名", null=True)
     # 【存在空】个人借阅书籍中总借阅次数最少的书被多少人借过
     nice_book_borrowing_person_num = models.CharField(max_length=255,
                                                       verbose_name="个人借阅书籍中总借阅次数最少的书被多少人借过",
                                                       null=True)
-    # 【存在空】借阅时间最长的书名
-    longest_keeping_book_name = models.CharField(max_length=255, verbose_name="借阅时间最长的书名", null=True)
+    # 【存在空】最长借阅天数
+    longest_book_borrowing_days = models.CharField(max_length=255, verbose_name="最长借阅天数", null=True, default="0")
 
-    # ---------- 体育 ---------- #
-    # 【存在空】场馆预约次数
-    gym_ordered_times = models.CharField(max_length=255, verbose_name="场馆预约次数", null=True, default="0")
-    # 【存在空】首次预约场馆
-    first_ordered_gym = models.CharField(max_length=255, verbose_name="首次预约场馆", null=True)
+    # ---------- 场景7: 体育馆 ---------- #
     # 【存在空】首次预约日期
     first_ordered_date = models.DateField(verbose_name="首次预约日期", null=True)
+    # 【存在空】首次预约场馆
+    first_ordered_gym = models.CharField(max_length=255, verbose_name="首次预约场馆", null=True)
+    # 【存在空】场馆预约次数
+    gym_ordered_times = models.CharField(max_length=255, verbose_name="场馆预约次数", null=True, default="0")
     # 【存在空】最常去的场馆
     favorite_gym = models.CharField(max_length=255, verbose_name="最常去的场馆", null=True)
     # 【存在空】最常去的场馆预约次数
@@ -143,5 +138,14 @@ class GraduatePersonalStat(models.Model):
         verbose_name_plural = verbose_name
         ordering = ["seu_card_id"]
 
+    def get_network_flow_equivalence(self):
+        return round(float(self.network_flow) / 167, 2)
+
     def show_papers(self):
         return int(self.papers_num) > 0
+
+    def show_borrowing_details(self):
+        return int(self.total_borrowed_books_num) > 0
+
+    def get_days_in_seu(self):
+        return (date.today() - self.enroll_date).days
