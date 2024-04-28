@@ -34,7 +34,7 @@
 {% load static %}
 <div class="swiper">
     <div class="swiper-wrapper">
-        {# 大门 #}
+        {# ---------- 场景1: 大门 ---------- #}
         <div class="swiper-slide" id="scenario-gate-enter">
             <img
                     class="absolute h-full w-full object-cover"
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        {# 宿舍 #}
+        {# ---------- 场景2: 宿舍 ---------- #}
         <div class="swiper-slide" id="scenario-dormitory">
             <img
                     class="absolute h-full w-full object-cover"
@@ -80,11 +80,11 @@
                 <p>校园网是你的贴心助手</p>
                 <p>它陪伴你度过了 {{ graduate.network_online_days }} 天 </p>
                 <p>总流量 {{ graduate.network_flow }} GB</p>
-                <p>相当于看了 {{ network_flow_equivalence }} 遍《甄嬛传》！</p>
+                <p>相当于看了 {{ graduate.get_network_flow_equivalence }} 遍《甄嬛传》！</p>
             </div>
         </div>
 
-        {# 食堂 #}
+        {# ---------- 场景3: 食堂 ---------- #}
         <div class="swiper-slide" id="scenario-canteen">
             <img
                     class="absolute h-full w-full object-cover"
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        {# 教室 #}
+        {# ---------- 场景4: 教室 ---------- #}
         <div class="swiper-slide" id="scenario-classroom">
             <img
                     class="absolute h-full w-full object-cover"
@@ -114,10 +114,16 @@
             />
             <div class="relative text-center text-white text-4xl font-bold">
                 <p>你选择了 {{ graduate.unit_name }} 的 {{ graduate.major }}</p>
-                {# TODO:  #}
                 {% if first_class_name %}
-                    <p>在 {{ graduate.first_class_date|date:"Y年m月d日" }}，{{ graduate.first_class_place }}</p>
-                    <p>{{ graduate.first_class_teacher }} 老师的《{{ graduate.first_class_name }}》</p>
+                    {% if graduate.first_class_date and graduate.first_class_place %}
+                        <p>在 {{ graduate.first_class_date|date:"Y年m月d日" }}，{{ graduate.first_class_place }}</p>
+                    {% endif %}
+                    <p>
+                        {% if graduate.first_class_teacher %}
+                            {{ graduate.first_class_teacher }} 老师的
+                        {% endif %}
+                        《{{ graduate.first_class_name }}》
+                    </p>
                     <p>是你在东大的第一课</p>
                 {% endif %}
                 <br/>
@@ -136,223 +142,120 @@
             </div>
         </div>
 
-        {# 大礼堂 #}
+        {# ---------- 场景5: 大礼堂 ---------- #}
         <div class="swiper-slide" id="scenario-auditorium">
-            <p>
-                {% if show_lectures %}
-                    你累计参加了
-                    {{ graduate.lecture_attended_times }}
-                    次讲座
-                    <br/>
-                    你在
-                    {{ graduate.first_lecture_date|date:"Y年m月d日" }}
-                    第一次听了
-                    {{ graduate.first_lecture_name }}
-                    讲座，知识拓宽视野
-                    <br/>
-                    {% if graduate.graduate_type != 0 %}
-                        在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门，在东大有无数扇门为你开启~
-                        <br/>
-                    {% endif %}
+            <div>
+                <p>你累计参加了 {{ graduate.lecture_attended_times }} 次讲座</p>
+                {% if first_lecture_date %}
+                    <p>在 {{ graduate.first_lecture_date|date:"Y年m月d日" }}</p>
+                    <p>第一次听了 {{ graduate.first_lecture_name }} 讲座</p>
+                    <p>知识拓宽视野</p>
                 {% endif %}
-                {% if show_srtp_projects %}
-                    你参与完成了
-                    {{ graduate.srtp_project_num }}
-                    个SRTP项目
-                    <br/>
-                    获得了
-                    {{ graduate.srtp_score }}
-                    个SRTP学分
-                    <br/>
-                    创新路上你努力前行！
-                    <br/>
+                {% if graduate.graduate_type != 0 %}
+                    <p>在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门</p>
+                    <p>在东大有无数扇门为你开启~</p>
                 {% endif %}
-                {% if show_volunteer_activities %}
-                    你一共参加了
-                    {{ graduate.volunteer_activity_num }}
-                    次志愿活动
-                    <br/>
-                    累计志愿时长
-                    {{ graduate.volunteer_duration }}
-                    小时
-                    <br/>
-                {% endif %}
-                {% if show_practice_projects %}
-                    参加了
-                    {{ graduate.practice_project_num }}
-                    次社会实践
-                    <br/>
-                    还记得那次
-                    “{{ graduate.first_practice_project_name }}”
-                    吗？
-                    <br/>
-                {% endif %}
-            </p>
-        </div>
-
-        {# 图书馆 #}
-        <div class="swiper-slide" id="scenario-library">
-            <p>
-                {% if show_borrowing_rank %}
-                    你累计借阅书籍
-                    {{ graduate.total_borrowed_books_num }}
-                    本，超过了
-                    {{ borrowing_rank_percent }}
-                    的人
-                    <br/>
-                {% endif %}
-                全校借书数量 No.1 的同学借阅了
-                {{ max_total_borrowed_books_num }}
-                本
                 <br/>
-                {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
-                    恭喜你成为
-                    {{ graduate.unit_name }}
-                    借书 No.1 ！
-                    <br/>
-                    吹灭读书灯，一身都是月
-                    <br/>
-                {% else %}
-                    {{ top_borrower_in_unit.full_name }}
-                    同学借阅了
-                    {{ top_borrower_in_unit.total_borrowed_books_num }}
-                    本
-                    <br/>
-                    成为
-                    {{ top_borrower_in_unit.unit_name }}
-                    借书 No.1 ！
-                    <br/>
+                <p>你参与完成了 {{ graduate.srtp_project_num }} 个SRTP项目</p>
+                <p>获得了 {{ graduate.srtp_score }} 个SRTP学分</p>
+                <p>创新路上你努力前行！</p>
+                <br/>
+                <p>一共参加了 {{ graduate.volunteer_activity_num }} 次志愿活动</p>
+                <p>累计志愿时长 {{ graduate.volunteer_duration }} 小时</p>
+                <br/>
+                {% if first_practice_project_name %}
+                    <p>参加了 {{ graduate.practice_project_num }} 次社会实践</p>
+                    <p>还记得那次 “{{ graduate.first_practice_project_name }}” 吗？</p>
                 {% endif %}
-                {% if show_borrowing_detail %}
-                    在借阅过的图书中，你阅读时间最长的一本是
-                    【TODO: graduate.longest_keeping_book_name】
-                    <br/>
-                    你借过的
-                    {{ graduate.nice_book_name }}
-                    ，只有
-                    【TODO: nice_book_borrowed_times】
-                    名同学读过，宝藏图书发现者！
-                    <br/>
-                {% endif %}
-            </p>
+            </div>
         </div>
 
-        {# 体育馆 #}
-        {% if not show_gyms and not show_morning_exercise and not show %}
+        {# ---------- 场景6: 图书馆 ---------- #}
+        <div class="swiper-slide" id="scenario-library">
+            <div>
+                <p>你累计借阅书籍 {{ graduate.total_borrowed_books_num }} 本</p>
+                {% if show_borrowing_rank %}
+                    <p>超过了 {{ borrowing_rank_percent }} 的人</p>
+                {% endif %}
+                <p>全校借书数量 No.1 的同学借阅了 {{ max_total_borrowed_books_num }} 本</p>
+                {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
+                    <p>恭喜你成为 {{ graduate.unit_name }} 借书 No.1 ！
+                    <p>吹灭读书灯，一身都是月</p>
+                {% else %}
+                    <p>{{ top_borrower_in_unit.full_name }}
+                        同学借阅了 {{ top_borrower_in_unit.total_borrowed_books_num }} 本</p>
+                    <p>成为 {{ top_borrower_in_unit.unit_name }} 借书 No.1 ！</p>
+                {% endif %}
+                <br/>
+                {% if graduate.show_borrowing_details %}
+                    <p>在借阅过的图书中，你阅读时间最长的一本是</p>
+                    <p>{{ graduate.longest_keeping_book_name }}</p>
+                    <p>你借过的 {{ graduate.nice_book_name }}</p>
+                    <p>只有 {{ graduate.nice_book_borrowing_person_num }} 名同学读过</p>
+                    <p>宝藏图书发现者！</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {# ---------- 场景7: 体育馆 ---------- #}
+        {% if not favorite_gym and not graduate.earliest_exercise_time and not show_sports_competitions %}
             {# 跳过此页 #}
         {% else %}
             <div class="swiper-slide" id="scenario-gym">
-                <p>
+                <div>
+                    {# 场馆 #}
+                    {% if graduate.first_ordered_date %}
+                        <p>你在 {{ graduate.first_ordered_date|date:"Y年m月d日" }}</p>
+                        <p>第一次预约了 {{ graduate.first_ordered_gym }}</p>
+                    {% endif %}
+                    <p>你一共预约场馆 {{ graduate.gym_ordered_times }} 次</p>
+                    <p>超过了 {{ gym_ordering_rank_percent }} 的老师同学</p>
+                    {% if graduate.favorite_gym %}
+                        <p>其中你最喜欢去的是 {{ graduate.favorite_gym }}</p>
+                        <p>预约了 {{ graduate.favorite_gym_ordered_times }} 次</p>
+                    {% endif %}
+                    {% if graduate.graduate_type != 0 %}
+                        <p>在场馆中挥洒汗水，突破自我，体现青春风采，运动美好人生！</p>
+                    {% endif %}
+                    <br/>
+                    {# 跑操 #}
                     {% if graduate.graduate_type == 0 %}
-                        {% if show_gyms %}
-                            你在
-                            {{ graduate.first_ordered_date|date:"Y年m月d日" }}
-                            第一次预约了
-                            {{ graduate.first_ordered_gym }}
-                            <br/>
-                            你一共预约场馆
-                            {{ graduate.gym_ordered_times }}
-                            次
-                            <br/>
-                            超过了
-                            {{ gym_ordering_rank_percent }}
-                            的老师同学
-                            <br/>
-                            其中你最喜欢去的是
-                            【TODO: favorite_gym】
-                            场馆，预约了
-                            【TODO: favorite_gym_ordered_times】
-                            次
-                            <br/>
-                        {% endif %}
-                        {% if show_morning_exercise %}
-                            你累计跑操打卡
-                            {{ graduate.morning_exercise_times }}
-                            次
-                            <br/>
-                            {{ graduate.earliest_exercise_time }}
-                            是你最早打卡的一次，感受东大的静谧与美好
-                            <br/>
-                        {% endif %}
-                        {% if show_sports_competitions %}
-                            还记得那些精彩的赛事吗？这是属于你的高光时刻：
-                            <br/>
-                            {{ sports_competition.competition_name }}
-                            中获得
-                            {{ sports_competition.score }}
-                            的好成绩！
-                            <br/>
-                            ……
-                            <br/>
-                        {% endif %}
-                        {% if not show_morning_exercise and not show_sports_competitions %}
-                            那些日子的运动时光，是属于你的独特记忆，东大陪你在健康路上前行
-                            <br/>
-                        {% endif %}
-                    {% else %}
-                        {% if show_gyms %}
-                            你在
-                            {{ graduate.first_ordered_date|date:"Y年m月d日" }}
-                            第一次预约了
-                            {{ graduate.first_ordered_gym }}
-                            <br/>
-                            你一共预约场馆
-                            {{ graduate.gym_ordered_times }}
-                            次
-                            <br/>
-                            超过了
-                            {{ gym_ordering_rank_percent }}
-                            的老师同学
-                            <br/>
-                            其中你最喜欢去的是
-                            【TODO: favorite_gym】
-                            场馆，预约了
-                            【TODO: favorite_gym_ordered_times】
-                            次
-                            <br/>
-                            在场馆中挥洒汗水，突破自我，体现青春风采，运动美好人生！
-                            <br/>
-                        {% endif %}
-                        {% if show_sports_competitions %}
-                            还记得那些精彩的赛事吗？这是属于你的高光时刻：
-                            <br/>
-                            {{ sports_competition.competition_name }}
-                            中获得
-                            {{ sports_competition.score }}
-                            的好成绩！
-                            <br/>
-                            ……
-                            <br/>
-                            {% if not show_gyms %}
-                                比赛中的心潮澎湃与坚持不懈，你认真的身影，是对体育精神的完美践行，运动美好人生！
-                                <br/>
-                            {% endif %}
+                        <p>你累计跑操打卡 {{ graduate.morning_exercise_times }} 次</p>
+                        {% if graduate.earliest_exercise_time %}
+                            <p>{{ graduate.earliest_exercise_time }} 是你最早打卡的一次</p>
+                            <p>感受东大的静谧与美好</p>
                         {% endif %}
                     {% endif %}
-                </p>
+                    <br/>
+                    {# 赛事 #}
+                    {% if show_sports_competitions %}
+                        <p>还记得那些精彩的赛事吗？这是属于你的高光时刻：</p>
+                        <p>{{ sports_competition.competition_name }} 中获得 {{ sports_competition.score }} 的好成绩！</p>
+                        <p>……</p>
+                        <br/>
+                        <p>比赛中的心潮澎湃与坚持不懈，你认真的身影，是对体育精神的完美践行，运动美好人生！</p>
+                    {% else %}
+                        {% if graduate.graduate_type == 0 %}
+                            <p>那些日子的运动时光，是属于你的独特记忆，东大陪你在健康路上前行！</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
 
-        {# 大门 #}
+        {# ---------- 场景8: 大门 ---------- #}
         <div class="swiper-slide" id="scenario-gate-leave">
-            <p>
-                这是你与东大相逢的第
-                {{ days_in_seu }}
-                天，母校将永远成为你的坚强后盾
+            <div>
+                <p>这是你与东大相逢的第 {{ graduate.get_days_in_seu }} 天</p>
+                <p>母校将永远成为你的坚强后盾</p>
+                <p>你与东大共同完成这份时间地图，回顾你在东大走过的角落，细数你赏过的春光，望过的月亮，邂逅过的人</p>
+                <p>记得再逛一次校园，拍一张照片，说一声珍重，作一次道别</p>
+                <p>感谢万千人海中东大与你相遇，在无限时光里，我们一直在一起</p>
+                <p>纸短情长，路遥情深</p>
                 <br/>
-                你与东大共同完成这份时间地图，回顾你在东大走过的角落，细数你赏过的春光，望过的月亮，邂逅过的人
-                <br/>
-                记得再逛一次校园，拍一张照片，说一声珍重，作一次道别
-                <br/>
-                感谢万千人海中东大与你相遇，在无限时光里，我们一直在一起
-                <br/>
-                纸短情长，路遥情深
-                <br/>
-                祝所有毕业生，前程似锦，他日凌云！
-                <br/>
-                毕业快乐！
-                <br/>
-            </p>
+                <p>祝所有毕业生，前程似锦，他日凌云！</p>
+                <p>毕业快乐！</p>
+            </div>
         </div>
     </div>
 </div>
