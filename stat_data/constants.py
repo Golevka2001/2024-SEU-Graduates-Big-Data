@@ -1,2 +1,8 @@
 # 表中毕业生总数
 GRADUATE_TOTAL_NUM = 11553
+
+# 全校最高借阅量
+MAX_TOTAL_BORROWED_BOOKS_NUM = 99
+
+# 显示借阅量排名的阈值（排在前50%的才显示）
+SHOW_BORROWING_RANK_THRESHOLD = 0.5
