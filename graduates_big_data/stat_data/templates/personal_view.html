@@ -54,56 +54,62 @@
                 <p>正式成为了东大人</p>
                 <p>在同届中</p>
                 <p>有 {{ graduate.same_birthdate_num }} 人与你同月同日生</p>
-                <p>有 {{ graduate.same_origin_num }} 人与你从同一省份来到东大</p>
+                {% if graduate.show_same_origin_num %}
+                    <p>有 {{ graduate.same_origin_num }} 人与你从同一省份来到东大</p>
+                {% endif %}
                 <p>不同时间，你们共同在路途中前进</p>
             </div>
         </div>
 
         {# ---------- 场景2: 宿舍 ---------- #}
-        <div class="swiper-slide" id="scenario-dormitory">
-            <img
-                    class="absolute h-full w-full object-cover"
-                    src="{% static 'stat_data/img/dorm.jpg' %}"
-                    alt="background image (dormitory)"
-            />
-            <div class="relative text-center text-white text-4xl font-bold">
-                <p>欢笑喜悦，迷茫困苦</p>
-                <p>你与室友相互陪伴</p>
-                <p>
+        {% if graduate.show_dormitory_page %}
+            <div class="swiper-slide" id="scenario-dormitory">
+                <img
+                        class="absolute h-full w-full object-cover"
+                        src="{% static 'stat_data/img/dorm.jpg' %}"
+                        alt="background image (dormitory)"
+                />
+                <div class="relative text-center text-white text-4xl font-bold">
                     {% if graduate.dormitory_name %}
-                        在 {{ graduate.dormitory_name }} 中分享青葱岁月
-                    {% else %}
-                        在宿舍中分享青葱岁月
+                        <p>欢笑喜悦，迷茫困苦</p>
+                        <p>你与室友相互陪伴</p>
+                        <p>在 {{ graduate.dormitory_name }} 中分享青葱岁月</p>
+                        <br/>
                     {% endif %}
-                </p>
-                <br/>
-                <p>校园网是你的贴心助手</p>
-                <p>它陪伴你度过了 {{ graduate.network_online_days }} 天 </p>
-                <p>总流量 {{ graduate.network_flow }} GB</p>
-                <p>相当于看了 {{ graduate.get_network_flow_equivalence }} 遍《甄嬛传》！</p>
+                    {% if graduate.show_network_data %}
+                        <p>校园网是你的贴心助手</p>
+                        <p>它陪伴你度过了 {{ graduate.network_online_days }} 天 </p>
+                        <p>总流量 {{ graduate.network_flow }} GB</p>
+                        <p>相当于看了 {{ graduate.get_network_flow_equivalence }} 遍《甄嬛传》！</p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         {# ---------- 场景3: 食堂 ---------- #}
-        <div class="swiper-slide" id="scenario-canteen">
-            <img
-                    class="absolute h-full w-full object-cover"
-                    src="{% static 'stat_data/img/canteen.jpg' %}"
-                    alt="background image (canteen)"
-            />
-            <div class="relative text-center text-white text-4xl font-bold">
-                <p>你一共在食堂使用校园卡消费 {{ graduate.consumption_amount }} 元</p>
-                <p>刷卡 {{ graduate.consumption_times }} 次</p>
-                <p>你最常去 {{ graduate.most_frequent_consumption_place }}</p>
-                <p>有 {{ same_favorite_canteen_percent }} 的人与你拥有共同喜好</p>
-                <br/>
-                {% if graduate.highest_single_consumption_date %}
-                    <p>{{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}</p>
-                    <p>你创下最高的单次消费记录 {{ graduate.highest_single_consumption_amount }} 元</p>
-                    <p>学校记住了你的变圆之旅和快乐心情</p>
-                {% endif %}
+        {% if graduate.show_canteen_page %}
+            <div class="swiper-slide" id="scenario-canteen">
+                <img
+                        class="absolute h-full w-full object-cover"
+                        src="{% static 'stat_data/img/canteen.jpg' %}"
+                        alt="background image (canteen)"
+                />
+                <div class="relative text-center text-white text-4xl font-bold">
+                    <p>你一共在食堂使用校园卡消费 {{ graduate.consumption_amount }} 元</p>
+                    <p>刷卡 {{ graduate.consumption_times }} 次</p>
+                    {% if graduate.most_frequent_consumption_place %}
+                        <p>你最常去 {{ graduate.most_frequent_consumption_place }}</p>
+                        <p>有 {{ same_favorite_canteen_percent }} 的人与你拥有共同喜好</p>
+                    {% endif %}
+                    <br/>
+                    {% if graduate.highest_single_consumption_date %}
+                        <p>{{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}</p>
+                        <p>你创下最高的单次消费记录 {{ graduate.highest_single_consumption_amount }} 元</p>
+                        <p>学校记住了你的变圆之旅和快乐心情</p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         {# ---------- 场景4: 教室 ---------- #}
         <div class="swiper-slide" id="scenario-classroom">
@@ -114,7 +120,7 @@
             />
             <div class="relative text-center text-white text-4xl font-bold">
                 <p>你选择了 {{ graduate.unit_name }} 的 {{ graduate.major }}</p>
-                {% if first_class_name %}
+                {% if graduate.first_class_name %}
                     {% if graduate.first_class_date and graduate.first_class_place %}
                         <p>在 {{ graduate.first_class_date|date:"Y年m月d日" }}，{{ graduate.first_class_place }}</p>
                     {% endif %}
@@ -136,71 +142,78 @@
                 <br/>
                 {% if graduate.show_papers %}
                     <p>你一共发表过 {{ graduate.papers_num }} 篇科研论文</p>
-                    <p>功不唐捐玉汝于成</p>
-                    <p>学术之路上东大为你保驾护航！</p>
                 {% endif %}
+                <p>功不唐捐玉汝于成</p>
+                <p>学术之路上东大为你保驾护航！</p>
             </div>
         </div>
 
         {# ---------- 场景5: 大礼堂 ---------- #}
-        <div class="swiper-slide" id="scenario-auditorium">
-            <div>
-                <p>你累计参加了 {{ graduate.lecture_attended_times }} 次讲座</p>
-                {% if first_lecture_date %}
-                    <p>在 {{ graduate.first_lecture_date|date:"Y年m月d日" }}</p>
-                    <p>第一次听了 {{ graduate.first_lecture_name }} 讲座</p>
-                    <p>知识拓宽视野</p>
-                {% endif %}
-                {% if graduate.graduate_type != 0 %}
-                    <p>在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门</p>
-                    <p>在东大有无数扇门为你开启~</p>
-                {% endif %}
-                <br/>
-                <p>你参与完成了 {{ graduate.srtp_project_num }} 个SRTP项目</p>
-                <p>获得了 {{ graduate.srtp_score }} 个SRTP学分</p>
-                <p>创新路上你努力前行！</p>
-                <br/>
-                <p>一共参加了 {{ graduate.volunteer_activity_num }} 次志愿活动</p>
-                <p>累计志愿时长 {{ graduate.volunteer_duration }} 小时</p>
-                <br/>
-                {% if first_practice_project_name %}
-                    <p>参加了 {{ graduate.practice_project_num }} 次社会实践</p>
-                    <p>还记得那次 “{{ graduate.first_practice_project_name }}” 吗？</p>
-                {% endif %}
+        {% if graduate.show_auditorium_page %}
+            <div class="swiper-slide" id="scenario-auditorium">
+                <div>
+                    {% if graduate.first_lecture_date %}
+                        <p>你累计参加了 {{ graduate.lecture_attended_times }} 次讲座</p>
+                        <p>在 {{ graduate.first_lecture_date|date:"Y年m月d日" }}</p>
+                        <p>第一次听了 {{ graduate.first_lecture_name }} 讲座</p>
+                        <p>知识拓宽视野</p>
+                        {% if graduate.graduate_type != 0 %}
+                            <p>在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门</p>
+                            <p>在东大有无数扇门为你开启~</p>
+                        {% endif %}
+                        <br/>
+                    {% endif %}
+                    {% if graduate.show_srtp_projects %}
+                        <p>你参与完成了 {{ graduate.srtp_project_num }} 个SRTP项目</p>
+                        <p>获得了 {{ graduate.srtp_score }} 个SRTP学分</p>
+                        <p>创新路上你努力前行！</p>
+                        <br/>
+                    {% endif %}
+                    {% if graduate.show_volunteer_activities %}
+                        <p>一共参加了 {{ graduate.volunteer_activity_num }} 次志愿活动</p>
+                        <p>累计志愿时长 {{ graduate.volunteer_duration }} 小时</p>
+                        <br/>
+                    {% endif %}
+                    {% if graduate.first_practice_project_name %}
+                        <p>参加了 {{ graduate.practice_project_num }} 次社会实践</p>
+                        <p>还记得那次 “{{ graduate.first_practice_project_name }}” 吗？</p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         {# ---------- 场景6: 图书馆 ---------- #}
-        <div class="swiper-slide" id="scenario-library">
-            <div>
-                <p>你累计借阅书籍 {{ graduate.total_borrowed_books_num }} 本</p>
-                {% if show_borrowing_rank %}
-                    <p>超过了 {{ borrowing_rank_percent }} 的人</p>
-                {% endif %}
-                <p>全校借书数量 No.1 的同学借阅了 {{ max_total_borrowed_books_num }} 本</p>
-                {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
-                    <p>恭喜你成为 {{ graduate.unit_name }} 借书 No.1 ！
-                    <p>吹灭读书灯，一身都是月</p>
-                {% else %}
-                    <p>{{ top_borrower_in_unit.full_name }}
-                        同学借阅了 {{ top_borrower_in_unit.total_borrowed_books_num }} 本</p>
-                    <p>成为 {{ top_borrower_in_unit.unit_name }} 借书 No.1 ！</p>
-                {% endif %}
-                <br/>
-                {% if graduate.show_borrowing_details %}
-                    <p>在借阅过的图书中，你阅读时间最长的一本是</p>
-                    <p>{{ graduate.longest_keeping_book_name }}</p>
-                    <p>你借过的 {{ graduate.nice_book_name }}</p>
-                    <p>只有 {{ graduate.nice_book_borrowing_person_num }} 名同学读过</p>
-                    <p>宝藏图书发现者！</p>
-                {% endif %}
+        {% if graduate.show_library_page %}
+            <div class="swiper-slide" id="scenario-library">
+                <div>
+                    <p>你累计借阅书籍 {{ graduate.total_borrowed_books_num }} 本</p>
+                    {% if show_borrowing_rank %}
+                        <p>超过了 {{ borrowing_rank_percent }} 的人</p>
+                    {% endif %}
+                    <p>全校借书数量 No.1 的同学借阅了 {{ max_total_borrowed_books_num }} 本</p>
+                    {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
+                        <p>恭喜你成为 {{ graduate.unit_name }} 借书 No.1 ！
+                        <p>吹灭读书灯，一身都是月</p>
+                    {% else %}
+                        <p>{{ top_borrower_in_unit.full_name }}
+                            同学借阅了 {{ top_borrower_in_unit.total_borrowed_books_num }} 本</p>
+                        <p>成为 {{ top_borrower_in_unit.unit_name }} 借书 No.1 ！</p>
+                    {% endif %}
+                    <br/>
+                    {% if graduate.show_borrowing_details %}
+                        <p>在借阅过的图书中，你阅读时间最长的一本是</p>
+                        <p>{{ graduate.longest_keeping_book_name }}</p>
+                        <p>共计阅读了 {{ graduate.longest_book_borrowing_days }} 天</p>
+                        <p>你借过的 {{ graduate.nice_book_name }}</p>
+                        <p>只有 {{ graduate.nice_book_borrowing_person_num }} 名同学读过</p>
+                        <p>宝藏图书发现者！</p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         {# ---------- 场景7: 体育馆 ---------- #}
-        {% if not favorite_gym and not graduate.earliest_exercise_time and not show_sports_competitions %}
-            {# 跳过此页 #}
-        {% else %}
+        {% if graduate.show_gym_page or show_sports_competitions %}
             <div class="swiper-slide" id="scenario-gym">
                 <div>
                     {# 场馆 #}
