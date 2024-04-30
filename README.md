@@ -138,7 +138,7 @@ code = 'modified code'
 
 ```bash
 # 构建镜像（在项目根目录下执行）
-docker build -t graduates-big-data:latest .
+docker buildx build -t graduates-big-data:latest .
 
 # 导出镜像
 docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
