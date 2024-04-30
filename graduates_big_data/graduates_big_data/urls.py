@@ -18,10 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from health_check.views import health_check_view
 from django_cas_ng import views as cas_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("health_check", health_check_view),
     path("accounts/login/", cas_views.LoginView.as_view(), name="cas_ng_login"),
     path("accounts/logout/", cas_views.LogoutView.as_view(), name="cas_ng_logout"),
     path("", include("stat_data.urls")),
