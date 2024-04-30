@@ -25,11 +25,7 @@ SECRET_KEY = "django-insecure-%3e#@30!w*+90b5rn9vo*hcb3^^2vty5-()a=yb)bijmhq!$r%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "gradudata2024.seu.edu.cn",
-]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "health_check",
     "django_cas_ng",
     "stat_data",
 ]
