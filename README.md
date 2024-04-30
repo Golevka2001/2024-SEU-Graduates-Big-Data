@@ -27,7 +27,7 @@ _注：安装依赖前请确保本地 MySQL Client 已配置完成_
 database = database_name
 user = username
 password = P4ssw0rd
-host = 127.0.0.1
+host = localhost
 port = 3306
 default-character-set = utf8
 ```
@@ -52,13 +52,16 @@ python manage.py migrate
 
 `gbd_graduate_personal_stat`、`gbd_library_borrowing_stat` 和 `gbd_sports_competition_stat`
 
-接下来，执行目录 [sql_scripts](./sql_scripts) 下的 SQL 脚本，生成另外几个辅助统计表。
+接下来，执行 [sql_scripts](./sql_scripts) 目录下的以 `gen_` 开头的 SQL 脚本，生成辅助统计表；
 
-### 4. 网络相关配置
+执行该目录下的 [calc_consts.sql](./sql_scripts/calc_consts.sql)
+脚本，将统计得到的常量值填入 [constants.py](graduates_big_data/stat_data/constants.py) 中对应字段。
+
+### 3. 网络相关配置
 
 由于统一身份认证系统有服务授权限制，只对已注册的服务（域名）提供认证服务，所以在本地开发时需要配置域名解析和反向代理，将已报备注册的域名指向本地服务器。
 
-#### 4.1 本地域名解析
+#### 3.1 本地域名解析
 
 向 `/etc/hosts` 文件中添加以下内容，将域名指向本地：
 
@@ -66,11 +69,7 @@ python manage.py migrate
 127.0.0.1 gradudata2024.seu.edu.cn
 ```
 
-#### 4.2 ssl 证书
-
-用于支持 https 访问。
-
-#### 4.2 Nginx 反向代理
+#### 3.2 Nginx 反向代理
 
 向 Nginx 配置文件中添加所要代理的域名配置：
 
@@ -96,12 +95,12 @@ server {
 }
 ```
 
-_注：请按照实际情况填写上述各字段_
+_注：由于此项目报备注册的域名为 https 协议，所以需要配置 https 代理和相应的 SSL 证书。否则，上述 https 部分配置可省略。_
 
-### 5. 启动服务器
+### 4. 启动服务
 
 ```bash
-python manage.py runserver
+python manage.py runserver 0.0.0.0:8000
 ```
 
 ## 补充说明
@@ -116,4 +115,45 @@ python manage.py runserver
 # code = 'original code'
 code = 'modified code'
 # ----- MODIFIED END ----- #
+```
+
+## 使用 Docker 部署
+
+### 0. 环境
+
+- 本地
+    - Docker
+- 服务器
+    - Docker
+    - MySQL 8.0
+    - Nginx
+
+### 1. 数据库相关配置
+
+在服务器上配置好 MySQL 数据库，并推送所需数据。
+
+按照 [配置连接信息](#21-配置连接信息) 部分的说明，将数据库连接信息填写到 `my.cnf` 文件中。
+
+### 2. 【本地】构建并导出镜像
+
+```bash
+# 构建镜像（在项目根目录下执行）
+docker build -t graduates-big-data:latest .
+
+# 导出镜像
+docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
+```
+
+### 3. 【服务器】导入并运行镜像
+
+使用 `scp` 或其他方式将导出的镜像文件传输到服务器上，然后执行以下命令：
+
+```bash
+# 导入镜像
+docker load < docker-img-graduates-big-data.tar
+
+# 运行容器
+docker run -d --name graduates-big-data --network host -p 8000:8000 graduates-big-data:latest
+# 或者进入容器交互模式
+docker run -it --name graduates-big-data --network host -p 8000:8000 graduates-big-data:latest /bin/bash
 ```
