@@ -1,12 +1,11 @@
-import datetime
-
 from django.conf import settings
 from django.shortcuts import render
 
-from stat_data.constants import GRADUATE_TOTAL_NUM, MAX_TOTAL_BORROWED_BOOKS_NUM, SHOW_BORROWING_RANK_THRESHOLD
-
 # from django_cas_ng.decorators import login_required
 from stat_data.models import FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, SportsCompetitionStat
+
+# 显示借阅量排名的阈值（前50%才显示）
+SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
 
 # @login_required  # TODO: 生产环境中启用
@@ -26,16 +25,23 @@ def personal_view(request):
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)
 
+    # 毕业生总数
+    graduate_total_num = GraduatePersonalStat.objects.count()
+
     # 最常去相同食堂的人数
     same_favorite_canteen_cnt = FavoriteCanteenStat.objects.get(
         canteen_name=graduate.most_frequent_consumption_place).count
-    same_favorite_canteen_percent = f'{same_favorite_canteen_cnt / GRADUATE_TOTAL_NUM:.2%}'
+    same_favorite_canteen_percent = f'{same_favorite_canteen_cnt / graduate_total_num:.2%}'
 
     # 借阅量排名
     borrowing_rank = GraduatePersonalStat.objects.filter(
         total_borrowed_books_num=graduate.total_borrowed_books_num).count()
-    show_borrowing_rank = borrowing_rank < GRADUATE_TOTAL_NUM * SHOW_BORROWING_RANK_THRESHOLD
-    borrowing_rank_percent = f'{1 - borrowing_rank / GRADUATE_TOTAL_NUM:.2%}'
+    show_borrowing_rank = borrowing_rank < graduate_total_num * SHOW_BORROWING_RANK_THRESHOLD
+    borrowing_rank_percent = f'{1 - borrowing_rank / graduate_total_num:.2%}'
+
+    # 全校最高借阅量
+    max_total_borrowed_books_num = (LibraryBorrowingStat.objects.order_by("-total_borrowed_books_num")[0]
+                                    .total_borrowed_books_num)
 
     # 本学院借阅量第一名
     unit_name = graduate.unit_name
@@ -45,7 +51,7 @@ def personal_view(request):
     # 场馆预约次数排名（gym_ordered_times）
     gym_ordering_rank = GraduatePersonalStat.objects.filter(
         gym_ordered_times=graduate.gym_ordered_times).count()
-    gym_ordering_rank_percent = f'{1 - gym_ordering_rank / GRADUATE_TOTAL_NUM:.2%}'
+    gym_ordering_rank_percent = f'{1 - gym_ordering_rank / graduate_total_num:.2%}'
 
     # 是否显示体育竞赛
     sports_competition_list = SportsCompetitionStat.objects.filter(seu_card_id=seu_card_id)
@@ -59,7 +65,7 @@ def personal_view(request):
                       "same_favorite_canteen_percent": same_favorite_canteen_percent,
                       "show_borrowing_rank": show_borrowing_rank,
                       "borrowing_rank_percent": borrowing_rank_percent,
-                      "max_total_borrowed_books_num": MAX_TOTAL_BORROWED_BOOKS_NUM,
+                      "max_total_borrowed_books_num": max_total_borrowed_books_num,
                       "top_borrower_in_unit": top_borrower_in_unit,
                       "gym_ordering_rank_percent": gym_ordering_rank_percent,
                       "show_sports_competitions": show_sports_competitions,
