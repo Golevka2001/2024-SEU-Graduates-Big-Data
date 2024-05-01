@@ -73,6 +73,9 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            "builtins": [
+                "django.templatetags.static",
+            ],
         },
     },
 ]
@@ -126,7 +129,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "stat_data", "static"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 # Default primary key field type
