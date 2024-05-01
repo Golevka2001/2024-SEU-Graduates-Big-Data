@@ -6,4 +6,5 @@ INSERT INTO gbd_favorite_canteen_stat (canteen_name, count)
 SELECT most_frequent_consumption_place,
        COUNT(*) AS count
 FROM gbd_graduate_personal_stat
+WHERE most_frequent_consumption_place IS NOT NULL
 GROUP BY most_frequent_consumption_place;
