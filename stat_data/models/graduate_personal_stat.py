@@ -15,7 +15,7 @@ class GraduatePersonalStat(models.Model):
 
     # ---------- 基本 ---------- #
     # 一卡通号
-    seu_card_id = models.CharField(max_length=20, primary_key=True, verbose_name="一卡通号", unique=True)
+    seu_card_id = models.CharField(max_length=255, primary_key=True, verbose_name="一卡通号", unique=True)
     # 姓名
     full_name = models.CharField(max_length=255, verbose_name="姓名")
     # 毕业生类型: 0-本科毕业生; 1-硕士毕业生; 2-博士毕业生
@@ -27,11 +27,11 @@ class GraduatePersonalStat(models.Model):
     # 【存在空】生源地
     origin = models.CharField(max_length=255, verbose_name="生源地", null=True)
     # 学号
-    student_id = models.CharField(max_length=20, verbose_name="学号")
+    student_id = models.CharField(max_length=255, verbose_name="学号")
     # 【存在空】相同生日人数
-    same_birthdate_num = models.CharField(max_length=100, verbose_name="相同生日人数", null=True, default="0")
+    same_birthdate_num = models.CharField(max_length=255, verbose_name="相同生日人数", null=True, default="0")
     # 【存在空】相同生源地人数
-    same_origin_num = models.CharField(max_length=100, verbose_name="相同生源地人数", null=True, default="0")
+    same_origin_num = models.CharField(max_length=255, verbose_name="相同生源地人数", null=True, default="0")
 
     # ---------- 场景2: 宿舍 ---------- #
     # 【存在空】宿舍名称
@@ -141,22 +141,34 @@ class GraduatePersonalStat(models.Model):
 
     # ----- 判断是否显示某部分文案的函数 ----- #
     def show_same_origin_num(self):
-        return int(self.same_origin_num) > 0
+        if self.same_origin_num:
+            return int(self.same_origin_num) > 0
+        return False
 
     def show_network_data(self):
-        return int(self.network_online_days) > 0
+        if self.network_online_days:
+            return int(self.network_online_days) > 0
+        return False
 
     def show_papers(self):
-        return int(self.papers_num) > 0
+        if self.papers_num:
+            return int(self.papers_num) > 0
+        return False
 
     def show_srtp_projects(self):
-        return float(self.srtp_score) > 0.0
+        if self.srtp_project_num:
+            return float(self.srtp_score) > 0.0
+        return False
 
     def show_volunteer_activities(self):
-        return float(self.volunteer_duration) > 0.0
+        if self.volunteer_activity_num:
+            return float(self.volunteer_duration) > 0.0
+        return False
 
     def show_borrowing_details(self):
-        return int(self.total_borrowed_books_num) > 0
+        if self.total_borrowed_books_num:
+            return int(self.total_borrowed_books_num) > 0
+        return False
 
     # ----- 判断是否跳过某整个页面的函数 ----- #
     def show_dormitory_page(self):
@@ -174,9 +186,11 @@ class GraduatePersonalStat(models.Model):
             or self.first_practice_project_name
 
     def show_library_page(self):
-        return int(self.total_borrowed_books_num) > 0 \
-            and int(self.longest_book_borrowing_days) > 0 \
-            and self.nice_book_name
+        if self.total_borrowed_books_num:
+            return int(self.total_borrowed_books_num) > 0 \
+                and int(self.get_longest_book_borrowing_days()) > 0 \
+                and self.nice_book_name
+        return False
 
     def show_gym_page(self):
         return self.favorite_gym \
@@ -184,7 +198,15 @@ class GraduatePersonalStat(models.Model):
 
     # ----- 用于计算的函数 ----- #
     def get_network_flow_equivalence(self):
+        if not self.network_flow:
+            return "0.00"
         return round(float(self.network_flow) / 167, 2)
+
+    def get_longest_book_borrowing_days(self):
+        # 存储格式为：xx days xx:xx:xx
+        if not self.longest_book_borrowing_days:
+            return "0"
+        return self.longest_book_borrowing_days.split(" ")[0]
 
     def get_days_in_seu(self):
         return (date.today() - self.enroll_date).days
