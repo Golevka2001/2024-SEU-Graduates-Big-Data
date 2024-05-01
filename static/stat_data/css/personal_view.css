@@ -1,0 +1,102 @@
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.swiper {
+    height: 100%;
+    width: 100%;
+}
+
+/* 每页中的背景图片 */
+.bg-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* 每页中的前景内容 */
+.fg-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 场景1中的文字：普通样式+高亮样式 */
+.text-scenario-gate {
+    position: absolute;
+    font-size: 2.2rem;
+    font-weight: normal;
+    color: #603813;
+    text-align: start;
+    line-height: 6rem;
+}
+
+.highlight-text-scenario-gate {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #e8822e;
+}
+
+/* 场景2中的文字：普通样式+高亮样式 */
+.text-scenario-dormitory {
+    position: absolute;
+    font-size: 2.2rem;
+    font-weight: normal;
+    color: #fff7c0;
+    text-align: center;
+    line-height: 6rem;
+}
+
+.highlight-text-scenario-dormitory {
+    font-size: 3rem;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
+    background-clip: text;
+}
+
+/* 场景3中的文字：普通样式+高亮样式 */
+.text-scenario-canteen {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: normal;
+    color: #ff718c;
+    text-align: start;
+    line-height: 6rem;
+    transform: skewY(-9deg);
+}
+
+.highlight-text-scenario-canteen {
+    font-size: 3rem;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
+    background-clip: text;
+}
+
+/* 场景4中的文字：普通样式+高亮样式 */
+.text-scenario-classroom {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: normal;
+    color: #2e93ef;
+    text-align: center;
+    line-height: 6rem;
+    transform: skewY(-6.5deg);
+}
+
+.highlight-text-scenario-classroom {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
+    background-clip: text;
+}

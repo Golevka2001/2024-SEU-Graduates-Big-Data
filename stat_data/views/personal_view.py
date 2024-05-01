@@ -17,7 +17,7 @@ def personal_view(request):
         if seu_card_id == "TEST_USER":
             seu_card_id = "213216666"
     else:
-        seu_card_id = "213216666"
+        seu_card_id = "213203228"
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
         return render(request, "index.html", {"is_graduate": False})
