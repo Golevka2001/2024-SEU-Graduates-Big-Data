@@ -52,10 +52,7 @@ python manage.py migrate
 
 `gbd_graduate_personal_stat`、`gbd_library_borrowing_stat` 和 `gbd_sports_competition_stat`
 
-接下来，执行 [sql_scripts](./sql_scripts) 目录下的以 `gen_` 开头的 SQL 脚本，生成辅助统计表；
-
-执行该目录下的 [calc_consts.sql](./sql_scripts/calc_consts.sql)
-脚本，将统计得到的常量值填入 [constants.py](graduates_big_data/stat_data/constants.py) 中对应字段。
+接下来，执行 [sql_scripts](./sql_scripts) 目录下的以 `gen_` 开头的 SQL 脚本，生成辅助统计表。
 
 ### 3. 网络相关配置
 
