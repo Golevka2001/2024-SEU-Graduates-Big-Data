@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="Resource-type" content="Document"/>
+    <title>东南大学 2024 毕业生大数据</title>
+
+    {# Tailwind CSS #}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {# 自定义 CSS #}
+    <link rel="stylesheet" href="{% static 'stat_data/css/welcome_view.css' %}"/>
+</head>
+
+<body>
+<div class="relative">
+    {# 背景图片 #}
+    <img src="{% static 'stat_data/img/bg-welcome.png' %}"
+         alt="background image (welcome)"
+         class="h-screen w-screen object-cover"
+    />
+
+    {# 顶部文字 #}
+    <div class="absolute w-full top-40">
+        <img src="{% static 'stat_data/img/text-welcome-1.png' %}"
+             alt="top text"
+             class="mx-auto"
+        />
+    </div>
+
+    {# 底部按钮+文字 #}
+    <div class="absolute w-full bottom-40 text-center">
+        {# 按钮：点击查看毕业报告 #}
+        <form action="{% url 'stat_data:personal_view' %}"
+              method="get"
+        >
+            <button type="submit"
+                    class="px-32 py-14 rounded-full"
+                    style="background: radial-gradient(circle, #f5dc8a, #ffc45c);
+                        border: 0.5rem solid #d34100;
+                    "
+            >
+                <span class="text-6xl font-bold"
+                      style="color: #251c14;"
+                >
+                    点击查看毕业报告
+                </span>
+            </button>
+        </form>
+
+        {# 底部文字 #}
+        <img src="{% static 'stat_data/img/text-welcome-2.png' %}"
+             alt="bottom text"
+             class="mt-10 mx-auto"
+        />
+    </div>
+</div>
+</body>
+</html>
