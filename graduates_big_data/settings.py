@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
-ENABLE_CAS = False
+ENABLE_CAS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",

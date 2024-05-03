@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.shortcuts import render
 
-# from django_cas_ng.decorators import login_required
+from django_cas_ng.decorators import login_required
 from stat_data.models import FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, SportsCompetitionStat
 
 # 显示借阅量排名的阈值（前50%才显示）
 SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
 
-# @login_required  # TODO: 生产环境中启用
+@login_required  # TODO: 生产环境中启用
 def personal_view(request):
     # 获取当前用户的一卡通号
     if settings.ENABLE_CAS:
@@ -17,10 +17,10 @@ def personal_view(request):
         if seu_card_id == "TEST_USER":
             seu_card_id = "213216666"
     else:
-        seu_card_id = "213203228"
+        seu_card_id = "213216666"
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
-        return render(request, "index.html", {"is_graduate": False})
+        return render(request, "welcome_view.html", {"is_graduate": False})
 
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)
