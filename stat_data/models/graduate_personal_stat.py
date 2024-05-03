@@ -128,7 +128,7 @@ class GraduatePersonalStat(models.Model):
     # 【存在空】跑操次数
     morning_exercise_times = models.CharField(max_length=255, verbose_name="跑操次数", null=True, default="0")
     # 【存在空】最早跑操打卡时间
-    earliest_exercise_time = models.TimeField(verbose_name="最早跑操打卡时间", null=True)
+    earliest_exercise_time = models.DateField(verbose_name="最早跑操打卡时间", null=True)
 
     def __str__(self):
         return f"{self.full_name}[{self.seu_card_id}]"
