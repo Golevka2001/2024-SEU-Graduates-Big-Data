@@ -5,6 +5,20 @@ body {
     position: relative;
 }
 
+/* 遮罩层（用于转场动画） */
+#overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 1;
+    transition: opacity 1s;
+    z-index: 9999;
+    pointer-events: none;
+}
+
 .swiper {
     height: 100%;
     width: 100%;
@@ -99,4 +113,66 @@ body {
     color: transparent;
     background: linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
     background-clip: text;
+}
+
+/* 场景5中的文字：普通样式+高亮样式 */
+.text-scenario-auditorium {
+    width: 70%;
+    position: absolute;
+    font-size: 2rem;
+    font-weight: normal;
+    color: #e28191;
+    text-align: start;
+    line-height: 4rem;
+}
+
+.subtitle-scenario-auditorium {
+    width: fit-content;
+    padding: 0.2rem 1.5rem;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    word-spacing: -0.5rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(to bottom, #ffc19c, #ffab91, #ff83b0);
+}
+
+.highlight-text-scenario-auditorium {
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
+    background-clip: text;
+}
+
+/* 场景6中的文字：普通样式+高亮样式 */
+.text-scenario-library {
+    position: absolute;
+    font-size: 2.2rem;
+    font-weight: normal;
+    color: #7769b2;
+    text-align: start;
+    line-height: 6rem;
+}
+
+.highlight-text-scenario-library {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1b1464;
+}
+
+/* 场景7中的文字：普通样式+高亮样式 */
+.text-scenario-gym {
+    position: absolute;
+    font-size: 2.2rem;
+    font-weight: normal;
+    color: #662d91;
+    text-align: start;
+    line-height: 6rem;
+}
+
+.highlight-text-scenario-gym {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #662d91;
 }
