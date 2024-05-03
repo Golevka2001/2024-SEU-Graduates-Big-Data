@@ -4,7 +4,7 @@ from django.db import models
 class SportsCompetitionStat(models.Model):
     """体育赛事统计表"""
     # 一卡通号
-    seu_card_id = models.CharField(max_length=255, primary_key=True, verbose_name="一卡通号", unique=True)
+    seu_card_id = models.CharField(max_length=255, verbose_name="一卡通号")
     # 学号
     student_id = models.CharField(max_length=255, verbose_name="学号", null=True)
     # 姓名
@@ -18,7 +18,7 @@ class SportsCompetitionStat(models.Model):
     # 项目
     sports_events = models.CharField(max_length=255, verbose_name="项目", null=True)
     # 成绩
-    score = models.CharField(max_length=255, verbose_name="成绩")
+    score = models.CharField(max_length=255, verbose_name="成绩", null=True)
 
     class Meta:
         db_table = "gbd_sports_competition_stat"
