@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.shortcuts import redirect, render
 
-from django_cas_ng.decorators import login_required
+# from django_cas_ng.decorators import login_required
 from stat_data.models import FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, SportsCompetitionStat
 
 # 显示借阅量排名的阈值（前50%才显示）
 SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
 
-@login_required  # TODO: 生产环境中启用
+# @login_required  # TODO: 生产环境中启用
 def personal_view(request):
     # 获取当前用户的一卡通号
     if settings.ENABLE_CAS:
@@ -17,7 +17,7 @@ def personal_view(request):
         if seu_card_id == "TEST_USER":
             seu_card_id = "213216666"
     else:
-        seu_card_id = "213216666"
+        seu_card_id = "213203142"
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
         return redirect("error:not_eligible_view")
@@ -40,13 +40,15 @@ def personal_view(request):
     borrowing_rank_percent = f'{1 - borrowing_rank / graduate_total_num:.2%}'
 
     # 全校最高借阅量
-    max_total_borrowed_books_num = (LibraryBorrowingStat.objects.order_by("-total_borrowed_books_num")[0]
-                                    .total_borrowed_books_num)
+    max_total_borrowed_books_num = (LibraryBorrowingStat.objects.extra(
+        select={"total_borrowed_books_num_int": "CAST(total_borrowed_books_num AS SIGNED INTEGER)"}).order_by(
+        "-total_borrowed_books_num_int")[0]).total_borrowed_books_num
 
     # 本学院借阅量第一名
     unit_name = graduate.unit_name
-    top_borrower_in_unit = \
-        LibraryBorrowingStat.objects.filter(unit_name=unit_name).order_by("-total_borrowed_books_num")[0]
+    top_borrower_in_unit = LibraryBorrowingStat.objects.filter(unit_name=unit_name).extra(
+        select={"total_borrowed_books_num_int": "CAST(total_borrowed_books_num AS SIGNED INTEGER)"}).order_by(
+        "-total_borrowed_books_num_int")[0]
 
     # 场馆预约次数排名（gym_ordered_times）
     gym_ordering_rank = GraduatePersonalStat.objects.filter(
