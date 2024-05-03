@@ -6,8 +6,11 @@
     <meta name="Resource-type" content="Document"/>
     <title>东南大学 2024 毕业生大数据</title>
 
+    {# Swiper JS #}
+    <script src="{% static 'swiper@11.1.1/swiper-bundle.min.js' %}"></script>
+
     {# Swiper CSS #}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'swiper@11.1.1/swiper-bundle.min.css' %}"/>
 
     {# 自定义 CSS #}
     <link rel="stylesheet" href="{% static 'stat_data/css/personal_view.css' %}"/>
@@ -360,7 +363,7 @@
                         <br/>
                         {% if graduate.show_borrowing_details %}
                             <p>在借阅过的图书中，你阅读时间最长的一本是</p>
-                            <p class="highlight-text-scenario-library">《{{ graduate.longest_keeping_book_name }}></p>
+                            <p class="highlight-text-scenario-library">《{{ graduate.longest_keeping_book_name }}》</p>
                             <p>共计阅读了
                                 <span class="highlight-text-scenario-library">{{ graduate.get_longest_book_borrowing_days }}</span>
                                 天
@@ -498,9 +501,6 @@
         </div>
     </div>
 </div>
-
-{# Swiper JS #}
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
     // 转场动画 - 进入页面

@@ -3,6 +3,8 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 /* 遮罩层（用于转场动画） */
