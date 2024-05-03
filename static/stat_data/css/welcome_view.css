@@ -1,0 +1,94 @@
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* 遮罩层（用于转场动画） */
+#overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 1;
+    transition: opacity 1s;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* 背景图片 */
+#bg-img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    -o-object-fit: cover;
+}
+
+/* 前景内容 */
+#fg-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+/* 顶部文字（图片） */
+#top-text {
+    position: absolute;
+    top: 10%;
+}
+
+/* 页面跳转按钮 */
+#jump-btn {
+    position: absolute;
+    bottom: 20%;
+    padding: 3rem 6rem;
+    background: radial-gradient(circle, #f5dc8a, #ffc45c);
+    border: 0.5rem solid #d34100;
+    border-radius: 999rem;
+    -moz-border-radius: 999rem;
+    -webkit-border-radius: 999rem;
+}
+
+#jump-btn span {
+    font-size: 3.75rem;
+    font-weight: bold;
+    line-height: 1;
+    color: #251c14;
+    border-width: 0;
+    background: transparent;
+}
+
+/* 底部文字（图片） */
+#bottom-text {
+    position: absolute;
+    bottom: 10%;
+}
+
+/* 底部复选框 */
+#bottom-checkbox {
+    position: absolute;
+    bottom: 1%;
+    font-size: 2rem;
+    color: whitesmoke;
+}
+
+#agree-checkbox {
+    vertical-align: middle;
+    margin-bottom: 0.5rem;
+    transform: scale(2.5);
+    -ms-transform: scale(2.5);
+    margin-right: 1rem;
+}

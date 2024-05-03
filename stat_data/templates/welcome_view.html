@@ -6,43 +6,66 @@
     <meta name="Resource-type" content="Document"/>
     <title>东南大学 2024 毕业生大数据</title>
 
-    {# Tailwind CSS #}
-    <script src="https://cdn.tailwindcss.com"></script>
+    {# 自定义 CSS #}
+    <link rel="stylesheet" href="{% static 'stat_data/css/welcome_view.css' %}"/>
 </head>
 
-<body class="relative">
+<body>
+{# 遮罩层（用于转场动画） #}
+<div id="overlay"></div>
+
 {# 背景图片 #}
 <img src="{% static 'stat_data/img/bg-welcome.png' %}"
      alt="background image (welcome)"
-     class="h-screen w-screen object-cover"/>
+     id="bg-img"/>
 
-{# 顶部文字 #}
-<div class="absolute w-full top-40">
+<div id="fg-content">
+    {# 顶部文字 #}
     <img src="{% static 'stat_data/img/text-welcome-top.png' %}"
          alt="top text"
-         class="mx-auto"/>
-</div>
+         id="top-text"/>
 
-{# 底部按钮+文字 #}
-<div class="absolute w-full bottom-40 text-center">
-    {# 按钮：点击查看毕业报告 #}
-    <form action="{% url 'stat_data:personal_view' %}"
-          method="get">
-        <button type="submit"
-                class="px-32 py-14 rounded-full"
-                style="background: radial-gradient(circle, #f5dc8a, #ffc45c);
-                        border: 0.5rem solid #d34100;">
-            <span class="text-6xl font-bold"
-                  style="color: #251c14;">
-                点击查看毕业报告
-            </span>
-        </button>
-    </form>
+    {# 页面跳转按钮 #}
+    <button id="jump-btn">
+        <span>点击查看毕业报告</span>
+    </button>
+    {#    <form action="{% url 'stat_data:personal_view' %}" method="get" id="jump-btn">#}
+    {#        <button type="submit">点击查看毕业报告</button>#}
+    {#    </form>#}
 
     {# 底部文字 #}
     <img src="{% static 'stat_data/img/text-welcome-bottom.png' %}"
          alt="bottom text"
-         class="mt-10 mx-auto"/>
+         id="bottom-text"/>
+
+    {# 底部复选框 #}
+    <div id="bottom-checkbox">
+        <input type="checkbox" id="agree-checkbox" name="agree-checkbox" value="agree"/>
+        <label for="agree-checkbox">同意使用个人数据生成毕业生数据报告</label>
+    </div>
 </div>
+
+<script>
+    // 转场动画 - 进入页面
+    window.addEventListener('pageshow', (event) => {
+        document.getElementById("overlay").style.opacity = "0";
+    });
+
+    // 页面跳转按钮点击事件
+    document.getElementById('jump-btn').addEventListener('click', (event) => {
+        // 若用户未勾选同意复选框，弹出提示
+        if (!document.getElementById('agree-checkbox').checked) {
+            alert('请先勾选同意使用个人数据');
+            event.preventDefault();
+        }
+        // 显示转场动画，执行页面跳转
+        else {
+            document.getElementById("overlay").style.opacity = "1";
+            setTimeout(() => {
+                window.location.href = "{% url 'stat_data:personal_view' %}";
+            }, 1000);
+        }
+    });
+</script>
 </body>
 </html>
