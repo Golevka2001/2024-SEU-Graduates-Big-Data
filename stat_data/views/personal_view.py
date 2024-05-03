@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from django_cas_ng.decorators import login_required
 from stat_data.models import FavoriteCanteenStat, GraduatePersonalStat, LibraryBorrowingStat, SportsCompetitionStat
@@ -20,7 +20,7 @@ def personal_view(request):
         seu_card_id = "213216666"
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
-        return render(request, "welcome_view.html", {"is_graduate": False})
+        return redirect("error:not_eligible_view")
 
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)
