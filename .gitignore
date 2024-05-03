@@ -5,7 +5,8 @@
 my.cnf
 
 # Django migration files
-**/migrations/*.py
+**/migrations/*
+!**/migrations/__init__.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
