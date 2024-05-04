@@ -1,16 +1,18 @@
 html,
-body {
+body,
+main {
     height: 100vh;
     width: 100vw;
     position: relative;
     margin: 0;
     padding: 0;
+    background-color: black;
 }
 
 /* 遮罩层（用于转场动画） */
 #overlay {
-    width: 100%;
     height: 100%;
+    width: inherit;
     position: fixed;
     top: 0;
     left: 0;
@@ -46,49 +48,70 @@ body {
 
 /* 顶部文字（图片） */
 #top-text {
+    width: 80%;
     position: absolute;
-    top: 10%;
+    top: 15%;
 }
 
 /* 页面跳转按钮 */
 #jump-btn {
+    width: 65%;
     position: absolute;
-    bottom: 20%;
-    padding: 3rem 6rem;
-    background: radial-gradient(circle, #f5dc8a, #ffc45c);
-    border: 0.5rem solid #d34100;
-    border-radius: 999rem;
-    -moz-border-radius: 999rem;
-    -webkit-border-radius: 999rem;
+    margin: auto;
+    bottom: 15%;
+    background: none;
+    border: none;
+    /*padding: 1rem 2.5rem;*/
+    /*background: radial-gradient(circle, #f5dc8a, #ffc45c);*/
+    /*border: 0.3rem solid #d34100;*/
+    /*border-radius: 9999px;*/
+    /*-moz-border-radius: 9999px;*/
+    /*-webkit-border-radius: 9999px;*/
 }
 
-#jump-btn span {
-    font-size: 3.75rem;
-    font-weight: bold;
-    line-height: 1;
-    color: #251c14;
-    border-width: 0;
-    background: transparent;
+#jump-btn img {
+    width: 100%;
+    height: auto;
 }
+
+/*#jump-btn span {*/
+/*    font-size: 200%;*/
+/*    font-weight: bold;*/
+/*    line-height: 1;*/
+/*    color: #251c14;*/
+/*    border-width: 0;*/
+/*    background: transparent;*/
+/*}*/
 
 /* 底部文字（图片） */
 #bottom-text {
+    width: 60%;
     position: absolute;
     bottom: 10%;
 }
 
 /* 底部复选框 */
 #bottom-checkbox {
+    max-width: 90%;
     position: absolute;
     bottom: 1%;
-    font-size: 2rem;
+    font-size: 1rem;
+    text-align: center;
     color: whitesmoke;
 }
 
 #agree-checkbox {
     vertical-align: middle;
     margin-bottom: 0.5rem;
-    transform: scale(2.5);
-    -ms-transform: scale(2.5);
-    margin-right: 1rem;
+    /*transform: scale(2.5);*/
+    /*-ms-transform: scale(2.5);*/
+    /*margin-right: 1rem;*/
+}
+
+@media (orientation: landscape) {
+    main {
+        height: 100%;
+        width: fit-content;
+        margin: auto;
+    }
 }
