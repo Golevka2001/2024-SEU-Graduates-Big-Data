@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
-
 ENABLE_CAS = False
 
 INSTALLED_APPS = [
@@ -56,7 +55,7 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    # "django.contrib.auth.backends.ModelBackend",
+    "django.contrib.auth.backends.ModelBackend",
     "django_cas_ng.backends.CASBackend",
 ]
 
@@ -153,4 +152,6 @@ CAS_SERVICE_URL = "https://gradudata2024.seu.edu.cn"
 CAS_LOGIN_NEXT_PAGE = "/"
 CAS_LOGOUT_NEXT_PAGE = "/"
 CAS_APPLY_ATTRIBUTES_TO_USER = True
+CAS_CREATE_USER_WITH_ID = True
 CAS_USERNAME_ATTRIBUTE = "mainCardId"
+CAS_RENAME_ATTRIBUTES = {"sn": "first_name"}  # django-cas-ng 的用户模型直接用的 django 自带的 User 模型，懒得改了

@@ -1,16 +1,27 @@
 html,
-body {
+body,
+main {
     height: 100vh;
     width: 100vw;
     position: relative;
     margin: 0;
     padding: 0;
+    background-color: black;
+    font-size: 3.75vw;
+}
+
+@media (orientation: landscape) {
+    main {
+        height: 100%;
+        width: fit-content;
+        margin: auto;
+    }
 }
 
 /* 遮罩层（用于转场动画） */
 #overlay {
-    width: 100%;
     height: 100%;
+    width: inherit;
     position: fixed;
     top: 0;
     left: 0;
@@ -47,32 +58,41 @@ body {
 
 /* 场景1中的文字：普通样式+高亮样式 */
 .text-scenario-gate {
+    width: 20rem;
     position: absolute;
-    font-size: 2.2rem;
+    top: 2rem;
+    left:4rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #603813;
     text-align: start;
-    line-height: 6rem;
+    line-height: 1.3rem;
 }
 
 .highlight-text-scenario-gate {
-    font-size: 3rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #e8822e;
+}
+
+.container-img-scenario-gate {
+    width: 23rem;
+    position: absolute;
+    top: 0;
 }
 
 /* 场景2中的文字：普通样式+高亮样式 */
 .text-scenario-dormitory {
     position: absolute;
-    font-size: 2.2rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #fff7c0;
     text-align: center;
-    line-height: 6rem;
+    line-height: 1.3rem;
 }
 
 .highlight-text-scenario-dormitory {
-    font-size: 3rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
@@ -82,16 +102,16 @@ body {
 /* 场景3中的文字：普通样式+高亮样式 */
 .text-scenario-canteen {
     position: absolute;
-    font-size: 2rem;
+    font-size: 0.8rem;
     font-weight: normal;
     color: #ff718c;
     text-align: start;
-    line-height: 6rem;
-    transform: skewY(-9deg);
+    line-height: 1.4rem;
+    transform: skewY(-9.5deg);
 }
 
 .highlight-text-scenario-canteen {
-    font-size: 3rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
@@ -101,16 +121,16 @@ body {
 /* 场景4中的文字：普通样式+高亮样式 */
 .text-scenario-classroom {
     position: absolute;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #2e93ef;
     text-align: center;
-    line-height: 6rem;
+    line-height: 1.3rem;
     transform: skewY(-6.5deg);
 }
 
 .highlight-text-scenario-classroom {
-    font-size: 2.6rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
@@ -119,19 +139,18 @@ body {
 
 /* 场景5中的文字：普通样式+高亮样式 */
 .text-scenario-auditorium {
-    width: 70%;
     position: absolute;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #e28191;
     text-align: start;
-    line-height: 4rem;
+    line-height: 1.3rem;
 }
 
 .subtitle-scenario-auditorium {
     width: fit-content;
     padding: 0.2rem 1.5rem;
-    font-size: 3rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: white;
     word-spacing: -0.5rem;
@@ -140,7 +159,7 @@ body {
 }
 
 .highlight-text-scenario-auditorium {
-    font-size: 2.6rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
@@ -150,15 +169,15 @@ body {
 /* 场景6中的文字：普通样式+高亮样式 */
 .text-scenario-library {
     position: absolute;
-    font-size: 2.2rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #7769b2;
     text-align: start;
-    line-height: 6rem;
+    line-height: 1.3rem;
 }
 
 .highlight-text-scenario-library {
-    font-size: 3rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #1b1464;
 }
@@ -166,15 +185,15 @@ body {
 /* 场景7中的文字：普通样式+高亮样式 */
 .text-scenario-gym {
     position: absolute;
-    font-size: 2.2rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #662d91;
     text-align: start;
-    line-height: 6rem;
+    line-height: 1.3rem;
 }
 
 .highlight-text-scenario-gym {
-    font-size: 3rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #662d91;
 }
