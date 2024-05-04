@@ -105,7 +105,8 @@ class GraduatePersonalStat(models.Model):
     # 【存在空】借阅时间最长的书名
     longest_keeping_book_name = models.CharField(max_length=255, verbose_name="借阅时间最长的书名", null=True)
     # 【存在空】最长借阅天数
-    longest_book_borrowing_days = models.CharField(max_length=255, verbose_name="最长借阅天数", null=True, default="0")
+    longest_book_borrowing_days = models.CharField(max_length=255, verbose_name="最长借阅天数", null=True,
+                                                   default="0 days 00:00:00")
     # 【存在空】个人借阅书籍中总借阅次数最少书名
     nice_book_name = models.CharField(max_length=255, verbose_name="个人借阅书籍中总借阅次数最少书名", null=True)
     # 【存在空】个人借阅书籍中总借阅次数最少的书被多少人借过
