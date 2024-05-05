@@ -174,7 +174,7 @@ class GraduatePersonalStat(models.Model):
     # ----- 判断是否跳过某整个页面的函数 ----- #
     def show_dormitory_page(self):
         return self.dormitory_name \
-            or self.show_network_data
+            or self.show_network_data()
 
     def show_canteen_page(self):
         return self.most_frequent_consumption_place \
@@ -182,8 +182,8 @@ class GraduatePersonalStat(models.Model):
 
     def show_auditorium_page(self):
         return self.first_lecture_date \
-            or self.show_srtp_projects \
-            or self.show_volunteer_activities \
+            or self.show_srtp_projects() \
+            or self.show_volunteer_activities() \
             or self.first_practice_project_name
 
     def show_library_page(self):
