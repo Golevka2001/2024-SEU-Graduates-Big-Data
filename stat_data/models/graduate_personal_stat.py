@@ -166,9 +166,22 @@ class GraduatePersonalStat(models.Model):
             return float(self.volunteer_duration) > 0.0
         return False
 
+    def show_additional_content_in_auditorium_page(self):
+        cnt = 0
+        cnt += self.first_lecture_date is not None
+        cnt += self.show_srtp_projects()
+        cnt += self.show_volunteer_activities()
+        cnt += self.first_practice_project_name is not None
+        return cnt <= 2
+
     def show_borrowing_details(self):
         if self.total_borrowed_books_num:
             return int(self.total_borrowed_books_num) > 0
+        return False
+
+    def show_morning_exercise_times(self):
+        if self.morning_exercise_times:
+            return int(self.morning_exercise_times) > 0
         return False
 
     # ----- 判断是否跳过某整个页面的函数 ----- #
@@ -204,8 +217,10 @@ class GraduatePersonalStat(models.Model):
         return round(float(self.network_flow) / 167, 2)
 
     def get_longest_book_borrowing_days(self):
-        # 存储格式为：xx days xx:xx:xx
+        # 存储格式为：(xx days) xx:xx:xx
         if not self.longest_book_borrowing_days:
+            return "0"
+        if "days" not in self.longest_book_borrowing_days:
             return "0"
         return self.longest_book_borrowing_days.split(" ")[0]
 
