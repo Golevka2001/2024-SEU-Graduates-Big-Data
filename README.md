@@ -150,7 +150,7 @@ docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
 docker load < docker-img-graduates-big-data.tar
 
 # 运行容器
-docker run -d --name graduates-big-data --network host -p 8000:8000 graduates-big-data:latest
+docker run -d --name graduates-big-data --network host graduates-big-data:latest
 # 或者进入容器交互模式
-docker run -it --name graduates-big-data --network host -p 8000:8000 graduates-big-data:latest /bin/bash
+docker run -it --name graduates-big-data --network host graduates-big-data:latest /bin/bash
 ```
