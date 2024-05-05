@@ -11,6 +11,12 @@ main {
 }
 
 @media (orientation: landscape) {
+    html,
+    body,
+    main {
+        font-size: 1.7vh;
+    }
+
     main {
         height: 100%;
         width: fit-content;
@@ -42,6 +48,7 @@ main {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    z-index: -1;
 }
 
 /* 每页中的前景内容 */
@@ -56,41 +63,66 @@ main {
     justify-content: center;
 }
 
-/* 场景1中的文字：普通样式+高亮样式 */
+/* 每页中文字上方的遮挡 */
+.fg-mask {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    object-fit: cover;
+    z-index: 100;
+}
+
+/* 额外补充的文字内容 */
+.additional-text {
+    margin-top: 2.5rem;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.1rem;
+}
+
+/* ---------- 场景1: 大门 ---------- */
+/* 文字背景 */
+.container-img-scenario-gate {
+    width: 23rem;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+/* 普通样式文字 */
 .text-scenario-gate {
     width: 20rem;
     position: absolute;
-    top: 2rem;
-    left:4rem;
     font-size: 1rem;
     font-weight: normal;
     color: #603813;
     text-align: start;
     line-height: 1.3rem;
+    z-index: 20;
 }
 
+/* 高亮样式文字 */
 .highlight-text-scenario-gate {
     font-size: 1.3rem;
     font-weight: bold;
     color: #e8822e;
 }
 
-.container-img-scenario-gate {
-    width: 23rem;
-    position: absolute;
-    top: 0;
-}
-
-/* 场景2中的文字：普通样式+高亮样式 */
+/* ---------- 场景2: 宿舍 ---------- */
+/* 普通样式文字 */
 .text-scenario-dormitory {
-    position: absolute;
+    position: relative;
     font-size: 1rem;
     font-weight: normal;
     color: #fff7c0;
     text-align: center;
     line-height: 1.3rem;
+    z-index: 20;
 }
 
+/* 高亮样式文字 */
 .highlight-text-scenario-dormitory {
     font-size: 1.3rem;
     font-weight: bold;
@@ -99,17 +131,35 @@ main {
     background-clip: text;
 }
 
-/* 场景3中的文字：普通样式+高亮样式 */
-.text-scenario-canteen {
+/* 中间的图片 */
+.img-scenario-dormitory {
+    width: 100%;
+    z-index: 10;
+}
+
+/* ---------- 场景3: 食堂 ---------- */
+/* 文字背景 */
+.container-img-scenario-canteen {
+    width: 25rem;
     position: absolute;
-    font-size: 0.8rem;
+    top: 0;
+    z-index: 10;
+}
+
+/* 普通样式文字 */
+.text-scenario-canteen {
+    width: 20rem;
+    position: absolute;
+    font-size: 1rem;
     font-weight: normal;
     color: #ff718c;
     text-align: start;
     line-height: 1.4rem;
     transform: skewY(-9.5deg);
+    z-index: 20;
 }
 
+/* 高亮样式文字 */
 .highlight-text-scenario-canteen {
     font-size: 1.3rem;
     font-weight: bold;
@@ -118,46 +168,72 @@ main {
     background-clip: text;
 }
 
-/* 场景4中的文字：普通样式+高亮样式 */
-.text-scenario-classroom {
+/* ---------- 场景4: 教室 ---------- */
+/* 文字背景 */
+.container-img-scenario-classroom {
+    width: 22rem;
     position: absolute;
-    font-size: 1rem;
+    top: 0;
+    z-index: 10;
+}
+
+/* 普通样式文字 */
+.text-scenario-classroom {
+    width: 19rem;
+    position: absolute;
+    font-size: 0.9rem;
     font-weight: normal;
     color: #2e93ef;
     text-align: center;
-    line-height: 1.3rem;
+    line-height: 1.2rem;
     transform: skewY(-6.5deg);
+    z-index: 20;
 }
 
+/* 高亮样式文字 */
 .highlight-text-scenario-classroom {
     font-size: 1.3rem;
     font-weight: bold;
+    line-height: 1.4rem;
     color: transparent;
     background: linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
     background-clip: text;
 }
 
-/* 场景5中的文字：普通样式+高亮样式 */
-.text-scenario-auditorium {
+/* ---------- 场景5: 大礼堂 ---------- */
+/* 文字背景 */
+.container-img-scenario-auditorium {
+    width: 26rem;
     position: absolute;
-    font-size: 1rem;
-    font-weight: normal;
-    color: #e28191;
-    text-align: start;
-    line-height: 1.3rem;
+    top: 0;
+    z-index: 10;
 }
 
+/* 小标题 */
 .subtitle-scenario-auditorium {
     width: fit-content;
     padding: 0.2rem 1.5rem;
     font-size: 1.3rem;
     font-weight: bold;
     color: white;
-    word-spacing: -0.5rem;
+    word-spacing: -0.3rem;
     border-radius: 0.5rem;
     background: linear-gradient(to bottom, #ffc19c, #ffab91, #ff83b0);
 }
 
+/* 普通样式文字 */
+.text-scenario-auditorium {
+    width: 20.5rem;
+    position: absolute;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #e28191;
+    text-align: start;
+    line-height: 1.3rem;
+    z-index: 20;
+}
+
+/* 高亮样式文字 */
 .highlight-text-scenario-auditorium {
     font-size: 1.3rem;
     font-weight: bold;
@@ -166,34 +242,109 @@ main {
     background-clip: text;
 }
 
-/* 场景6中的文字：普通样式+高亮样式 */
+/* ---------- 场景6: 图书馆 ---------- */
+/* 文字背景 */
+.container-img-scenario-library {
+    width: 23rem;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+/* 普通样式文字 */
 .text-scenario-library {
+    width: 20.5rem;
     position: absolute;
     font-size: 1rem;
     font-weight: normal;
     color: #7769b2;
     text-align: start;
     line-height: 1.3rem;
+    z-index: 20;
 }
 
+/* 高亮样式文字 */
 .highlight-text-scenario-library {
     font-size: 1.3rem;
     font-weight: bold;
     color: #1b1464;
 }
 
-/* 场景7中的文字：普通样式+高亮样式 */
+/* ---------- 场景7: 体育馆 ---------- */
+/* 文字背景 */
+.container-img-scenario-gym {
+    width: 23rem;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+/* 普通样式文字 */
 .text-scenario-gym {
+    width: 20.5rem;
     position: absolute;
     font-size: 1rem;
     font-weight: normal;
     color: #662d91;
     text-align: start;
     line-height: 1.3rem;
+    z-index: 20;
 }
 
+/* 高亮样式文字 */
 .highlight-text-scenario-gym {
     font-size: 1.3rem;
     font-weight: bold;
     color: #662d91;
+}
+
+/* ---------- 场景8: 离开 ---------- */
+/* 文字背景 */
+.container-img-scenario-leave {
+    width: 25rem;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+/* 普通样式文字 */
+.text-scenario-leave {
+    width: 16.5rem;
+    position: absolute;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #6aa386;
+    text-align: center;
+    line-height: 0.75rem;
+    transform: skew(-5deg, 4.8deg);
+    z-index: 20;
+}
+
+/* 普通样式文字 */
+.text-line-scenario-leave {
+    border-bottom: 0.1rem solid #6aa386;
+    padding-bottom: 0.3rem;
+}
+
+/* 高亮样式文字 */
+.highlight-text-scenario-leave {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #3c604e;
+}
+
+/* ---------- 结束 ---------- */
+.title-img-end {
+    width: 80%;
+    position: relative;
+    bottom: 14%;
+    z-index: 20;
+}
+
+.fg-img-end {
+    width: 90%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
 }

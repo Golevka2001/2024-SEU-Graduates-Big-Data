@@ -7,12 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>东南大学 2024 毕业生大数据</title>
 
-    {# Swiper JS #}
-    <script src="{% static 'swiper@11.1.1/swiper-bundle.min.js' %}"></script>
-
+    {# Animate CSS #}
+    <link rel="stylesheet" href="{% static 'animate@4.1.1/animate.min.css' %}"/>
     {# Swiper CSS #}
     <link rel="stylesheet" href="{% static 'swiper@11.1.1/swiper-bundle.min.css' %}"/>
-
     {# 自定义 CSS #}
     <link rel="stylesheet" href="{% static 'stat_data/css/personal_view.css' %}"/>
 </head>
@@ -27,18 +25,26 @@
             {# ---------- 场景1: 大门 ---------- #}
             <div class="swiper-slide" id="scenario-gate">
                 {# 背景图片 #}
-                <img src="{% static 'stat_data/img/bg-gate.png' %}"
+                <img src="{% static 'stat_data/img/1-gate/background.png' %}"
                      alt="background image (gate)"
                      loading="lazy"
                      class="bg-img"/>
-                {# 内容 #}
-                <div class="fg-content" style="top: 10vh">
+                {# 前景遮挡 #}
+                <img src="{% static 'stat_data/img/1-gate/mask.png' %}"
+                     alt="mask (gate)"
+                     loading="lazy"
+                     class="fg-mask"/>
+                <div class="fg-content"
+                     style="top: 10vh"
+                     data-swiper-animation="animate__fadeIn"
+                     data-duration="1s">
                     {# 文字背景 #}
-                    <img src="{% static 'stat_data/img/container-gate.png' %}"
+                    <img src="{% static 'stat_data/img/1-gate/text-container.png' %}"
                          alt="text container (gate)"
+                         loading="lazy"
                          class="container-img-scenario-gate"/>
                     {# 文字 #}
-                    <div class="text-scenario-gate">
+                    <div class="text-scenario-gate" style="top: 2rem;left: 4rem;">
                         <p class="highlight-text-scenario-gate">{{ graduate.enroll_date|date:"Y年m月d日" }}</p>
                         <p>
                             {% if graduate.origin %}
@@ -51,7 +57,7 @@
                             拥有了专属学号
                             <span class="highlight-text-scenario-gate">{{ graduate.student_id }}</span>
                         </p>
-                        <p>正式成为了东大人</p>
+                        <p style="margin-bottom: 2rem">正式成为了东大人</p>
                         <p>在同届中</p>
                         <p>
                             有
@@ -73,15 +79,15 @@
             {% if graduate.show_dormitory_page %}
                 <div class="swiper-slide" id="scenario-dormitory">
                     {# 背景图片 #}
-                    <img src="{% static 'stat_data/img/bg-dormitory.png' %}"
+                    <img src="{% static 'stat_data/img/2-dormitory/background.png' %}"
                          alt="background image (dormitory)"
                          loading="lazy"
                          class="bg-img"/>
-                    {# 内容 #}
-                    <div class="fg-content">
+                    <div class="fg-content"
+                         data-swiper-animation="animate__fadeIn"
+                         data-duration="1s">
                         {# 顶部文字 #}
-                        <div class="text-scenario-dormitory"
-                             style="top:5rem">
+                        <div class="text-scenario-dormitory" style="left:10vw">
                             {% if graduate.dormitory_name %}
                                 <p>欢笑喜悦，迷茫困苦</p>
                                 <p>你与室友相互陪伴</p>
@@ -96,9 +102,13 @@
                                 <p>和你相伴在东南的每一天</p>
                             {% endif %}
                         </div>
+                        {# 图片 #}
+                        <img src="{% static 'stat_data/img/2-dormitory/middle.png' %}"
+                             alt="middle image (dormitory)"
+                             loading="lazy"
+                             class="img-scenario-dormitory"/>
                         {# 底部文字 #}
-                        <div class="text-scenario-dormitory"
-                             style="bottom:10rem">
+                        <div class="text-scenario-dormitory">
                             {% if graduate.show_network_data %}
                                 <p>校园网是你的贴心助手</p>
                                 <p>
@@ -130,15 +140,27 @@
             {% if graduate.show_canteen_page %}
                 <div class="swiper-slide" id="scenario-canteen">
                     {# 背景图片 #}
-                    <img src="{% static 'stat_data/img/bg-canteen.png' %}"
+                    <img src="{% static 'stat_data/img/3-canteen/background.png' %}"
                          alt="background image (canteen)"
                          loading="lazy"
                          class="bg-img"/>
-                    {# 内容 #}
-                    <div class="fg-content">
+                    {# 前景遮挡 #}
+                    <img src="{% static 'stat_data/img/3-canteen/mask.png' %}"
+                         alt="mask (canteen)"
+                         loading="lazy"
+                         class="fg-mask"/>
+                    <div class="fg-content"
+                         style="top: 8vh"
+                         data-swiper-animation="animate__fadeIn"
+                         data-duration="1s">
+                        {# 文字背景 #}
+                        <img src="{% static 'stat_data/img/3-canteen/text-container.png' %}"
+                             alt="text container (canteen)"
+                             loading="lazy"
+                             class="container-img-scenario-canteen"
+                             style="left:3rem"/>
                         {# 文字 #}
-                        <div class="text-scenario-canteen"
-                             style="top:15%; left:18%">
+                        <div class="text-scenario-canteen" style="top: 5rem;left: 4rem;">
                             <p>你一共在食堂使用校园卡</p>
                             <p>
                                 消费
@@ -177,20 +199,32 @@
             {# ---------- 场景4: 教室 ---------- #}
             <div class="swiper-slide" id="scenario-classroom">
                 {# 背景图片 #}
-                <img src="{% static 'stat_data/img/bg-classroom.png' %}"
+                <img src="{% static 'stat_data/img/4-classroom/background.png' %}"
                      alt="background image (classroom)"
                      loading="lazy"
                      class="bg-img"/>
-                {# 内容 #}
-                <div class="fg-content">
+                {# 前景遮挡 #}
+                <img src="{% static 'stat_data/img/4-classroom/mask.png' %}"
+                     alt="mask (classroom)"
+                     loading="lazy"
+                     class="fg-mask"/>
+                <div class="fg-content"
+                     style="top: 3vh"
+                     data-swiper-animation="animate__fadeIn"
+                     data-duration="1s">
+                    {# 文字背景 #}
+                    <img src="{% static 'stat_data/img/4-classroom/text-container.png' %}"
+                         alt="text container (classroom)"
+                         loading="lazy"
+                         class="container-img-scenario-classroom"
+                         style="left:3rem"/>
                     {# 文字 #}
                     <div class="text-scenario-classroom"
-                         style="top:15%; left:20%">
+                         style="top:7rem; left:4.5rem">
                         <p>
                             你选择了
                             <span class="highlight-text-scenario-classroom">{{ graduate.unit_name }}</span>
-                        </p>
-                        <p>
+                            -
                             <span class="highlight-text-scenario-classroom">{{ graduate.major }}</span>
                             专业
                         </p>
@@ -203,18 +237,21 @@
                                     <span class="highlight-text-scenario-classroom">{{ graduate.first_class_place }}</span>
                                 </p>
                             {% endif %}
+                            {% if graduate.first_class_teacher %}
+                                <p>{{ graduate.first_class_teacher }}老师的</p>
+                            {% endif %}
                             <p>
-                                {% if graduate.first_class_teacher %}
-                                    {{ graduate.first_class_teacher }}老师的
-                                {% endif %}
                                 <span class="highlight-text-scenario-classroom">《{{ graduate.first_class_name }}》</span>
                             </p>
                             <p>是你在东大的第一课</p>
                         {% endif %}
-                        <p>
+                        <p style="margin-top: 2rem">
                             你累计选了
                             <span class="highlight-text-scenario-classroom">{{ graduate.course_selected_num }}</span>
-                            门课，获得了
+                            门课
+                        </p>
+                        <p>
+                            获得了
                             <span class="highlight-text-scenario-classroom">{{ graduate.credits_obtained }}</span>
                             学分
                         </p>
@@ -239,15 +276,24 @@
             {% if graduate.show_auditorium_page %}
                 <div class="swiper-slide" id="scenario-auditorium">
                     {# 背景图片 #}
-                    <img src="{% static 'stat_data/img/bg-auditorium.png' %}"
+                    <img src="{% static 'stat_data/img/5-auditorium/background.png' %}"
                          alt="background image (auditorium)"
                          loading="lazy"
                          class="bg-img"/>
-                    {# 内容 #}
-                    <div class="fg-content">
+                    <div class="fg-content"
+                         style="top:27vh"
+                         data-swiper-animation="animate__fadeIn"
+                         data-duration="1s">
+                        {# 文字背景 #}
+                        <img src="{% static 'stat_data/img/5-auditorium/text-container.png' %}"
+                             alt="text container (auditorium)"
+                             loading="lazy"
+                             class="container-img-scenario-auditorium"
+                             style="left:0"/>
                         {# 文字 #}
                         <div class="text-scenario-auditorium"
-                             style="bottom:5%; left:10%">
+                             style="top:2rem;left:1.5rem">
+                            {# 讲座 #}
                             {% if graduate.first_lecture_date %}
                                 <p class="subtitle-scenario-auditorium">课 外 讲 座</p>
                                 <p>
@@ -261,15 +307,12 @@
                                 </p>
                                 <p>
                                     第一次听了
-                                    <span class="highlight-text-scenario-auditorium">{{ graduate.first_lecture_name }}</span>
+                                    <span class="highlight-text-scenario-auditorium">“{{ graduate.first_lecture_name }}”</span>
                                     讲座
                                 </p>
-                                <p>知识拓宽视野</p>
-                                {#{% if graduate.graduate_type != 0 %}#}
-                                {#    <p>在讲座中通过他者视角感受不一样的世界，打开一扇知识与生活的大门</p>#}
-                                {#    <p>在东大有无数扇门为你开启~</p>#}
-                                {#{% endif %}#}
+                                <p>知识拓宽视野！</p>
                             {% endif %}
+                            {# SRTP项目 #}
                             {% if graduate.show_srtp_projects %}
                                 <p class="subtitle-scenario-auditorium">SRTP 项目</p>
                                 <p>
@@ -284,8 +327,11 @@
                                 </p>
                                 <p>创新路上你努力前行！</p>
                             {% endif %}
+                            {% if graduate.show_volunteer_activities or graduate.first_practice_project_name %}
+                                <p class="subtitle-scenario-auditorium">志 愿 与 实 践</p>
+                            {% endif %}
+                            {# 志愿活动 #}
                             {% if graduate.show_volunteer_activities %}
-                                <p class="subtitle-scenario-auditorium">志 愿 活 动</p>
                                 <p>
                                     一共参加了
                                     <span class="highlight-text-scenario-auditorium">{{ graduate.volunteer_activity_num }}</span>
@@ -297,8 +343,8 @@
                                     小时
                                 </p>
                             {% endif %}
+                            {# 社会实践 #}
                             {% if graduate.first_practice_project_name %}
-                                <p class="subtitle-scenario-auditorium">社 会 实 践</p>
                                 <p>
                                     参加了
                                     <span class="highlight-text-scenario-auditorium">{{ graduate.practice_project_num }}</span>
@@ -310,6 +356,15 @@
                                     吗？
                                 </p>
                             {% endif %}
+                            {# 补充 #}
+                            {% if graduate.show_additional_content_in_auditorium_page %}
+                                <div class="additional-text">
+                                    <p>你在这里接触到了多彩的世界，</p>
+                                    <p style="margin-bottom: 2rem">也在这里勇敢地探索无限可能。</p>
+                                    <p>回看自己奋斗的点滴，</p>
+                                    <p>愿你不虚此行!</p>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -319,15 +374,28 @@
             {% if graduate.show_library_page %}
                 <div class="swiper-slide" id="scenario-library">
                     {# 背景图片 #}
-                    <img src="{% static 'stat_data/img/bg-library.png' %}"
+                    <img src="{% static 'stat_data/img/6-library/background.png' %}"
                          alt="background image (library)"
                          loading="lazy"
                          class="bg-img"/>
-                    {# 内容 #}
-                    <div class="fg-content">
+                    {# 前景遮挡 #}
+                    <img src="{% static 'stat_data/img/6-library/mask.png' %}"
+                         alt="mask (library)"
+                         loading="lazy"
+                         class="fg-mask"/>
+                    <div class="fg-content"
+                         style="top:2vh"
+                         data-swiper-animation="animate__fadeIn"
+                         data-duration="1s">
+                        {# 文字背景 #}
+                        <img src="{% static 'stat_data/img/6-library/text-container.png' %}"
+                             alt="text container (library)"
+                             loading="lazy"
+                             class="container-img-scenario-library"
+                             style="left:2.5rem"/>
                         {# 文字 #}
                         <div class="text-scenario-library"
-                             style="top:10%;">
+                             style="top:5vh;">
                             <p>
                                 你累计借阅书籍
                                 <span class="highlight-text-scenario-library">{{ graduate.total_borrowed_books_num }}</span>
@@ -345,19 +413,21 @@
                                 <span class="highlight-text-scenario-library">{{ max_total_borrowed_books_num }}</span>
                                 本
                             </p>
-                            {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
-                                <p>恭喜你成为
-                                    <span class="highlight-text-scenario-library">{{ graduate.unit_name }}</span>
-                                    借书
-                                    <span class="highlight-text-scenario-library">No.1</span>
-                                </p>
-                                <p>吹灭读书灯，一身都是月</p>
-                            {% else %}
-                                <p>{{ top_borrower_in_unit.full_name }}同学借阅了
-                                    <span class="highlight-text-scenario-library">{{ top_borrower_in_unit.total_borrowed_books_num }}</span>
-                                    本
-                                </p>
-                                <p>成为{{ top_borrower_in_unit.unit_name }}借书 No.1 ！</p>
+                            {% if top_borrower_in_unit %}
+                                {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
+                                    <p>恭喜你成为
+                                        <span class="highlight-text-scenario-library">{{ graduate.unit_name }}</span>
+                                        借书
+                                        <span class="highlight-text-scenario-library">No.1</span>
+                                    </p>
+                                    <p>吹灭读书灯，一身都是月</p>
+                                {% else %}
+                                    <p>{{ top_borrower_in_unit.full_name }}同学借阅了
+                                        <span class="highlight-text-scenario-library">{{ top_borrower_in_unit.total_borrowed_books_num }}</span>
+                                        本
+                                    </p>
+                                    <p>成为{{ top_borrower_in_unit.unit_name }}借书 No.1 ！</p>
+                                {% endif %}
                             {% endif %}
                             <br/>
                             {% if graduate.show_borrowing_details %}
@@ -387,15 +457,27 @@
             {% if graduate.show_gym_page or show_sports_competitions %}
                 {# 背景图片 #}
                 <div class="swiper-slide" id="scenario-gym">
-                    <img src="{% static 'stat_data/img/bg-gym.png' %}"
+                    <img src="{% static 'stat_data/img/7-gym/background.png' %}"
                          alt="background image (gym)"
                          loading="lazy"
                          class="bg-img"/>
-                    {# 内容 #}
-                    <div class="fg-content">
-                        {# 顶部文字 #}
+                    {# 前景遮挡 #}
+                    <img src="{% static 'stat_data/img/7-gym/mask.png' %}"
+                         alt="mask (gym)"
+                         loading="lazy"
+                         class="fg-mask"/>
+                    <div class="fg-content"
+                         style="top:5vh"
+                         data-swiper-animation="animate__fadeIn"
+                         data-duration="1s">
+                        {# 文字背景 #}
+                        <img src="{% static 'stat_data/img/7-gym/text-container.png' %}"
+                             alt="text container (gym)"
+                             loading="lazy"
+                             class="container-img-scenario-gym"/>
+                        {# 文字 #}
                         <div class="text-scenario-gym"
-                             style="top:10%;">
+                             style="top:1.5rem;">
                             {# 场馆 #}
                             {% if graduate.first_ordered_date %}
                                 <p>
@@ -406,34 +488,37 @@
                                     第一次预约了
                                     <span class="highlight-text-scenario-gym">{{ graduate.first_ordered_gym }}</span>
                                 </p>
-                            {% endif %}
-                            <p>
-                                你一共预约场馆
-                                <span class="highlight-text-scenario-gym">{{ graduate.gym_ordered_times }}</span>
-                                次
-                            </p>
-                            <p>
-                                超过了
-                                <span class="highlight-text-scenario-gym">{{ gym_ordering_rank_percent }}</span>
-                                的老师同学
-                            </p>
-                            {% if graduate.favorite_gym %}
                                 <p>
-                                    其中你最喜欢去的是
-                                    <span class="highlight-text-scenario-gym">{{ graduate.favorite_gym }}</span>
-                                </p>
-                                <p>
-                                    预约了
-                                    <span class="highlight-text-scenario-gym">{{ graduate.favorite_gym_ordered_times }}</span>
+                                    你一共预约场馆
+                                    <span class="highlight-text-scenario-gym">{{ graduate.gym_ordered_times }}</span>
                                     次
                                 </p>
+                                <p>
+                                    超过了
+                                    <span class="highlight-text-scenario-gym">{{ gym_ordering_rank_percent }}</span>
+                                    的老师同学
+                                </p>
+                                {% if graduate.favorite_gym %}
+                                    <p>
+                                        其中你最喜欢去的是
+                                        <span class="highlight-text-scenario-gym">{{ graduate.favorite_gym }}</span>
+                                    </p>
+                                    <p>
+                                        预约了
+                                        <span class="highlight-text-scenario-gym">{{ graduate.favorite_gym_ordered_times }}</span>
+                                        次
+                                    </p>
+                                {% endif %}
+                                {# 补充 #}
+                                {% if not graduate.show_morning_exercise_times and not show_sports_competitions %}
+                                    <div class="additional-text">
+                                        <p>在场馆中挥洒汗水，突破自我</p>
+                                        <p>体现青春风采，运动美好人生！</p></div>
+                                {% endif %}
+                                <br/>
                             {% endif %}
-                            {% if graduate.graduate_type != 0 %}
-                                <p>在场馆中挥洒汗水，突破自我，体现青春风采，运动美好人生！</p>
-                            {% endif %}
-                            <br/>
                             {# 跑操 #}
-                            {% if graduate.graduate_type == 0 %}
+                            {% if graduate.show_morning_exercise_times %}
                                 <p>
                                     你累计跑操打卡
                                     <span class="highlight-text-scenario-gym">{{ graduate.morning_exercise_times }}</span>
@@ -442,27 +527,40 @@
                                 {% if graduate.earliest_exercise_time %}
                                     <p class="highlight-text-scenario-gym">{{ graduate.earliest_exercise_time|date:"Y年m月d日" }}</p>
                                     <p>是你最早打卡的一次</p>
-                                    <p>感受东大的静谧与美好</p>
+                                    <p>你是否在途中感受到东大的</p>
+                                    <p>静谧与美好</p>
                                 {% endif %}
+                                {# 补充 #}
+                                {% if not graduate.first_ordered_date and not show_sports_competitions %}
+                                    <div class="additional-text">
+                                        <p>那些日子的运动时光</p>
+                                        <p>是属于你的独特记忆</p>
+                                        <p>东大陪你在健康路上前行！</p>
+                                    </div>
+                                {% endif %}
+                                <br/>
                             {% endif %}
-                            <br/>
                             {# 赛事 #}
                             {% if show_sports_competitions %}
                                 <p>还记得那些精彩的赛事吗？这是属于你的高光时刻：</p>
-                                <p class="highlight-text-scenario-gym">{{ sports_competition.competition_name }}</p>
+                                <p>
+                                    在
+                                    <span class="highlight-text-scenario-gym">{{ sports_competition.competition_name }}</span>
+                                    中
+                                </p>
+
                                 <p>
                                     获得
                                     <span class="highlight-text-scenario-gym">{{ sports_competition.score }}</span>
                                     的好成绩！
                                 </p>
-                                <p>……</p>
-                                <br/>
-                                <p>比赛中的心潮澎湃与坚持不懈，你认真的身影</p>
-                                <p>是对体育精神的完美践行，运动美好人生！</p>
-                            {% else %}
-                                {% if graduate.graduate_type == 0 %}
-                                    <p>那些日子的运动时光，是属于你的独特记忆</p>
-                                    <p>东大陪你在健康路上前行！</p>
+                                <p class="highlight-text-scenario-gym">……</p>
+                                {# 补充 #}
+                                {% if not graduate.first_ordered_date and not graduate.show_morning_exercise_times %}
+                                    <div class="additional-text">
+                                        <p style="margin-top: 2rem">比赛中的心潮澎湃与坚持不懈，你认真的身影</p>
+                                        <p>是对体育精神的完美践行，运动美好人生！</p>
+                                    </div>
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -473,44 +571,88 @@
             {# ---------- 场景8: 离开 ---------- #}
             <div class="swiper-slide" id="scenario-gate-leave">
                 {# 背景图片 #}
-                <img src="{% static 'stat_data/img/bg-leave.png' %}"
+                <img src="{% static 'stat_data/img/8-leave/background.png' %}"
                      alt="background image (leave)"
                      loading="lazy"
                      class="bg-img"/>
-                {# 内容 #}
-                <div class="fg-content">
-                    <p>这是你与东大相逢的第 {{ graduate.get_days_in_seu }} 天</p>
-                    <p>母校将永远成为你的坚强后盾</p>
-                    <p>你与东大共同完成这份时间地图，回顾你在东大走过的角落，细数你赏过的春光，望过的月亮，邂逅过的人</p>
-                    <p>记得再逛一次校园，拍一张照片，说一声珍重，作一次道别</p>
-                    <p>感谢万千人海中东大与你相遇，在无限时光里，我们一直在一起</p>
-                    <p>纸短情长，路遥情深</p>
-                    <br/>
-                    <p>祝所有毕业生，前程似锦，他日凌云！</p>
-                    <p>毕业快乐！</p>
+                {# 前景遮挡 #}
+                <img src="{% static 'stat_data/img/8-leave/mask.png' %}"
+                     alt="mask (leave)"
+                     loading="lazy"
+                     class="fg-mask"/>
+                <div class="fg-content"
+                     style="top:5vh"
+                     data-swiper-animation="animate__fadeIn"
+                     data-duration="1s">
+                    {# 文字背景 #}
+                    <img src="{% static 'stat_data/img/8-leave/text-container.png' %}"
+                         alt="text container (leave)"
+                         loading="lazy"
+                         class="container-img-scenario-leave"
+                         style="left:1rem"/>
+                    <div class="text-scenario-leave"
+                         style="top:5rem;left:6rem">
+                        <p class="text-line-scenario-leave">
+                            这是你与东大相逢的第
+                            <span class="highlight-text-scenario-leave">{{ graduate.get_days_in_seu }}</span>
+                            天
+                        </p>
+                        <p class="text-line-scenario-leave">母校将永远成为你的坚强后盾</p>
+                        <p class="text-line-scenario-leave">回顾你在东大走过的角落</p>
+                        <p class="text-line-scenario-leave">细数你赏过的春光</p>
+                        <p class="text-line-scenario-leave">望过的月亮，邂逅过的人</p>
+                        <p class="text-line-scenario-leave">记得再逛一次校园</p>
+                        <p class="text-line-scenario-leave">拍一张照片</p>
+                        <p class="text-line-scenario-leave">说一声珍重，作一次道别</p>
+                    </div>
                 </div>
             </div>
 
 
             {# ---------- 结束 ---------- #}
             <div class="swiper-slide" id="end">
-                <img src="{% static 'stat_data/img/bg-end.png' %}"
+                <img src="{% static 'stat_data/img/9-end/background.png' %}"
                      alt="background image (end)"
                      loading="lazy"
                      class="bg-img"/>
+                <div class="fg-content">
+                    <img src="{% static 'stat_data/img/9-end/title.png' %}"
+                         alt="title (end)"
+                         loading="lazy"
+                         data-swiper-animation="animate__tada"
+                         data-duration="1.5s"
+                         data-delay="1s"
+                         class="title-img-end"/>
+                </div>
+                <img src="{% static 'stat_data/img/9-end/foreground.png' %}"
+                     alt="foreground image (end)"
+                     loading="lazy"
+                     data-swiper-animation="animate__rollIn"
+                     data-duration="1.5s"
+                     data-delay="-0.5s"
+                     class="fg-img-end"/>
             </div>
         </div>
     </div>
 </main>
 
+
+{# Swiper JS #}
+<script src="{% static 'swiper@11.1.1/swiper-bundle.min.js' %}"></script>
+{# Swiper Animation JS #}
+<script src="{% static 'swiper-animation@6.0.2/swiper-animation.umd.min.js' %}"></script>
 <script>
     window.addEventListener('pageshow', (event) => {
         // 转场动画 - 进入页面
         document.getElementById("overlay").style.opacity = "0";
     });
 
+    // Initialize Swiper Animation
+    const swiperAnimation = new SwiperAnimation();
+
     // Initialize Swiper
     const swiper = new Swiper(".swiper", {
+        initialSlide: 0,
         direction: "vertical",
         edgeSwipeDetection: "prevent",
         keyboard: {
@@ -519,9 +661,14 @@
         lazyPreloadPrevNext: 2,
         mousewheel: true,
         speed: 800,
-        virtual: {
-            enabled: true,
-        }
+        on: {
+            init: function () {
+                swiperAnimation.init(this).animate();
+            },
+            slideChange: function () {
+                swiperAnimation.init(this).animate();
+            },
+        },
     });
 </script>
 </body>
