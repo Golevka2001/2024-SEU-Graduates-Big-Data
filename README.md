@@ -149,8 +149,8 @@ docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
 # 导入镜像
 docker load < docker-img-graduates-big-data.tar
 
-# 运行容器
-docker run -d --name graduates-big-data --network host graduates-big-data:latest
+# 运行容器（个人倾向于将项目目录挂载到容器内，方便后续修改）
+docker run -d -v /root/2024-SEU-Graduates-Big-Data:/app --name graduates-big-data --network host graduates-big-data:latest
 # 或者进入容器交互模式
-docker run -it --name graduates-big-data --network host graduates-big-data:latest /bin/bash
+docker run -it -v /root/2024-SEU-Graduates-Big-Data:/app --name graduates-big-data --network host graduates-big-data:latest /bin/bash
 ```
