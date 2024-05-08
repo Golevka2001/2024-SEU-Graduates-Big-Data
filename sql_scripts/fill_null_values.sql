@@ -8,7 +8,6 @@
 -- highest_single_consumption_amount : '0.00'
 -- course_selected_num : '0'
 -- credits_obtained : '0.00'
--- papers_num : '0'
 -- lecture_attended_times : '0'
 -- srtp_project_num : '0'
 -- srtp_score : '0.00'
@@ -17,6 +16,7 @@
 -- practice_project_num : '0'
 -- total_borrowed_books_num : '0'
 -- longest_book_borrowing_days : '0 days 00:00:00'
+-- library_visits : '0'
 -- gym_ordered_times : '0'
 -- morning_exercise_times : '0'
 UPDATE graduates_big_data.gbd_graduate_personal_stat
@@ -37,7 +37,6 @@ SET same_birthdate_num                = IF(same_birthdate_num IS NULL OR same_bi
                                            course_selected_num),
     credits_obtained                  = IF(credits_obtained IS NULL OR credits_obtained = '', '0.00',
                                            credits_obtained),
-    papers_num                        = IF(papers_num IS NULL OR papers_num = '', '0', papers_num),
     lecture_attended_times            = IF(lecture_attended_times IS NULL OR lecture_attended_times = '', '0',
                                            lecture_attended_times),
     srtp_project_num                  = IF(srtp_project_num IS NULL OR srtp_project_num = '', '0', srtp_project_num),
@@ -52,6 +51,7 @@ SET same_birthdate_num                = IF(same_birthdate_num IS NULL OR same_bi
                                            total_borrowed_books_num),
     longest_book_borrowing_days       = IF(longest_book_borrowing_days IS NULL OR longest_book_borrowing_days = '',
                                            '0 days 00:00:00', longest_book_borrowing_days),
+    library_visits                    = IF(library_visits IS NULL OR library_visits = '', '0', library_visits),
     gym_ordered_times                 = IF(gym_ordered_times IS NULL OR gym_ordered_times = '', '0',
                                            gym_ordered_times),
     morning_exercise_times            = IF(morning_exercise_times IS NULL OR morning_exercise_times = '', '0',
