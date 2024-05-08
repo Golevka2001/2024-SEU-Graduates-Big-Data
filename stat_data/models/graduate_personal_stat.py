@@ -38,8 +38,8 @@ class GraduatePersonalStat(models.Model):
     dormitory_name = models.CharField(max_length=255, verbose_name="宿舍名称", null=True)
     # 【存在空】网络在线天数
     network_online_days = models.CharField(max_length=255, verbose_name="网络在线天数", null=True, default="0")
-    # 【存在空】网络总流量（GB）
-    network_flow = models.CharField(max_length=255, verbose_name="网络总流量(GB)", null=True, default="0.00")
+    # 【存在空】网络总流量（TB）
+    network_flow = models.CharField(max_length=255, verbose_name="网络总流量(TB)", null=True, default="0.00")
 
     # ---------- 场景3: 食堂 ---------- #
     # 【存在空】消费金额
@@ -214,7 +214,7 @@ class GraduatePersonalStat(models.Model):
     def get_network_flow_equivalence(self):
         if not self.network_flow:
             return "0.00"
-        return round(float(self.network_flow) / 167, 2)
+        return round(float(self.network_flow) * 1024 / 167, 2)
 
     def get_longest_book_borrowing_days(self):
         # 存储格式为：(xx days) xx:xx:xx
