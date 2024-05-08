@@ -12,6 +12,7 @@
     {# Swiper CSS #}
     <link rel="stylesheet" href="{% static 'swiper@11.1.1/swiper-bundle.min.css' %}"/>
     {# 自定义 CSS #}
+    <link rel="stylesheet" href="{% static 'stat_data/css/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'stat_data/css/personal_view.css' %}"/>
 </head>
 
@@ -27,19 +28,16 @@
                 {# 背景图片 #}
                 <img src="{% static 'stat_data/img/1-gate/background.png' %}"
                      alt="background image (gate)"
-                     loading="lazy"
                      class="bg-img"/>
                 {# 前景遮挡 #}
                 <img src="{% static 'stat_data/img/1-gate/mask.png' %}"
                      alt="mask (gate)"
-                     loading="lazy"
                      class="fg-mask"/>
                 <div class="fg-content"
                      style="top: 10vh;">
                     {# 文字背景 #}
                     <img src="{% static 'stat_data/img/1-gate/text-container.png' %}"
                          alt="text container (gate)"
-                         loading="lazy"
                          id="container-img-scenario-gate"/>
                     {# 文字 #}
                     <div class="text-scenario-gate" style="top: 2rem;left: 4rem;">
@@ -83,7 +81,7 @@
                          class="bg-img"/>
                     <div class="fg-content">
                         {# 顶部文字 #}
-                        <div class="text-scenario-dormitory" style="left:10vw">
+                        <div class="text-scenario-dormitory" style="left:0">
                             {% if graduate.dormitory_name %}
                                 <p>欢笑喜悦，迷茫困苦</p>
                                 <p>你与室友相互陪伴</p>

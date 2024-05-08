@@ -8,6 +8,7 @@
     <title>东南大学 2024 毕业生大数据</title>
 
     {# 自定义 CSS #}
+    <link rel="stylesheet" href="{% static 'stat_data/css/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'stat_data/css/welcome_view.css' %}"/>
 </head>
 
@@ -17,24 +18,27 @@
     <div id="overlay"></div>
 
     {# 背景图片 #}
-    <img src="{% static 'stat_data/img/bg-welcome.png' %}"
+    <img src="{% static 'stat_data/img/0-welcome/background.png' %}"
          alt="background image (welcome)"
-         id="bg-img"/>
+         class="bg-img"/>
 
-    <div id="fg-content">
+    <div class="fg-content">
         {# 顶部文字 #}
-        <img src="{% static 'stat_data/img/text-welcome-top.png' %}"
+        <img src="{% static 'stat_data/img/0-welcome/top-text.png' %}"
              alt="top text"
              id="top-text"/>
 
         {# 页面跳转按钮 #}
         <button id="jump-btn">
-            <img src="{% static 'stat_data/img/btn-welcome-jump.png' %}"
+            <img src="{% static 'stat_data/img/0-welcome/jump-button.png' %}"
                  alt="jump button"/>
         </button>
+        {#    <form action="{% url 'stat_data:personal_view' %}" method="get" id="jump-btn">#}
+        {#        <button type="submit">点击查看毕业报告</button>#}
+        {#    </form>#}
 
         {# 底部文字 #}
-        <img src="{% static 'stat_data/img/text-welcome-bottom.png' %}"
+        <img src="{% static 'stat_data/img/0-welcome/bottom-text.png' %}"
              alt="bottom text"
              id="bottom-text"/>
 
@@ -52,8 +56,7 @@
         if (window.innerWidth > window.innerHeight) {
             alert('推荐使用竖屏浏览');
         }
-
-        // 转场动画 - 进入页面
+        // 进入页面的转场动画
         document.getElementById("overlay").style.opacity = "0";
     });
 
@@ -64,7 +67,6 @@
             alert('请先勾选同意使用个人数据');
             event.preventDefault();
         }
-
         // 显示转场动画，执行页面跳转
         else {
             document.getElementById("overlay").style.opacity = "1";
