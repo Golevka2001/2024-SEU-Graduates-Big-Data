@@ -138,19 +138,34 @@ class GraduatePersonalStat(models.Model):
     earliest_exercise_time = models.DateField(db_comment="最早跑操打卡时间", null=True)
 
     # ----- 判断是否显示某部分文案的函数 ----- #
+    def is_birthdate_unique(self):
+        if self.same_birthdate_num:
+            return int(self.same_birthdate_num) == 1
+        return True
+
     def show_same_origin_num(self):
         if self.same_origin_num:
             return int(self.same_origin_num) > 0
         return False
 
     def show_network_data(self):
-        if self.network_online_days:
-            return int(self.network_online_days) > 0
+        if self.network_online_days and self.network_flow:
+            return int(self.network_online_days) > 0 and float(self.network_flow) > 0.0
         return False
 
+    def show_first_class_data(self):
+        return bool(self.first_class_date
+                    and self.first_class_teacher
+                    and self.first_class_name)
+
+    def show_lectures(self):
+        return bool(self.lecture_attended_times
+                    and self.first_lecture_place
+                    and self.first_lecture_name)
+
     def show_srtp_projects(self):
-        if self.srtp_project_num:
-            return float(self.srtp_score) > 0.0
+        if self.srtp_project_num and self.srtp_score:
+            return int(self.srtp_project_num) > 0 and float(self.srtp_score) > 0.0
         return False
 
     def show_volunteer_activities(self):
@@ -158,46 +173,63 @@ class GraduatePersonalStat(models.Model):
             return float(self.volunteer_duration) > 0.0
         return False
 
+    def show_practice_projects(self):
+        return bool(self.practice_project_num
+                    and self.first_practice_project_member
+                    and self.first_practice_project_name)
+
     def show_additional_content_in_auditorium_page(self):
         cnt = 0
-        cnt += self.first_lecture_place is not None
+        cnt += self.show_lectures()
         cnt += self.show_srtp_projects()
         cnt += self.show_volunteer_activities()
-        cnt += self.first_practice_project_name is not None
-        return cnt <= 2
+        cnt += self.show_practice_projects()
+        return cnt <= 1
 
-    def show_borrowing_details(self):
+    def show_library_visits_only(self):
+        return bool(self.library_visits) and int(self.library_visits) >= 10
+
+    def lack_of_borrowing_data(self):
         if self.total_borrowed_books_num:
-            return int(self.total_borrowed_books_num) > 0
+            return (int(self.total_borrowed_books_num) <= 0
+                    or int(self.get_longest_book_borrowing_days()) <= 0
+                    or not bool(self.nice_book_name))
         return False
 
-    def show_morning_exercise_times(self):
+    def show_gym_data(self):
+        return bool(self.first_ordered_date) and bool(self.first_ordered_gym)
+
+    def show_gym_details(self):
+        if self.gym_ordered_times and self.favorite_gym and self.favorite_gym_ordered_times:
+            return int(self.gym_ordered_times) >= 10
+
+    def show_morning_exercise(self):
         if self.morning_exercise_times:
             return int(self.morning_exercise_times) > 0
         return False
 
     # ----- 判断是否跳过某整个页面的函数 ----- #
     def show_dormitory_page(self):
-        return self.dormitory_name or self.show_network_data()
+        return bool(self.dormitory_name) or self.show_network_data()
 
     def show_canteen_page(self):
-        return self.most_frequent_consumption_place or self.highest_single_consumption_date
+        return bool(self.most_frequent_consumption_place) or bool(self.highest_single_consumption_date)
 
     def show_auditorium_page(self):
-        return (self.first_lecture_place
+        return (bool(self.first_lecture_place)
                 or self.show_srtp_projects()
                 or self.show_volunteer_activities()
-                or self.first_practice_project_name)
+                or bool(self.first_practice_project_name))
 
     def show_library_page(self):
-        if self.total_borrowed_books_num:
-            return (int(self.total_borrowed_books_num) > 0
-                    and int(self.get_longest_book_borrowing_days()) > 0
-                    and self.nice_book_name)
+        if not self.lack_of_borrowing_data():
+            return True
+        if self.library_visits:
+            return int(self.library_visits) >= 10
         return False
 
     def show_gym_page(self):
-        return self.favorite_gym or self.earliest_exercise_time
+        return bool(self.favorite_gym) or bool(self.earliest_exercise_time)
 
     # ----- 用于计算的函数 ----- #
     def get_network_flow_equivalence(self):
