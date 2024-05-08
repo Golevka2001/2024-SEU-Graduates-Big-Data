@@ -1,0 +1,63 @@
+html,
+body,
+main {
+    height: 100%;
+    width: 100vw;
+    position: relative;
+    margin: auto;
+    padding: 0;
+    font-size: 3.75vw;
+    @media (min-aspect-ratio: 2/3) {
+        width: fit-content;
+        font-size: 1.7vh;
+    }
+}
+
+/* 遮罩层（用于转场动画） */
+#overlay {
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    -webkit-transition: opacity 1s;
+}
+
+/* 每页中的背景图片 */
+.bg-img {
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    overflow: clip;
+    object-position: center;
+    -o-object-position: center;
+    object-fit: cover;
+    -o-object-fit: cover;
+    transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    @media (min-aspect-ratio: 2/3) {
+        width: auto;
+    }
+}
+
+/* 每页中的前景内容 */
+.fg-content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+}
