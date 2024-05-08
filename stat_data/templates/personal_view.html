@@ -680,11 +680,12 @@
         },
         lazyPreloadPrevNext: 1,
         mousewheel: true,
+        preventInteractionOnTransition: true,
+        speed: 500,
+        threshold: 20,
         virtual: {
             enabled: true,
         },
-        speed: 500,
-        threshold: 20,
         on: {
             // 动画相关逻辑
             // 原因：如果只是把动画添加到class中，只会在第一次加载时生效，之后的页面切换不会触发动画
