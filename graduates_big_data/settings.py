@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
-ENABLE_CAS = False
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -138,20 +137,23 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CAS settings
-# Testing CAS server
-CAS_LOGIN_URL = "https://apitest.seu.edu.cn/dist/#/dist/main/login"
-CAS_SERVICE_VALIDATE_URL = "https://apitest.seu.edu.cn/auth/casapi/serviceValidate"
-CAS_LOGOUT_URL = "https://apitest.seu.edu.cn/dist/#/dist/logOut"
 
-# Production CAS server
-# CAS_LOGIN_URL = "https://auth.seu.edu.cn/dist/#/dist/main/login"
-# CAS_SERVICE_VALIDATE_URL = "https://auth.seu.edu.cn/auth/casapi/serviceValidate"
-# CAS_LOGOUT_URL = "https://auth.seu.edu.cn/dist/#/dist/logOut"
+if DEBUG:
+    # 测试环境的 CAS 服务器 URL
+    CAS_LOGIN_URL = "https://apitest.seu.edu.cn/dist/#/dist/main/login"
+    CAS_SERVICE_VALIDATE_URL = "https://apitest.seu.edu.cn/auth/casapi/serviceValidate"
+    CAS_LOGOUT_URL = "https://apitest.seu.edu.cn/dist/#/dist/logOut"
+else:
+    # 正式环境的 CAS 服务器 URL
+    CAS_LOGIN_URL = "https://auth.seu.edu.cn/dist/#/dist/main/login"
+    CAS_SERVICE_VALIDATE_URL = "https://auth.seu.edu.cn/auth/casapi/serviceValidate"
+    CAS_LOGOUT_URL = "https://auth.seu.edu.cn/dist/#/dist/logOut"
 
 CAS_SERVICE_URL = "https://gradudata2024.seu.edu.cn"
 CAS_LOGIN_NEXT_PAGE = "/"
 CAS_LOGOUT_NEXT_PAGE = "/"
 CAS_APPLY_ATTRIBUTES_TO_USER = True
-CAS_CREATE_USER_WITH_ID = True
 CAS_USERNAME_ATTRIBUTE = "mainCardId"
-CAS_RENAME_ATTRIBUTES = {"sn": "first_name"}  # django-cas-ng 的用户模型直接用的 django 自带的 User 模型，懒得改了
+CAS_RENAME_ATTRIBUTES = {
+    "sn": "first_name"
+}  # django-cas-ng 的用户模型直接用的 django 自带的 User 模型，懒得改了
