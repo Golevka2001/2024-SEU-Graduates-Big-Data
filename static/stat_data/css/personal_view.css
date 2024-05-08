@@ -1,7 +1,12 @@
+:root {
+    /*--animate-delay: 1s;*/
+    --animate-duration: 1s;
+}
+
 html,
 body,
 main {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     position: relative;
     margin: 0;
@@ -26,6 +31,7 @@ main {
 
 /* 遮罩层（用于转场动画） */
 #overlay {
+    z-index: 9999;
     height: 100%;
     width: inherit;
     position: fixed;
@@ -33,45 +39,66 @@ main {
     left: 0;
     background-color: white;
     opacity: 1;
-    transition: opacity 1s;
-    z-index: 9999;
     pointer-events: none;
+    transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    -webkit-transition: opacity 1s;
 }
 
-.swiper {
+.swiper,
+.swiper-wrapper {
     height: 100%;
     width: 100%;
+}
+
+.swiper-slide {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    overflow: clip;
 }
 
 /* 每页中的背景图片 */
 .bg-img {
+    z-index: -1;
     height: 100%;
     width: 100%;
     object-fit: cover;
-    z-index: -1;
+    -o-object-fit: cover;
+    overflow: clip;
+    transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
 }
 
 /* 每页中的前景内容 */
 .fg-content {
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
     position: absolute;
     top: 0;
-    align-items: center;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
 }
 
 /* 每页中文字上方的遮挡 */
 .fg-mask {
+    z-index: 100;
     height: 100%;
     width: 100%;
-    display: flex;
     position: absolute;
     top: 0;
+    display: flex;
+    overflow: clip;
     object-fit: cover;
-    z-index: 100;
+    -o-object-fit: cover;
+    transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
 }
 
 /* 额外补充的文字内容 */
@@ -84,15 +111,16 @@ main {
 
 /* ---------- 场景1: 大门 ---------- */
 /* 文字背景 */
-.container-img-scenario-gate {
+#container-img-scenario-gate {
+    z-index: 10;
     width: 23rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 普通样式文字 */
 .text-scenario-gate {
+    z-index: 20;
     width: 20rem;
     position: absolute;
     font-size: 1rem;
@@ -100,7 +128,6 @@ main {
     color: #603813;
     text-align: start;
     line-height: 1.3rem;
-    z-index: 20;
 }
 
 /* 高亮样式文字 */
@@ -113,13 +140,13 @@ main {
 /* ---------- 场景2: 宿舍 ---------- */
 /* 普通样式文字 */
 .text-scenario-dormitory {
+    z-index: 20;
     position: relative;
     font-size: 1rem;
     font-weight: normal;
     color: #fff7c0;
     text-align: center;
     line-height: 1.3rem;
-    z-index: 20;
 }
 
 /* 高亮样式文字 */
@@ -128,26 +155,32 @@ main {
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
+    background: -ms-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
+    background: -moz-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
+    background: -o-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
+    background: -webkit-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
     background-clip: text;
+    -webkit-background-clip: text;
 }
 
 /* 中间的图片 */
-.img-scenario-dormitory {
-    width: 100%;
+#img-scenario-dormitory {
     z-index: 10;
+    width: 100%;
 }
 
 /* ---------- 场景3: 食堂 ---------- */
 /* 文字背景 */
-.container-img-scenario-canteen {
+#container-img-scenario-canteen {
+    z-index: 10;
     width: 25rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 普通样式文字 */
 .text-scenario-canteen {
+    z-index: 20;
     width: 20rem;
     position: absolute;
     font-size: 1rem;
@@ -156,7 +189,7 @@ main {
     text-align: start;
     line-height: 1.4rem;
     transform: skewY(-9.5deg);
-    z-index: 20;
+    -ms-transform: skewY(-9.5deg);
 }
 
 /* 高亮样式文字 */
@@ -165,20 +198,26 @@ main {
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
+    background: -ms-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
+    background: -moz-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
+    background: -o-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
+    background: -webkit-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
     background-clip: text;
+    -webkit-background-clip: text;
 }
 
 /* ---------- 场景4: 教室 ---------- */
 /* 文字背景 */
-.container-img-scenario-classroom {
+#container-img-scenario-classroom {
+    z-index: 10;
     width: 22rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 普通样式文字 */
 .text-scenario-classroom {
+    z-index: 20;
     width: 19rem;
     position: absolute;
     font-size: 0.9rem;
@@ -187,7 +226,7 @@ main {
     text-align: center;
     line-height: 1.2rem;
     transform: skewY(-6.5deg);
-    z-index: 20;
+    -ms-transform: skewY(-6.5deg);
 }
 
 /* 高亮样式文字 */
@@ -197,16 +236,21 @@ main {
     line-height: 1.4rem;
     color: transparent;
     background: linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
+    background: -ms-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
+    background: -moz-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
+    background: -o-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
+    background: -webkit-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
     background-clip: text;
+    -webkit-background-clip: text;
 }
 
 /* ---------- 场景5: 大礼堂 ---------- */
 /* 文字背景 */
-.container-img-scenario-auditorium {
+#container-img-scenario-auditorium {
+    z-index: 10;
     width: 26rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 小标题 */
@@ -217,12 +261,15 @@ main {
     font-weight: bold;
     color: white;
     word-spacing: -0.3rem;
-    border-radius: 0.5rem;
     background: linear-gradient(to bottom, #ffc19c, #ffab91, #ff83b0);
+    border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
 }
 
 /* 普通样式文字 */
 .text-scenario-auditorium {
+    z-index: 20;
     width: 20.5rem;
     position: absolute;
     font-size: 1rem;
@@ -230,7 +277,6 @@ main {
     color: #e28191;
     text-align: start;
     line-height: 1.3rem;
-    z-index: 20;
 }
 
 /* 高亮样式文字 */
@@ -239,20 +285,26 @@ main {
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
+    background: -ms-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
+    background: -moz-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
+    background: -o-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
+    background: -webkit-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
     background-clip: text;
+    -webkit-background-clip: text;
 }
 
 /* ---------- 场景6: 图书馆 ---------- */
 /* 文字背景 */
-.container-img-scenario-library {
+#container-img-scenario-library {
+    z-index: 10;
     width: 23rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 普通样式文字 */
 .text-scenario-library {
+    z-index: 20;
     width: 20.5rem;
     position: absolute;
     font-size: 1rem;
@@ -260,7 +312,6 @@ main {
     color: #7769b2;
     text-align: start;
     line-height: 1.3rem;
-    z-index: 20;
 }
 
 /* 高亮样式文字 */
@@ -272,15 +323,16 @@ main {
 
 /* ---------- 场景7: 体育馆 ---------- */
 /* 文字背景 */
-.container-img-scenario-gym {
+#container-img-scenario-gym {
+    z-index: 10;
     width: 23rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 普通样式文字 */
 .text-scenario-gym {
+    z-index: 20;
     width: 20.5rem;
     position: absolute;
     font-size: 1rem;
@@ -288,7 +340,6 @@ main {
     color: #662d91;
     text-align: start;
     line-height: 1.3rem;
-    z-index: 20;
 }
 
 /* 高亮样式文字 */
@@ -300,15 +351,16 @@ main {
 
 /* ---------- 场景8: 离开 ---------- */
 /* 文字背景 */
-.container-img-scenario-leave {
+#container-img-scenario-leave {
+    z-index: 10;
     width: 25rem;
     position: absolute;
     top: 0;
-    z-index: 10;
 }
 
 /* 普通样式文字 */
 .text-scenario-leave {
+    z-index: 20;
     width: 16.5rem;
     position: absolute;
     font-size: 0.9rem;
@@ -317,7 +369,7 @@ main {
     text-align: center;
     line-height: 0.75rem;
     transform: skew(-5deg, 4.8deg);
-    z-index: 20;
+    -ms-transform: skew(-5deg, 4.8deg);
 }
 
 /* 普通样式文字 */
@@ -334,17 +386,17 @@ main {
 }
 
 /* ---------- 结束 ---------- */
-.title-img-end {
+#title-img-end {
+    z-index: 20;
     width: 80%;
     position: relative;
     bottom: 14%;
-    z-index: 20;
 }
 
-.fg-img-end {
+#fg-img-end {
+    z-index: 10;
     width: 90%;
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 10;
 }
