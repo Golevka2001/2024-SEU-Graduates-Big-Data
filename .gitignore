@@ -1,9 +1,6 @@
 # Mac OS
 .DS_Store
 
-# Local files
-*-local*
-
 # Database configuration
 my.cnf
 

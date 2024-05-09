@@ -15,4 +15,4 @@ ENV TZ=China/Shanghai
 RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 RUN pip install -r requirements.txt --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["uwsgi", "--ini", "uwsgi.ini"]

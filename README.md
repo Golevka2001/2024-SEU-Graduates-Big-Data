@@ -2,6 +2,8 @@
 
 ## 本地开发
 
+默认本地开发过程中 `DEBUG=True`，否则需要配置静态文件等服务，请参照 [使用 Docker 部署](#使用-docker-部署) 中相关内容进行配置。
+
 ### 0. 环境
 
 - Python 3.9
@@ -75,9 +77,6 @@ python manage.py migrate
 server {
     listen 80;
     server_name gradudata2024.seu.edu.cn;
-    location /static {
-        alias /path/to/static;  # 静态文件目录
-    }
     location / {
         proxy_pass http://127.0.0.1:8000;
     }
@@ -127,30 +126,51 @@ code = 'modified code'
     - Docker
     - MySQL 8.0
     - Nginx
+    - 拷贝整个项目到服务器
 
 ### 1. 部署前配置
 
-#### 1.1 数据库
+#### 1.1 环境变量
 
-在服务器上配置好 MySQL 数据库，并推送所需数据（或在镜像运行后再推送）。
+在生产环境中，需要设置 `DEBUG=False`，并配置 `SECRET_KEY` 以确保安全性。
 
-按照 [配置连接信息](#21-配置连接信息) 部分的说明，将数据库连接信息填写到 `my.cnf` 文件中。
+在项目根目录下创建 `.env` 文件，填写以下内容：
 
-#### 1.2 环境变量
+```ini
+DJANGO_DEBUG=False
+DJANGO_SECRET_KEY='xxxx'
+```
 
-在生产环境中，需要设置 `DEBUG=False`，并配置 `SECRET_KEY`。
-
-`SECRET_KEY` 可以通过以下命令生成：
+_注：`SECRET_KEY` 可以通过以下命令生成（可本地生成）：_
 
 ```bash
 python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
 ```
 
-在项目根目录下创建 `.env` 文件，填写以下内容：
+#### 1.2 数据库
 
-```ini
-DJANGO_DEBUG = False
-DJANGO_SECRET_KEY = 'xxxx'
+在服务器上配置好 MySQL 数据库，按照 [配置连接信息](#21-配置连接信息) 部分的说明，创建并将数据库连接信息填写到 `my.cnf` 文件中。
+
+
+#### 1.3 Nginx
+
+避免在生产环境使用 `runserver`，本项目中使用 `uWSGI` 配合 Nginx 进行部署。
+
+在 Nginx 配置文件中添加以下内容，配置静态文件服务和 uWSGI 代理：
+
+```text
+server {
+    listen       20246;  # 对外端口
+    server_name  gradudata2024.seu.edu.cn;
+    
+    location /static {
+        alias /path/to/2024-SEU-Graduates-Big-Data/static;
+    }
+    location / {
+        include uwsgi_params;
+        uwsgi_pass 127.0.0.1:3031;  # 与 uwsgi.ini 中的 socket 一致
+    }
+}
 ```
 
 ### 2. 【本地】构建并导出镜像
@@ -176,25 +196,26 @@ docker load < docker-img-graduates-big-data.tar
 进入容器交互模式（个人倾向于将项目目录挂载，方便后续修改），在容器中执行数据库迁移、静态文件收集等操作：
 
 ```bash
-docker run -it -v /root/2024-SEU-Graduates-Big-Data:/app \
+docker run -it --name graduates-big-data \
+           -v /root/2024-SEU-Graduates-Big-Data:/app \
            --env-file /root/2024-SEU-Graduates-Big-Data/.env \
            --network host graduates-big-data:latest \
-           --name graduates-big-data \
            /bin/bash
 
 # 容器内执行
 python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic
-python3 manage.py check --deploy  # 检查部署环境
+python manage.py check --deploy  # 检查部署环境
+uwsgi --ini uwsgi.ini  # 测试 uWSGI
 exit
 ```
 
 在数据推送完成、静态文件服务配置完成后，以守护进程方式运行容器：
 
 ```bash
-docker run -d -v /root/2024-SEU-Graduates-Big-Data:/app \
+docker run -d --name graduates-big-data \
+           -v /root/2024-SEU-Graduates-Big-Data:/app \
            --env-file /root/2024-SEU-Graduates-Big-Data/.env \
-           --network host graduates-big-data:latest \
-           --name graduates-big-data
+           --network host graduates-big-data:latest
 ```
