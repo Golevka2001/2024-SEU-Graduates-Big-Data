@@ -70,11 +70,14 @@ python manage.py migrate
 
 向 Nginx 配置文件中添加所要代理的域名配置：
 
-```nginx
+```text
 # http
 server {
     listen 80;
     server_name gradudata2024.seu.edu.cn;
+    location /static {
+        alias /path/to/static;  # 静态文件目录
+    }
     location / {
         proxy_pass http://127.0.0.1:8000;
     }

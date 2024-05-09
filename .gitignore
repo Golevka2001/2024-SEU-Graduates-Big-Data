@@ -1,12 +1,18 @@
 # Mac OS
 .DS_Store
 
+# Local files
+*-local*
+
 # Database configuration
 my.cnf
 
 # Django migration files
 **/migrations/*
 !**/migrations/__init__.py
+
+# Collected static files of Django-Apps
+/static/admin/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
