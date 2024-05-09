@@ -22,9 +22,11 @@ from django_cas_ng import views as cas_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("error/", include("error.urls")),
-    path("health_check", include("health_check.urls")),
+    # ----- CAS ----- #
     path("accounts/login/", cas_views.LoginView.as_view(), name="cas_ng_login"),
     path("accounts/logout/", cas_views.LogoutView.as_view(), name="cas_ng_logout"),
+    # ----- APPS ----- #
+    path("error/", include("error.urls")),
+    path("health_check", include("health_check.urls")),
     path("", include("stat_data.urls")),
 ]
