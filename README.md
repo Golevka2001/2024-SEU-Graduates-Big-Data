@@ -125,11 +125,30 @@ code = 'modified code'
     - MySQL 8.0
     - Nginx
 
-### 1. 数据库相关配置
+### 1. 部署前配置
 
-在服务器上配置好 MySQL 数据库，并推送所需数据。
+#### 1.1 数据库
+
+在服务器上配置好 MySQL 数据库，并推送所需数据（或在镜像运行后再推送）。
 
 按照 [配置连接信息](#21-配置连接信息) 部分的说明，将数据库连接信息填写到 `my.cnf` 文件中。
+
+#### 1.2 环境变量
+
+在生产环境中，需要设置 `DEBUG=False`，并配置 `SECRET_KEY`。
+
+`SECRET_KEY` 可以通过以下命令生成：
+
+```bash
+python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
+
+在项目根目录下创建 `.env` 文件，填写以下内容：
+
+```ini
+DJANGO_DEBUG = False
+DJANGO_SECRET_KEY = 'xxxx'
+```
 
 ### 2. 【本地】构建并导出镜像
 
@@ -143,14 +162,36 @@ docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
 
 ### 3. 【服务器】导入并运行镜像
 
-使用 `scp` 或其他方式将导出的镜像文件传输到服务器上，然后执行以下命令：
+使用 `scp` 或其他方式将导出的镜像文件传输到服务器上。
+
+执行以下命令导入镜像：
 
 ```bash
-# 导入镜像
 docker load < docker-img-graduates-big-data.tar
+```
 
-# 运行容器（个人倾向于将项目目录挂载到容器内，方便后续修改）
-docker run -d -v /root/2024-SEU-Graduates-Big-Data:/app --name graduates-big-data --network host graduates-big-data:latest
-# 或者进入容器交互模式
-docker run -it -v /root/2024-SEU-Graduates-Big-Data:/app --name graduates-big-data --network host graduates-big-data:latest /bin/bash
+进入容器交互模式（个人倾向于将项目目录挂载，方便后续修改），在容器中执行数据库迁移、静态文件收集等操作：
+
+```bash
+docker run -it -v /root/2024-SEU-Graduates-Big-Data:/app \
+           --env-file /root/2024-SEU-Graduates-Big-Data/.env \
+           --network host graduates-big-data:latest \
+           --name graduates-big-data \
+           /bin/bash
+
+# 容器内执行
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic
+python3 manage.py check --deploy  # 检查部署环境
+exit
+```
+
+在数据推送完成、静态文件服务配置完成后，以守护进程方式运行容器：
+
+```bash
+docker run -d -v /root/2024-SEU-Graduates-Big-Data:/app \
+           --env-file /root/2024-SEU-Graduates-Big-Data/.env \
+           --network host graduates-big-data:latest \
+           --name graduates-big-data
 ```
