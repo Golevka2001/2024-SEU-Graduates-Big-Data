@@ -39,7 +39,7 @@ def personal_view(request):
 
     # 借阅量排名
     borrowing_rank = GraduatePersonalStat.objects.filter(
-        total_borrowed_books_num=graduate.total_borrowed_books_num
+        total_borrowed_books_num__gt=graduate.total_borrowed_books_num
     ).count()
     show_borrowing_rank = (
             borrowing_rank < graduate_total_num * SHOW_BORROWING_RANK_THRESHOLD

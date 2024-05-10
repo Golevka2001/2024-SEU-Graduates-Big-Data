@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from stat_data.models import (
     FavoriteCanteenStat,
@@ -12,8 +12,13 @@ SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
 
 def test(request):
-    seu_card_id = GraduatePersonalStat.objects.order_by("?")[0].seu_card_id
+    seu_card_id = request.GET.get("id")
+    if not seu_card_id:
+        seu_card_id = GraduatePersonalStat.objects.order_by("?")[0].seu_card_id
     print(seu_card_id)
+
+    if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
+        return redirect("error:not_eligible_view")
 
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)
@@ -34,7 +39,7 @@ def test(request):
 
     # 借阅量排名
     borrowing_rank = GraduatePersonalStat.objects.filter(
-        total_borrowed_books_num=graduate.total_borrowed_books_num
+        total_borrowed_books_num__gt=graduate.total_borrowed_books_num
     ).count()
     show_borrowing_rank = (
             borrowing_rank < graduate_total_num * SHOW_BORROWING_RANK_THRESHOLD
