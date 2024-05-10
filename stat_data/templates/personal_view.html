@@ -408,10 +408,12 @@
                                     <span class="highlight-text-scenario-library">{{ graduate.library_visits }}</span>
                                     次
                                 </p>
-                                <p>你是思想的雕塑家</p>
-                                <p>每一次造访图书馆</p>
-                                <p>都是在智慧的宫殿内悉心雕琢独属于自己的精神世界</p>
-                                <p>属于自己的精神世界</p>
+                                <div class="additional-text">
+                                    <p>你是思想的雕塑家</p>
+                                    <p>每一次造访图书馆</p>
+                                    <p>都是在智慧的宫殿内悉心雕琢独属于自己的精神世界</p>
+                                    <p>属于自己的精神世界</p>
+                                </div>
                             {% else %}
                                 <p>
                                     {% if graduate.graduate_type != 0 %}
@@ -534,7 +536,8 @@
                                 {% if not graduate.show_morning_exercise and not show_sports_competitions %}
                                     <div class="additional-text">
                                         <p>在场馆中挥洒汗水，突破自我</p>
-                                        <p>体现青春风采，运动美好人生！</p></div>
+                                        <p>体现青春风采，运动美好人生！</p>
+                                    </div>
                                 {% endif %}
                                 <br/>
                             {% endif %}
