@@ -1,0 +1,98 @@
+{# 背景图片 #}
+<img src="{% static 'stat_data/img/6-library/background.png' %}"
+     alt="background image (library)"
+     loading="lazy"
+     class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'stat_data/img/6-library/mask.png' %}"
+     alt="mask (library)"
+     loading="lazy"
+     class="fg-mask"/>
+<div class="fg-content"
+     style="top:2vh">
+    {# 文字背景 #}
+    <img src="{% static 'stat_data/img/6-library/text-container.png' %}"
+         alt="text container (library)"
+         loading="lazy"
+         id="container-img-scenario-library"
+         style="left:2.5rem"/>
+    {# 文字 #}
+    <div class="text-scenario-library"
+         style="top:5vh;">
+        {% if graduate.lack_of_borrowing_data %}
+            <p>
+                {% if graduate.graduate_type == 0 %}
+                    在校期间，
+                {% else %}
+                    读研期间，
+                {% endif %}
+                你累计进出图书馆
+                <span class="highlight-text-scenario-library">{{ graduate.library_visits }}</span>
+                次
+            </p>
+            <div class="additional-text">
+                <p>你是思想的雕塑家</p>
+                <p>每一次造访图书馆</p>
+                <p>都是在智慧的宫殿内悉心雕琢独属于自己的精神世界</p>
+                <p>属于自己的精神世界</p>
+            </div>
+        {% else %}
+            <p>
+                {% if graduate.graduate_type != 0 %}
+                    读研期间，
+                {% endif %}
+                你累计借阅书籍
+                <span class="highlight-text-scenario-library">{{ graduate.total_borrowed_books_num }}</span>
+                本
+            </p>
+            {% if show_borrowing_rank %}
+                <p>
+                    超过了
+                    <span class="highlight-text-scenario-library">{{ borrowing_rank_percent }}</span>
+                    的人
+                </p>
+            {% endif %}
+            <p>
+                全校借书数量 No.1 的同学借阅了
+                <span class="highlight-text-scenario-library">{{ max_total_borrowed_books_num }}</span>
+                本
+            </p>
+            {% if top_borrower_in_unit %}
+                {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
+                    <p>
+                        恭喜你成为所在学院借书
+                        <span class="highlight-text-scenario-library">No.1</span>
+                    </p>
+                    <p>吹灭读书灯，一身都是月</p>
+                {% else %}
+                    <p>
+                        你所在学院的{{ top_borrower_in_unit.full_name }}同学借阅了
+                        <span class="highlight-text-scenario-library">{{ top_borrower_in_unit.total_borrowed_books_num }}</span>
+                        本
+                    </p>
+                    <p>成为学院借书 No.1 ！</p>
+                {% endif %}
+            {% endif %}
+            <br/>
+            <p>在借阅过的图书中，你阅读时间最长的一本是</p>
+            <p class="highlight-text-scenario-library">
+                《{{ graduate.longest_keeping_book_name }}》</p>
+            <p>
+                共计阅读了
+                <span class="highlight-text-scenario-library">{{ graduate.get_longest_book_borrowing_days }}</span>
+                天
+            </p>
+            <br/>
+            <p>
+                你借过的
+                <span class="highlight-text-scenario-library">《{{ graduate.nice_book_name }}》</span>
+            </p>
+            <p>
+                只有
+                <span class="highlight-text-scenario-library">{{ graduate.nice_book_borrowing_person_num }}</span>
+                名同学读过
+            </p>
+            <p>宝藏图书发现者！</p>
+        {% endif %}
+    </div>
+</div>

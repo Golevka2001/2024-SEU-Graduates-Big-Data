@@ -1,0 +1,53 @@
+{# 背景图片 #}
+<img src="{% static 'stat_data/img/2-dormitory/background.png' %}"
+     alt="background image (dormitory)"
+     loading="lazy"
+     class="bg-img"/>
+<div class="fg-content">
+    {# 顶部文字 #}
+    <div class="text-scenario-dormitory" style="left:0">
+        {% if graduate.dormitory_name %}
+            <p>欢笑喜悦，迷茫困苦</p>
+            <p>你与室友相互陪伴</p>
+            <p>
+                在
+                <span class="highlight-text-scenario-dormitory">{{ graduate.dormitory_name }}</span>
+                宿舍留下毕业前的青葱回忆
+            </p>
+        {% else %}
+            <p>“有一份安心是 SEU-WLAN 给的”</p>
+            <p>安全、稳定、高速的校园网使用体验</p>
+            <p>和你相伴在东南的每一天</p>
+        {% endif %}
+    </div>
+    {# 图片 #}
+    <img src="{% static 'stat_data/img/2-dormitory/middle.png' %}"
+         alt="middle image (dormitory)"
+         loading="lazy"
+         class="img-scenario-dormitory"/>
+    {# 底部文字 #}
+    <div class="text-scenario-dormitory">
+        {% if graduate.show_network_data %}
+            <p>校园网是你的贴心助手</p>
+            <p>
+                它陪伴你度过了
+                <span class="highlight-text-scenario-dormitory">{{ graduate.network_online_days }}</span>
+                天
+            </p>
+            <p>
+                总流量
+                <span class="highlight-text-scenario-dormitory">{{ graduate.network_flow }}</span>
+                TB
+            </p>
+            <p>
+                相当于看了
+                <span class="highlight-text-scenario-dormitory">{{ graduate.get_network_flow_equivalence }}</span>
+                遍《狂飙》！
+            </p>
+        {% else %}
+            <p>一起谈天说地，一起运动锻炼，一起完成 ddl ……</p>
+            <p>相信这段奇妙的缘分</p>
+            <p>一定会成为彼此间珍贵的回忆</p>
+        {% endif %}
+    </div>
+</div>

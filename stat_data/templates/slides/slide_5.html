@@ -1,0 +1,97 @@
+{# 背景图片 #}
+<img src="{% static 'stat_data/img/5-auditorium/background.png' %}"
+     alt="background image (auditorium)"
+     loading="lazy"
+     class="bg-img"/>
+<div class="fg-content"
+     style="top:27vh">
+    {# 文字背景 #}
+    <img src="{% static 'stat_data/img/5-auditorium/text-container.png' %}"
+         alt="text container (auditorium)"
+         loading="lazy"
+         id="container-img-scenario-auditorium"
+         style="left:0"/>
+    {# 文字 #}
+    <div class="text-scenario-auditorium"
+         style="top:2rem;left:1.5rem">
+        {# 讲座 #}
+        {% if graduate.show_lectures %}
+            <p class="subtitle-scenario-auditorium">课 外 讲 座</p>
+            <p>
+                你累计听了
+                <span class="highlight-text-scenario-auditorium">{{ graduate.lecture_attended_times }}</span>
+                次讲座
+            </p>
+            <p>
+                在
+                <span class="highlight-text-scenario-auditorium">{{ graduate.first_lecture_date|date:"Y年m月d日" }}</span>
+            </p>
+            <p>
+                第一次听了
+                <span class="highlight-text-scenario-auditorium">“{{ graduate.first_lecture_name }}”</span>
+                讲座
+            </p>
+            <p>知识拓宽视野！</p>
+        {% endif %}
+        {# SRTP项目 #}
+        {% if graduate.show_srtp_projects %}
+            <p class="subtitle-scenario-auditorium">SRTP 项目</p>
+            <p>
+                你参与完成了
+                <span class="highlight-text-scenario-auditorium">{{ graduate.srtp_project_num }}</span>
+                个SRTP项目
+            </p>
+            <p>
+                获得了
+                <span class="highlight-text-scenario-auditorium">{{ graduate.srtp_score }}</span>
+                个SRTP学分
+            </p>
+            <p>创新路上你努力前行！</p>
+        {% endif %}
+        {% if graduate.show_volunteer_activities or graduate.first_practice_project_name %}
+            <p class="subtitle-scenario-auditorium">志 愿 与 实 践</p>
+        {% endif %}
+        {# 志愿活动 #}
+        {% if graduate.show_volunteer_activities %}
+            <p>
+                一共参加了
+                <span class="highlight-text-scenario-auditorium">{{ graduate.volunteer_activity_num }}</span>
+                次志愿活动
+            </p>
+            {% if graduate.volunteer_duration %}
+                <p>
+                    累计志愿时长
+                    <span class="highlight-text-scenario-auditorium">{{ graduate.volunteer_duration }}</span>
+                    小时
+                </p>
+            {% endif %}
+            {% if graduate.show_practice_projects %}
+                <p>善意在活动中传递！</p>
+            {% endif %}
+        {% endif %}
+        {# 社会实践 #}
+        {% if graduate.show_practice_projects %}
+            <p>
+                参加了
+                <span class="highlight-text-scenario-auditorium">{{ graduate.practice_project_num }}</span>
+                次社会实践
+            </p>
+            <p>
+                还记得那次你与
+                <span class="highlight-text-scenario-auditorium">{{ graduate.first_practice_project_member }}</span>
+                共同完成的
+                <span class="highlight-text-scenario-auditorium">“{{ graduate.first_practice_project_name }}”</span>
+                吗？
+            </p>
+        {% endif %}
+        {# 补充 #}
+        {% if graduate.show_additional_content_in_auditorium_page %}
+            <div class="additional-text">
+                <p>你在这里接触到了多彩的世界，</p>
+                <p style="margin-bottom: 2rem">也在这里勇敢地探索无限可能。</p>
+                <p>回看自己奋斗的点滴，</p>
+                <p>愿你不虚此行!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
