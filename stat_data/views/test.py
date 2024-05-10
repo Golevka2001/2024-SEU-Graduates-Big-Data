@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 
 from stat_data.models import (
+    BorrowingRankStat,
     FavoriteCanteenStat,
     GraduatePersonalStat,
     LibraryBorrowingStat,
@@ -42,22 +43,12 @@ def test(request):
         show_borrowing_rank = False
         borrowing_rank_percent = "0.00%"
     else:
-        borrowing_rank = GraduatePersonalStat.objects.filter(
-            total_borrowed_books_num__gt=graduate.total_borrowed_books_num
-        ).count()
-        show_borrowing_rank = (
-                borrowing_rank < graduate_total_num * SHOW_BORROWING_RANK_THRESHOLD
-        )
+        borrowing_rank = BorrowingRankStat.objects.get(borrowing_num=graduate.total_borrowed_books_num).borrowing_rank
+        show_borrowing_rank = borrowing_rank / graduate_total_num < SHOW_BORROWING_RANK_THRESHOLD
         borrowing_rank_percent = f"{1 - borrowing_rank / graduate_total_num:.2%}"
 
     # 全校最高借阅量
-    max_total_borrowed_books_num = (
-        LibraryBorrowingStat.objects.extra(
-            select={
-                "total_borrowed_books_num_int": "CAST(total_borrowed_books_num AS SIGNED INTEGER)"
-            }
-        ).order_by("-total_borrowed_books_num_int")[0]
-    ).total_borrowed_books_num
+    max_total_borrowed_books_num = BorrowingRankStat.objects.order_by("borrowing_rank")[0].borrowing_num
 
     # 本学院借阅量第一名
     if not graduate.unit_name:
