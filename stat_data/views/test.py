@@ -38,13 +38,17 @@ def test(request):
         )
 
     # 借阅量排名
-    borrowing_rank = GraduatePersonalStat.objects.filter(
-        total_borrowed_books_num__gt=graduate.total_borrowed_books_num
-    ).count()
-    show_borrowing_rank = (
-            borrowing_rank < graduate_total_num * SHOW_BORROWING_RANK_THRESHOLD
-    )
-    borrowing_rank_percent = f"{1 - borrowing_rank / graduate_total_num:.2%}"
+    if not graduate.total_borrowed_books_num:
+        show_borrowing_rank = False
+        borrowing_rank_percent = "0.00%"
+    else:
+        borrowing_rank = GraduatePersonalStat.objects.filter(
+            total_borrowed_books_num__gt=graduate.total_borrowed_books_num
+        ).count()
+        show_borrowing_rank = (
+                borrowing_rank < graduate_total_num * SHOW_BORROWING_RANK_THRESHOLD
+        )
+        borrowing_rank_percent = f"{1 - borrowing_rank / graduate_total_num:.2%}"
 
     # 全校最高借阅量
     max_total_borrowed_books_num = (
@@ -71,11 +75,14 @@ def test(request):
         )
         top_borrower_in_unit = same_unit_borrowers[0] if same_unit_borrowers else None
 
-    # 场馆预约次数排名（gym_ordered_times）
-    gym_ordering_rank = GraduatePersonalStat.objects.filter(
-        gym_ordered_times=graduate.gym_ordered_times
-    ).count()
-    gym_ordering_rank_percent = f"{1 - gym_ordering_rank / graduate_total_num:.2%}"
+    # 场馆预约次数排名
+    if not graduate.gym_ordered_times:
+        gym_ordering_rank_percent = "0.00%"
+    else:
+        gym_ordering_rank = GraduatePersonalStat.objects.filter(
+            gym_ordered_times=graduate.gym_ordered_times
+        ).count()
+        gym_ordering_rank_percent = f"{1 - gym_ordering_rank / graduate_total_num:.2%}"
 
     # 是否显示体育竞赛
     sports_competition_list = SportsCompetitionStat.objects.filter(
