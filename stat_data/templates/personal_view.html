@@ -25,57 +25,57 @@
         <div class="swiper-wrapper">
             {# ---------- 场景1: 大门 ---------- #}
             <div class="swiper-slide" id="scenario-gate">
-                {% include 'slides/slide_1.html' %}
+                {% include "slides/slide_1.html" %}
             </div>
 
             {# ---------- 场景2: 宿舍 ---------- #}
             {% if graduate.show_dormitory_page %}
                 <div class="swiper-slide" id="scenario-dormitory">
-                    {% include 'slides/slide_2.html' %}
+                    {% include "slides/slide_2.html" %}
                 </div>
             {% endif %}
 
             {# ---------- 场景3: 食堂 ---------- #}
             {% if graduate.show_canteen_page %}
                 <div class="swiper-slide" id="scenario-canteen">
-                    {% include 'slides/slide_3.html' %}
+                    {% include "slides/slide_3.html" %}
                 </div>
             {% endif %}
 
             {# ---------- 场景4: 教室 ---------- #}
             <div class="swiper-slide" id="scenario-classroom">
-                {% include 'slides/slide_4.html' %}
+                {% include "slides/slide_4.html" %}
             </div>
 
             {# ---------- 场景5: 大礼堂 ---------- #}
             {% if graduate.show_auditorium_page %}
                 <div class="swiper-slide" id="scenario-auditorium">
-                    {% include 'slides/slide_5.html' %}
+                    {% include "slides/slide_5.html" %}
                 </div>
             {% endif %}
 
             {# ---------- 场景6: 图书馆 ---------- #}
             {% if graduate.show_library_page %}
                 <div class="swiper-slide" id="scenario-library">
-                    {% include 'slides/slide_6.html' %}
+                    {% include "slides/slide_6.html" %}
                 </div>
             {% endif %}
 
             {# ---------- 场景7: 体育馆 ---------- #}
             {% if graduate.show_gym_page or show_sports_competitions %}
                 <div class="swiper-slide" id="scenario-gym">
-                    {% include 'slides/slide_7.html' %}
+                    {% include "slides/slide_7.html" %}
                 </div>
             {% endif %}
 
             {# ---------- 场景8: 离开 ---------- #}
             <div class="swiper-slide" id="scenario-leave">
-                {% include 'slides/slide_8.html' %}
+                {% include "slides/slide_8.html" %}
             </div>
 
             {# ---------- 结束 ---------- #}
             <div class="swiper-slide" id="end">
-                {% include 'slides/slide_9.html' %}
+                {% include "slides/slide_9.html" %}
             </div>
         </div>
     </div>
@@ -85,24 +85,23 @@
 {# Swiper JS #}
 <script src="{% static 'swiper@11.1.1/swiper-bundle.min.js' %}"></script>
 <script>
-    window.addEventListener('pageshow', () => {
+    window.addEventListener("pageshow", () => {
         // 转场动画 - 进入页面
         document.getElementById("overlay").style.opacity = "0";
     });
+
+    let lastSlideId = "";
 
     // Initialize Swiper
     const swiper = new Swiper(".swiper", {
         direction: "vertical",
         edgeSwipeDetection: "prevent",
         grabCursor: true,
-        keyboard: {
-            enabled: true,
-        },
         lazyPreloadPrevNext: 1,
-        mousewheel: true,
         preventInteractionOnTransition: true,
-        speed: 500,
-        threshold: 20,
+        resistanceRatio: 0.5,
+        speed: 800,
+        threshold: 0,
         virtual: {
             enabled: true,
         },
@@ -112,71 +111,74 @@
             init: function () {
                 // 动画初始化
                 // 当前页面内容fadeIn
-                const curFgContent = this.wrapperEl.querySelector(".swiper-slide-active .fg-content");
-                if (curFgContent) {
-                    curFgContent.classList.add('animate__animated', 'animate__fadeIn');
-                }
-                // 下一页内容隐藏
-                const nextSlide = this.wrapperEl.querySelector(".swiper-slide-next");
-                if (nextSlide) {
-                    const nextFgContent = nextSlide.querySelector(".fg-content");
-                    if (nextFgContent) {
-                        nextFgContent.classList.add('animate__animated', 'animate__fadeOut');
-                    }
+                const initFgContent = this.wrapperEl.querySelector(".swiper-slide-active .fg-content");
+                if (initFgContent) {
+                    initFgContent.classList.add("animate__animated", "animate__fadeIn");
                 }
             },
-            slideChangeTransitionEnd: function () {
-                const curSlide = this.wrapperEl.querySelector(".swiper-slide-active");
-                const curFgContent = curSlide.querySelector(".fg-content");
-                if (curFgContent) {
-                    curFgContent.classList.remove('animate__animated', 'animate__fadeOut');
-                    curFgContent.classList.add('animate__animated', 'animate__fadeIn');
+            touchMove: function () {
+                // 开始滑动时，隐藏该页内容
+                const lastSlide = this.wrapperEl.querySelector(".swiper-slide-active");
+                lastSlideId = lastSlide.id;
+                const lastFgContent = lastSlide.querySelector(".fg-content");
+                if (lastFgContent) {
+                    if (lastFgContent.classList.contains("animate__fadeOut")) {
+                        return;
+                    }
+                    lastFgContent.classList.remove("animate__animated", "animate__fadeIn");
+                    lastFgContent.classList.add("animate__animated", "animate__fadeOut");
                 }
-                if (curSlide.id === "end") {
-                    // 结束页特殊处理
-                    const titleImg = curSlide.querySelector("#title-img-end");
+                // 结束页特殊处理
+                if (lastSlideId === "end") {
+                    const titleImg = lastSlide.querySelector("#title-img-end");
                     if (titleImg) {
-                        titleImg.classList.remove('animate__animated', 'animate__fadeOut');
-                        titleImg.classList.add('animate__animated', 'animate__tada');
-                        titleImg.style.setProperty('--animate-duration', '2s');
+                        if (titleImg.classList.contains("animate__fadeOut")) {
+                            return;
+                        }
+                        titleImg.classList.remove("animate__animated", "animate__tada");
+                        titleImg.classList.add("animate__animated", "animate__fadeOut");
                     }
-                    const fgImg = curSlide.querySelector("#fg-img-end");
+                    const fgImg = lastSlide.querySelector("#fg-img-end");
                     if (fgImg) {
-                        fgImg.classList.remove('animate__animated', 'animate__fadeOut');
-                        fgImg.classList.add('animate__animated', 'animate__fadeInLeft');
-                        fgImg.style.setProperty('--animate-duration', '1.5s');
+                        if (fgImg.classList.contains("animate__fadeOutLeft")) {
+                            return;
+                        }
+                        fgImg.classList.remove("animate__animated", "animate__fadeInLeft");
+                        fgImg.classList.add("animate__animated", "animate__fadeOutLeft");
                     }
                 }
             },
-            slideChangeTransitionStart: function () {
-                // 如果存在前一页/后一页，重置相关动画
-                const prevSlide = this.wrapperEl.querySelector(".swiper-slide-prev");
-                if (prevSlide) {
-                    const prevFgContent = prevSlide.querySelector(".fg-content");
-                    if (prevFgContent) {
-                        prevFgContent.classList.remove('animate__animated', 'animate__fadeIn');
-                        prevFgContent.classList.add('animate__animated', 'animate__fadeOut');
+            transitionEnd: function () {
+                // 页面切换完成后，显示该页内容
+                const lastSlide = this.wrapperEl.querySelector(".swiper-slide-active");
+                lastSlideId = lastSlide.id;
+                const lastFgContent = lastSlide.querySelector(".fg-content");
+                if (lastFgContent) {
+                    if (lastFgContent.classList.contains("animate__fadeIn")) {
+                        return;
                     }
+                    lastFgContent.classList.remove("animate__animated", "animate__fadeOut");
+                    lastFgContent.classList.add("animate__animated", "animate__fadeIn");
                 }
-                const nextSlide = this.wrapperEl.querySelector(".swiper-slide-next");
-                if (nextSlide) {
-                    const nextFgContent = nextSlide.querySelector(".fg-content");
-                    if (nextFgContent) {
-                        nextFgContent.classList.remove('animate__animated', 'animate__fadeIn');
-                        nextFgContent.classList.add('animate__animated', 'animate__fadeOut');
+                // 结束页特殊处理
+                if (lastSlideId === "end") {
+                    const titleImg = lastSlide.querySelector("#title-img-end");
+                    if (titleImg) {
+                        if (titleImg.classList.contains("animate__tada")) {
+                            return;
+                        }
+                        titleImg.classList.remove("animate__animated", "animate__fadeOut");
+                        titleImg.classList.add("animate__animated", "animate__tada");
+                        titleImg.style.setProperty("--animate-duration", "2s");
                     }
-                    // 结束页特殊处理
-                    if (nextSlide.id === "end") {
-                        const titleImg = nextSlide.querySelector("#title-img-end");
-                        if (titleImg) {
-                            titleImg.classList.remove('animate__animated', 'animate__tada');
-                            titleImg.classList.add('animate__animated', 'animate__fadeOut');
+                    const fgImg = lastSlide.querySelector("#fg-img-end");
+                    if (fgImg) {
+                        if (fgImg.classList.contains("animate__fadeInLeft")) {
+                            return;
                         }
-                        const fgImg = nextSlide.querySelector("#fg-img-end");
-                        if (fgImg) {
-                            fgImg.classList.remove('animate__animated', 'animate__fadeInLeft');
-                            fgImg.classList.add('animate__animated', 'animate__fadeOut');
-                        }
+                        fgImg.classList.remove("animate__animated", "animate__fadeOutLeft");
+                        fgImg.classList.add("animate__animated", "animate__fadeInLeft");
+                        fgImg.style.setProperty("--animate-duration", "1.5s");
                     }
                 }
             },

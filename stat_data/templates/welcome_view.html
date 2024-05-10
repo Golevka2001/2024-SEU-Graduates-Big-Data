@@ -22,7 +22,8 @@
          alt="background image (welcome)"
          class="bg-img"/>
 
-    <div class="fg-content">
+    <div class="fg-content"
+         style="opacity: 1;-moz-opacity: 1;">
         {# 顶部文字 #}
         <img src="{% static 'stat_data/img/0-welcome/top-text.png' %}"
              alt="top text"
@@ -33,9 +34,6 @@
             <img src="{% static 'stat_data/img/0-welcome/jump-button.png' %}"
                  alt="jump button"/>
         </button>
-        {#    <form action="{% url 'stat_data:personal_view' %}" method="get" id="jump-btn">#}
-        {#        <button type="submit">点击查看毕业报告</button>#}
-        {#    </form>#}
 
         {# 底部文字 #}
         <img src="{% static 'stat_data/img/0-welcome/bottom-text.png' %}"
@@ -51,20 +49,20 @@
 </main>
 
 <script>
-    window.addEventListener('pageshow', (event) => {
+    window.addEventListener("pageshow", (event) => {
         // 若用户使用横屏设备，弹出提示
         if (window.innerWidth > window.innerHeight) {
-            alert('推荐使用竖屏浏览');
+            alert("推荐使用竖屏浏览");
         }
         // 进入页面的转场动画
         document.getElementById("overlay").style.opacity = "0";
     });
 
     // 页面跳转按钮点击事件
-    document.getElementById('jump-btn').addEventListener('click', (event) => {
+    document.getElementById("jump-btn").addEventListener("click", (event) => {
         // 若用户未勾选同意复选框，弹出提示
-        if (!document.getElementById('agree-checkbox').checked) {
-            alert('请先勾选同意使用个人数据');
+        if (!document.getElementById("agree-checkbox").checked) {
+            alert("请先勾选同意使用个人数据");
             event.preventDefault();
         }
         // 显示转场动画，执行页面跳转
