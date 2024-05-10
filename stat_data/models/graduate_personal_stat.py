@@ -194,7 +194,7 @@ class GraduatePersonalStat(models.Model):
             return (int(self.total_borrowed_books_num) <= 0
                     or int(self.get_longest_book_borrowing_days()) <= 0
                     or not bool(self.nice_book_name))
-        return False
+        return True
 
     def show_gym_data(self):
         return bool(self.first_ordered_date) and bool(self.first_ordered_gym)
