@@ -27,10 +27,12 @@
             <span class="highlight-text-scenario-gate">{{ graduate.seu_card_id }}</span>
         </p>
         <p style="margin-bottom: 2rem">
-            {% if graduate.graduate_type == 0 %}
-                正式成为了东大人
-            {% else %}
+            {% if graduate.graduate_type == 1 %}
                 成为了东大研究生
+            {% elif graduate.graduate_type == 2 %}
+                成为了东大博士生
+            {% else %}
+                正式成为了东大人
             {% endif %}
         </p>
         <p>在同届中</p>

@@ -20,12 +20,16 @@
         <div class="text-scenario-leave"
              style="top:5rem;left:6rem">
             <p class="text-line-scenario-leave">
-                {% if graduate.graduate_type == 0 %}
-                    这是你与东大相逢的第
+                {% if graduate.graduate_type == 1 %}
+                    这是你成为东大研究生的第
+                    <span class="highlight-text-scenario-leave">{{ graduate.get_days_in_seu }}</span>
+                    天
+                {% elif graduate.graduate_type == 2 %}
+                    这是你成为东大博士生的第
                     <span class="highlight-text-scenario-leave">{{ graduate.get_days_in_seu }}</span>
                     天
                 {% else %}
-                    这是你成为东大研究生的第
+                    这是你与东大相逢的第
                     <span class="highlight-text-scenario-leave">{{ graduate.get_days_in_seu }}</span>
                     天
                 {% endif %}

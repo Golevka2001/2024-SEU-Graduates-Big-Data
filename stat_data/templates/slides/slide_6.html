@@ -21,10 +21,12 @@
          style="top:5vh;">
         {% if graduate.lack_of_borrowing_data %}
             <p>
-                {% if graduate.graduate_type == 0 %}
-                    在校期间，
-                {% else %}
+                {% if graduate.graduate_type == 1 %}
                     读研期间，
+                {% elif graduate.graduate_type == 2 %}
+                    读博期间，
+                {% else %}
+                    在校期间，
                 {% endif %}
                 你累计进出图书馆
                 <span class="highlight-text-scenario-library">{{ graduate.library_visits }}</span>
@@ -33,13 +35,15 @@
             <div class="additional-text">
                 <p>你是思想的雕塑家</p>
                 <p>每一次造访图书馆</p>
-                <p>都是在智慧的宫殿内悉心雕琢独属于自己的精神世界</p>
-                <p>属于自己的精神世界</p>
+                <p>都是在智慧的宫殿内悉心雕琢</p>
+                <p>独属于自己的精神世界</p>
             </div>
         {% else %}
             <p>
-                {% if graduate.graduate_type != 0 %}
+                {% if graduate.graduate_type == 1 %}
                     读研期间，
+                {% elif graduate.graduate_type == 2 %}
+                    读博期间，
                 {% endif %}
                 你累计借阅书籍
                 <span class="highlight-text-scenario-library">{{ graduate.total_borrowed_books_num }}</span>

@@ -20,8 +20,10 @@
     <div class="text-scenario-classroom"
          style="top:7rem; left:4.5rem">
         <p>
-            {% if graduate.graduate_type != 0 %}
+            {% if graduate.graduate_type == 1 %}
                 读研期间，
+            {% elif graduate.graduate_type == 2 %}
+                读博期间，
             {% endif %}
             你选择了
             <span class="highlight-text-scenario-classroom">{{ graduate.unit_name }}</span>

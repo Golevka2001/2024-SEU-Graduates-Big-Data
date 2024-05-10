@@ -19,10 +19,12 @@
     {# 文字 #}
     <div class="text-scenario-canteen" style="top: 5rem;left: 4rem;">
         <p>
-            {% if graduate.graduate_type == 0 %}
-                本科期间，
-            {% else %}
+            {% if graduate.graduate_type == 1 %}
                 读研期间，
+            {% elif graduate.graduate_type == 2 %}
+                读博期间，
+            {% else %}
+                在校期间，
             {% endif %}
             你一共在食堂使用校园卡
         </p>
