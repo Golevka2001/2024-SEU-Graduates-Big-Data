@@ -7,6 +7,11 @@ main {
     margin: auto;
     padding: 0;
     font-size: 3.75vw;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
     @media (min-aspect-ratio: 2/3) {
         width: fit-content;
         font-size: 1.7vh;

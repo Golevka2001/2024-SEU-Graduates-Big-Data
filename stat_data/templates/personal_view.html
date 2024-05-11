@@ -85,12 +85,15 @@
 {# Swiper JS #}
 <script src="{% static 'swiper@11.1.1/swiper-bundle.min.js' %}"></script>
 <script>
+    let curSlide = null;
+    let prevSlidePos = 0;
+    let curSlidePos = 0;
+    let nextSlidePos = 0;
+
     window.addEventListener("pageshow", () => {
         // 转场动画 - 进入页面
         document.getElementById("overlay").style.opacity = "0";
     });
-
-    let lastSlideId = "";
 
     // Initialize Swiper
     const swiper = new Swiper(".swiper", {
@@ -102,6 +105,7 @@
         resistanceRatio: 0.5,
         speed: 800,
         threshold: 0,
+        touchAngle: 90,
         virtual: {
             enabled: true,
         },
@@ -116,21 +120,32 @@
                     initFgContent.classList.add("animate__animated", "animate__fadeIn");
                 }
             },
+            touchStart: function () {
+                // 记录开始滑动时的页面
+                curSlide = this.wrapperEl.querySelector(".swiper-slide-active");
+                // 计算当前页、上一页、下一页的位置
+                prevSlidePos = -1 * (this.activeIndex - 1) * this.height;
+                curSlidePos = -1 * this.activeIndex * this.height;
+                nextSlidePos = -1 * (this.activeIndex + 1) * this.height;
+            },
             touchMove: function () {
+                // 滑动距离小于阈值时不触发动画
+                if ((this.translate >= curSlidePos && (this.translate - curSlidePos) / (prevSlidePos - curSlidePos) < 0.2)
+                    || (this.translate <= curSlidePos && (this.translate - curSlidePos) / (nextSlidePos - curSlidePos) < 0.2)) {
+                    return;
+                }
                 // 开始滑动时，隐藏该页内容
-                const lastSlide = this.wrapperEl.querySelector(".swiper-slide-active");
-                lastSlideId = lastSlide.id;
-                const lastFgContent = lastSlide.querySelector(".fg-content");
-                if (lastFgContent) {
-                    if (lastFgContent.classList.contains("animate__fadeOut")) {
+                const curFgContent = curSlide.querySelector(".fg-content");
+                if (curFgContent) {
+                    if (curFgContent.classList.contains("animate__fadeOut")) {
                         return;
                     }
-                    lastFgContent.classList.remove("animate__animated", "animate__fadeIn");
-                    lastFgContent.classList.add("animate__animated", "animate__fadeOut");
+                    curFgContent.classList.remove("animate__animated", "animate__fadeIn");
+                    curFgContent.classList.add("animate__animated", "animate__fadeOut");
                 }
                 // 结束页特殊处理
-                if (lastSlideId === "end") {
-                    const titleImg = lastSlide.querySelector("#title-img-end");
+                if (curSlide.id === "end") {
+                    const titleImg = curSlide.querySelector("#title-img-end");
                     if (titleImg) {
                         if (titleImg.classList.contains("animate__fadeOut")) {
                             return;
@@ -138,7 +153,7 @@
                         titleImg.classList.remove("animate__animated", "animate__tada");
                         titleImg.classList.add("animate__animated", "animate__fadeOut");
                     }
-                    const fgImg = lastSlide.querySelector("#fg-img-end");
+                    const fgImg = curSlide.querySelector("#fg-img-end");
                     if (fgImg) {
                         if (fgImg.classList.contains("animate__fadeOutLeft")) {
                             return;
@@ -148,21 +163,19 @@
                     }
                 }
             },
-            transitionEnd: function () {
-                // 页面切换完成后，显示该页内容
-                const lastSlide = this.wrapperEl.querySelector(".swiper-slide-active");
-                lastSlideId = lastSlide.id;
-                const lastFgContent = lastSlide.querySelector(".fg-content");
+            slideChange: function () {
+                // 清除前一页动画（处理没有触发touchMove中清除操作的情况）
+                const lastFgContent = curSlide.querySelector(".fg-content");
                 if (lastFgContent) {
-                    if (lastFgContent.classList.contains("animate__fadeIn")) {
+                    if (lastFgContent.classList.contains("animate__fadeOut")) {
                         return;
                     }
-                    lastFgContent.classList.remove("animate__animated", "animate__fadeOut");
-                    lastFgContent.classList.add("animate__animated", "animate__fadeIn");
+                    lastFgContent.classList.remove("animate__animated", "animate__fadeIn");
+                    lastFgContent.classList.add("animate__animated", "animate__fadeOut");
                 }
                 // 结束页特殊处理
-                if (lastSlideId === "end") {
-                    const titleImg = lastSlide.querySelector("#title-img-end");
+                if (curSlide.id === "end") {
+                    const titleImg = curSlide.querySelector("#title-img-end");
                     if (titleImg) {
                         if (titleImg.classList.contains("animate__tada")) {
                             return;
@@ -171,7 +184,40 @@
                         titleImg.classList.add("animate__animated", "animate__tada");
                         titleImg.style.setProperty("--animate-duration", "2s");
                     }
-                    const fgImg = lastSlide.querySelector("#fg-img-end");
+                    const fgImg = curSlide.querySelector("#fg-img-end");
+                    if (fgImg) {
+                        if (fgImg.classList.contains("animate__fadeInLeft")) {
+                            return;
+                        }
+                        fgImg.classList.remove("animate__animated", "animate__fadeOutLeft");
+                        fgImg.classList.add("animate__animated", "animate__fadeInLeft");
+                        fgImg.style.setProperty("--animate-duration", "1.5s");
+                    }
+                }
+            },
+            transitionEnd: function () {
+                // 页面切换完成后，显示该页内容
+                const newSlide = this.wrapperEl.querySelector(".swiper-slide-active");
+                const newFgContent = newSlide.querySelector(".fg-content");
+                if (newFgContent) {
+                    if (newFgContent.classList.contains("animate__fadeIn")) {
+                        return;
+                    }
+                    newFgContent.classList.remove("animate__animated", "animate__fadeOut");
+                    newFgContent.classList.add("animate__animated", "animate__fadeIn");
+                }
+                // 结束页特殊处理
+                if (newSlide.id === "end") {
+                    const titleImg = newSlide.querySelector("#title-img-end");
+                    if (titleImg) {
+                        if (titleImg.classList.contains("animate__tada")) {
+                            return;
+                        }
+                        titleImg.classList.remove("animate__animated", "animate__fadeOut");
+                        titleImg.classList.add("animate__animated", "animate__tada");
+                        titleImg.style.setProperty("--animate-duration", "2s");
+                    }
+                    const fgImg = newSlide.querySelector("#fg-img-end");
                     if (fgImg) {
                         if (fgImg.classList.contains("animate__fadeInLeft")) {
                             return;
