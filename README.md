@@ -1,6 +1,32 @@
 # 2024-SEU-Graduates-Big-Data
 
-## 本地开发
+## :open_file_folder: 目录结构
+
+```text
+2024-SEU-Graduates-Big-Data
+|---2024_SEU_Graduates_Big_Data     # 项目主目录
+|   |---settings.py                 # - 项目配置文件
+|   |---urls.py                     # - 项目 URL 配置
+|   \---wsgi.py                     # - 项目 WSGI 配置
+|
+|---app_health_check                # 健康检查应用（提供给数据中心用于检查服务状态）
+|
+|---app_main                        # 向用户展示的主应用
+|   |---models                      # - 数据模型目录
+|   |---templates                   # - HTML 模板目录
+|   |---views                       # - 视图函数目录（欢迎页面、个人数据展示页面）
+|   \---urls.py                     # - 应用 URL 配置
+|
+|---django_cas_ng                   # CAS 认证客户端（在 django-cas-ng 基础上进行了一定的修改）
+|
+|---sql_scripts                     # SQL 脚本
+|   |---fill_null_values.sql        # - 填充 graduates_big_data 表中的空值
+|   \---gen_xxx_table.sql           # - 生成辅助统计表
+|
+\---static                          # 静态文件
+```
+
+## :compass: 本地开发指导
 
 默认本地开发过程中 `DEBUG=True`，否则需要配置静态文件等服务，请参照 [使用 Docker 部署](#使用-docker-部署) 中相关内容进行配置。
 
@@ -55,7 +81,7 @@ python manage.py migrate
 `gbd_graduate_personal_stat`、`gbd_library_borrowing_stat` 和 `gbd_sports_competition_stat`
 
 接下来，执行 [sql_scripts](./sql_scripts) 目录下的几个 SQL
-脚本（首先执行[`fill_null_values.sql`](sql_scripts/fill_null_values.sql)），填充空值、生成辅助统计表等。
+脚本（[fill_null_values.sql](sql_scripts/fill_null_values.sql) 应被首先执行），填充空值、生成辅助统计表。
 
 ### 3. 网络相关配置
 
@@ -103,7 +129,7 @@ _注：由于此项目报备注册的域名为 https 协议，所以需要配置
 python manage.py runserver 0.0.0.0:8000
 ```
 
-## 使用 Docker 部署
+## :whale: 使用 Docker 部署
 
 ### 0. 环境
 
@@ -149,7 +175,7 @@ python -c 'from django.core.management.utils import get_random_secret_key; print
 server {
     listen       20246;  # 对外端口
     server_name  gradudata2024.seu.edu.cn;
-    
+
     location /static {
         alias /path/to/2024-SEU-Graduates-Big-Data/static;
     }
@@ -207,7 +233,7 @@ docker run -d --name graduates-big-data \
            --network host graduates-big-data:latest
 ```
 
-## 补充说明
+## :screwdriver: 补充说明
 
 项目的 [CAS 认证客户端](./django_cas_ng) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng)
 和 [python-cas](https://github.com/python-cas/python-cas)，在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
