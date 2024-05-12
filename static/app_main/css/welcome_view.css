@@ -30,8 +30,8 @@
     bottom: 10%;
 }
 
-/* 底部复选框 */
-#bottom-checkbox {
+/* 底部复选框或退出登录链接 */
+#bottom-content {
     z-index: 20;
     max-width: 90%;
     position: absolute;

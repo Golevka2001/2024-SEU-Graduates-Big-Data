@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
 from app_main.models import (
     BorrowingRankStat,
@@ -19,7 +19,7 @@ def test_view(request):
     print(seu_card_id)
 
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
-        return redirect("error:not_eligible_view")
+        return render(request, "welcome_view.html", {"is_eligible": False})
 
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)

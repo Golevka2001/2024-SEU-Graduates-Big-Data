@@ -1,7 +1,7 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
-from django_cas_ng.views import LoginView
 from app_main.models import GraduatePersonalStat
+from django_cas_ng.views import LoginView
 
 
 def welcome_view(request):
@@ -11,7 +11,8 @@ def welcome_view(request):
 
     # 检查是否为本届毕业生，若不在毕业生数据中，则跳转到错误页面，显示仅对本届毕业生开放的提示
     seu_card_id = request.user.username
+    is_eligible = True
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
-        return redirect("error:not_eligible_view")
+        is_eligible = False
 
-    return render(request, "welcome_view.html")
+    return render(request, "welcome_view.html", {"is_eligible": is_eligible})

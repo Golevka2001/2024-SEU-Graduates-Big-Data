@@ -1,6 +1,5 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
-from django_cas_ng.decorators import login_required
 from app_main.models import (
     BorrowingRankStat,
     FavoriteCanteenStat,
@@ -8,6 +7,7 @@ from app_main.models import (
     LibraryBorrowingStat,
     SportsCompetitionStat,
 )
+from django_cas_ng.decorators import login_required
 
 # 显示借阅量排名的阈值（前50%才显示）
 SHOW_BORROWING_RANK_THRESHOLD = 0.5
@@ -19,7 +19,7 @@ def personal_view(request):
     seu_card_id = request.user.username
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
-        return redirect("error:not_eligible_view")
+        return render(request, "welcome_view.html", {"is_eligible": False})
 
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)
