@@ -1,5 +1,5 @@
 """
-ASGI config for graduates_big_data project.
+ASGI config for 2024-SEU-Graduates-Big-Data project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'graduates_big_data.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '2024-SEU-Graduates-Big-Data.settings')
 
 application = get_asgi_application()

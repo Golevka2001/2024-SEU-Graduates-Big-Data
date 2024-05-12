@@ -12,7 +12,7 @@ from app_main.models import (
 SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
 
-def test(request):
+def test_view(request):
     seu_card_id = request.GET.get("id")
     if not seu_card_id:
         seu_card_id = GraduatePersonalStat.objects.order_by("?")[0].seu_card_id

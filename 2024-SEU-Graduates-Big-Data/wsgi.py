@@ -1,5 +1,5 @@
 """
-WSGI config for graduates_big_data project.
+WSGI config for 2024-SEU-Graduates-Big-Data project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'graduates_big_data.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '2024-SEU-Graduates-Big-Data.settings')
 
 application = get_wsgi_application()

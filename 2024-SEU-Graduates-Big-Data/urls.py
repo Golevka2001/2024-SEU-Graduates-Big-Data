@@ -1,5 +1,5 @@
 """
-URL configuration for graduates_big_data project.
+URL configuration for 2024-SEU-Graduates-Big-Data project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
