@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
 from django_cas_ng.views import LoginView
-from stat_data.models import GraduatePersonalStat
+from app_main.models import GraduatePersonalStat
 
 
 def welcome_view(request):

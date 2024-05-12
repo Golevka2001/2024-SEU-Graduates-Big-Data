@@ -27,6 +27,6 @@ urlpatterns = [
     path("accounts/logout/", cas_views.LogoutView.as_view(), name="cas_ng_logout"),
     # ----- APPS ----- #
     path("error/", include("error.urls")),
-    path("health_check", include("health_check.urls")),
-    path("", include("stat_data.urls")),
+    path("health_check", include("app_health_check.urls")),
+    path("", include("app_main.urls")),
 ]

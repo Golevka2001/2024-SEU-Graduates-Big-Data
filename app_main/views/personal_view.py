@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 
-from stat_data.models import (
+from django_cas_ng.decorators import login_required
+from app_main.models import (
     BorrowingRankStat,
     FavoriteCanteenStat,
     GraduatePersonalStat,
@@ -12,12 +13,11 @@ from stat_data.models import (
 SHOW_BORROWING_RANK_THRESHOLD = 0.5
 
 
-def test(request):
-    seu_card_id = request.GET.get("id")
-    if not seu_card_id:
-        seu_card_id = GraduatePersonalStat.objects.order_by("?")[0].seu_card_id
-    print(seu_card_id)
-
+@login_required
+def personal_view(request):
+    # 获取当前用户的一卡通号
+    seu_card_id = request.user.username
+    # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
         return redirect("error:not_eligible_view")
 
@@ -43,7 +43,8 @@ def test(request):
         show_borrowing_rank = False
         borrowing_rank_percent = "0.00%"
     else:
-        borrowing_rank = BorrowingRankStat.objects.get(borrowing_num=graduate.total_borrowed_books_num).borrowing_rank
+        borrowing_rank = BorrowingRankStat.objects.get(
+            borrowing_num=graduate.total_borrowed_books_num).borrowing_rank
         show_borrowing_rank = borrowing_rank / graduate_total_num < SHOW_BORROWING_RANK_THRESHOLD
         borrowing_rank_percent = f"{1 - borrowing_rank / graduate_total_num:.2%}"
 

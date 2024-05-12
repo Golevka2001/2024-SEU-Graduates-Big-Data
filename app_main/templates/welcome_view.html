@@ -8,8 +8,8 @@
     <title>东南大学 2024 毕业生大数据</title>
 
     {# 自定义 CSS #}
-    <link rel="stylesheet" href="{% static 'stat_data/css/common.css' %}"/>
-    <link rel="stylesheet" href="{% static 'stat_data/css/welcome_view.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app_main/css/common.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app_main/css/welcome_view.css' %}"/>
 </head>
 
 <body>
@@ -18,25 +18,25 @@
     <div id="overlay"></div>
 
     {# 背景图片 #}
-    <img src="{% static 'stat_data/img/0-welcome/background.png' %}"
+    <img src="{% static 'app_main/img/0-welcome/background.png' %}"
          alt="background image (welcome)"
          class="bg-img"/>
 
     <div class="fg-content"
          style="opacity: 1;-moz-opacity: 1;">
         {# 顶部文字 #}
-        <img src="{% static 'stat_data/img/0-welcome/top-text.png' %}"
+        <img src="{% static 'app_main/img/0-welcome/top-text.png' %}"
              alt="top text"
              id="top-text"/>
 
         {# 页面跳转按钮 #}
         <button id="jump-btn">
-            <img src="{% static 'stat_data/img/0-welcome/jump-button.png' %}"
+            <img src="{% static 'app_main/img/0-welcome/jump-button.png' %}"
                  alt="jump button"/>
         </button>
 
         {# 底部文字 #}
-        <img src="{% static 'stat_data/img/0-welcome/bottom-text.png' %}"
+        <img src="{% static 'app_main/img/0-welcome/bottom-text.png' %}"
              alt="bottom text"
              id="bottom-text"/>
 
@@ -69,7 +69,7 @@
         else {
             document.getElementById("overlay").style.opacity = "1";
             setTimeout(() => {
-                window.location.href = "{% url 'stat_data:personal_view' %}";
+                window.location.href = "{% url 'app_main:personal_view' %}";
             }, 1000);
         }
     });
