@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django_cas_ng",
     "app_health_check",
     "app_main",
-    "error",
 ]
 
 MIDDLEWARE = [
