@@ -54,7 +54,8 @@ python manage.py migrate
 
 `gbd_graduate_personal_stat`、`gbd_library_borrowing_stat` 和 `gbd_sports_competition_stat`
 
-接下来，执行 [sql_scripts](./sql_scripts) 目录下的 SQL 脚本，填充空值、生成辅助统计表等。
+接下来，执行 [sql_scripts](./sql_scripts) 目录下的几个 SQL
+脚本（首先执行[`fill_null_values.sql`](sql_scripts/fill_null_values.sql)），填充空值、生成辅助统计表等。
 
 ### 3. 网络相关配置
 
@@ -94,26 +95,12 @@ server {
 }
 ```
 
-_注：由于此项目报备注册的域名为 https 协议，所以需要配置 https 代理和相应的 SSL 证书。否则，上述 https 部分配置可省略。_
+_注：由于此项目报备注册的域名为 https 协议，所以需要配置 https 代理和相应的 SSL 证书。_
 
 ### 4. 启动服务
 
 ```bash
 python manage.py runserver 0.0.0.0:8000
-```
-
-## 补充说明
-
-项目的 [CAS 认证客户端](./django_cas_ng) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng)
-和 [python-cas](https://github.com/python-cas/python-cas)，在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
-
-修改部分在代码中按照以下形式标注：
-
-```python
-# ----- MODIFIED START ----- #
-# code = 'original code'
-code = 'modified code'
-# ----- MODIFIED END ----- #
 ```
 
 ## 使用 Docker 部署
@@ -136,7 +123,7 @@ code = 'modified code'
 
 在项目根目录下创建 `.env` 文件，填写以下内容：
 
-```ini
+```text
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY='xxxx'
 ```
@@ -149,8 +136,8 @@ python -c 'from django.core.management.utils import get_random_secret_key; print
 
 #### 1.2 数据库
 
-在服务器上配置好 MySQL 数据库，按照 [配置连接信息](#21-配置连接信息) 部分的说明，创建并将数据库连接信息填写到 `my.cnf` 文件中。
-
+在服务器上配置好 MySQL 数据库，按照 [配置连接信息](#21-配置连接信息) 部分的说明，创建并将数据库连接信息填写到 `my.cnf`
+文件中。
 
 #### 1.3 Nginx
 
@@ -185,7 +172,7 @@ docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
 
 ### 3. 【服务器】导入并运行镜像
 
-使用 `scp` 或其他方式将导出的镜像文件传输到服务器上。
+使用 `scp` 或其他方式将**导出的镜像文件**及**整个项目目录**传输到服务器上。
 
 执行以下命令导入镜像：
 
@@ -197,8 +184,8 @@ docker load < docker-img-graduates-big-data.tar
 
 ```bash
 docker run -it --name graduates-big-data \
-           -v /root/2024-SEU-Graduates-Big-Data:/app \
-           --env-file /root/2024-SEU-Graduates-Big-Data/.env \
+           -v /path/to/2024-SEU-Graduates-Big-Data:/app \
+           --env-file /path/to/2024-SEU-Graduates-Big-Data/.env \
            --network host graduates-big-data:latest \
            /bin/bash
 
@@ -215,7 +202,21 @@ exit
 
 ```bash
 docker run -d --name graduates-big-data \
-           -v /root/2024-SEU-Graduates-Big-Data:/app \
-           --env-file /root/2024-SEU-Graduates-Big-Data/.env \
+           -v /path/to/2024-SEU-Graduates-Big-Data:/app \
+           --env-file /path/to/2024-SEU-Graduates-Big-Data/.env \
            --network host graduates-big-data:latest
+```
+
+## 补充说明
+
+项目的 [CAS 认证客户端](./django_cas_ng) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng)
+和 [python-cas](https://github.com/python-cas/python-cas)，在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
+
+修改部分在代码中按照以下形式标注：
+
+```python
+# ----- MODIFIED START ----- #
+# code = 'original code'
+code = 'modified code'
+# ----- MODIFIED END ----- #
 ```

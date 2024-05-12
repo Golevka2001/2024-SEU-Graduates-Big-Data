@@ -16,8 +16,10 @@
 -- practice_project_num : '0'
 -- total_borrowed_books_num : '0'
 -- longest_book_borrowing_days : '0 days 00:00:00'
+-- nice_book_borrowing_person_num : '0'
 -- library_visits : '0'
 -- gym_ordered_times : '0'
+-- favorite_gym_ordered_times : '0'
 -- morning_exercise_times : '0'
 UPDATE graduates_big_data.gbd_graduate_personal_stat
 SET same_birthdate_num                = IF(same_birthdate_num IS NULL OR same_birthdate_num = '', '0',
@@ -51,9 +53,14 @@ SET same_birthdate_num                = IF(same_birthdate_num IS NULL OR same_bi
                                            total_borrowed_books_num),
     longest_book_borrowing_days       = IF(longest_book_borrowing_days IS NULL OR longest_book_borrowing_days = '',
                                            '0 days 00:00:00', longest_book_borrowing_days),
+    nice_book_borrowing_person_num    = IF(
+            nice_book_borrowing_person_num IS NULL OR nice_book_borrowing_person_num = '',
+            '0', nice_book_borrowing_person_num),
     library_visits                    = IF(library_visits IS NULL OR library_visits = '', '0', library_visits),
     gym_ordered_times                 = IF(gym_ordered_times IS NULL OR gym_ordered_times = '', '0',
                                            gym_ordered_times),
+    favorite_gym_ordered_times        = IF(favorite_gym_ordered_times IS NULL OR favorite_gym_ordered_times = '', '0',
+                                           favorite_gym_ordered_times),
     morning_exercise_times            = IF(morning_exercise_times IS NULL OR morning_exercise_times = '', '0',
                                            morning_exercise_times)
 WHERE TRUE;
