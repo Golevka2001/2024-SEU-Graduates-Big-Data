@@ -20,7 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-%3e#@30!w*+90b5rn9vo*hcb3^^2vty5-()a=yb)bijmhq!$r%")
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-%3e#@30!w*+90b5rn9vo*hcb3^^2vty5-()a=yb)bijmhq!$r%",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
@@ -57,7 +60,7 @@ AUTHENTICATION_BACKENDS = [
     "django_cas_ng.backends.CASBackend",
 ]
 
-ROOT_URLCONF = "2024-SEU-Graduates-Big-Data.urls"
+ROOT_URLCONF = "2024_SEU_Graduates_Big_Data.urls"
 
 TEMPLATES = [
     {
@@ -78,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "2024-SEU-Graduates-Big-Data.wsgi.application"
+WSGI_APPLICATION = "2024_SEU_Graduates_Big_Data.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

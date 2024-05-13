@@ -11,6 +11,8 @@ class FavoriteCanteenStat(models.Model):
         ordering = ["canteen_name"]
 
     # 食堂名称
-    canteen_name = models.CharField(max_length=255, primary_key=True, unique=True, db_comment="食堂名称")
+    canteen_name = models.CharField(
+        max_length=255, primary_key=True, unique=True, db_comment="食堂名称"
+    )
     # 最常去此食堂的毕业生人数
     count = models.IntegerField(db_comment="最常去此食堂的毕业生人数")

@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', '2024-SEU-Graduates-Big-Data.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "2024_SEU_Graduates_Big_Data.settings")
 
 application = get_wsgi_application()
