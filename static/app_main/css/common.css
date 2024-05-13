@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Alibaba-PuHuiTi";
+    font-weight: normal;
+    src: url("/static/app_main/fonts/Alibaba-PuHuiTi-Regular.otf");
+}
+@font-face {
+    font-family: "Alibaba-PuHuiTi";
+    font-weight: bold;
+    src: url("/static/app_main/fonts/Alibaba-PuHuiTi-Bold.otf");
+}
+
 html,
 body,
 main {
@@ -7,6 +18,7 @@ main {
     margin: auto;
     padding: 0;
     font-size: 3.75vw;
+    font-family: Alibaba-PuHuiTi, sans-serif;
     -webkit-user-drag: none;
     user-select: none;
     -moz-user-select: none;
