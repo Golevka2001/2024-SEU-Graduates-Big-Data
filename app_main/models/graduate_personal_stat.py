@@ -117,10 +117,8 @@ class GraduatePersonalStat(models.Model):
     lecture_attended_times = models.CharField(
         max_length=255, db_comment="参加讲座次数", null=True, default="0"
     )
-    # 第一次参加讲座地点
-    first_lecture_place = models.CharField(
-        max_length=255, db_comment="第一次参加讲座地点", null=True
-    )
+    # 第一次参加讲座时间
+    first_lecture_date = models.DateField(db_comment="第一次参加讲座时间", null=True)
     # 第一次参加讲座名称
     first_lecture_name = models.CharField(
         max_length=255, db_comment="第一次参加讲座名称", null=True
@@ -233,7 +231,7 @@ class GraduatePersonalStat(models.Model):
     def show_lectures(self):
         return (
             int(self.lecture_attended_times or 0) > 0
-            and bool(self.first_lecture_place)
+            and bool(self.first_lecture_date)
             and bool(self.first_lecture_name)
         )
 
@@ -294,7 +292,7 @@ class GraduatePersonalStat(models.Model):
 
     def show_auditorium_page(self):
         return (
-            bool(self.first_lecture_place)
+            bool(self.first_lecture_date)
             or self.show_srtp_projects()
             or self.show_volunteer_activities()
             or bool(self.first_practice_project_name)
