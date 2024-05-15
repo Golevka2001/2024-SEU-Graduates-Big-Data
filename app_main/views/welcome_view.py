@@ -15,4 +15,12 @@ def welcome_view(request):
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
         is_eligible = False
 
-    return render(request, "welcome_view.html", {"is_eligible": is_eligible})
+    graduate_name = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id).full_name
+    return render(
+        request,
+        "welcome_view.html",
+        {
+            "is_eligible": is_eligible,
+            "graduate_name": graduate_name,
+        },
+    )
