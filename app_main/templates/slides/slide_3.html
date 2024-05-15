@@ -1,31 +1,32 @@
 {# 背景图片 #}
-<img src="{% static 'app_main/images/3-canteen/background.png' %}"
+<img src="{% static 'app_main/images/3-canteen/background.svg' %}"
      alt="background image (canteen)"
      loading="lazy"
      class="bg-img"/>
 {# 前景遮挡 #}
-<img src="{% static 'app_main/images/3-canteen/mask.png' %}"
+<img src="{% static 'app_main/images/3-canteen/mask.svg' %}"
      alt="mask (canteen)"
      loading="lazy"
      class="fg-mask"/>
 <div class="fg-content"
-     style="top: 8vh">
+     style="top: 3%">
     {# 文字背景 #}
-    <img src="{% static 'app_main/images/3-canteen/text-container.png' %}"
+    <img src="{% static 'app_main/images/3-canteen/text-container.svg' %}"
          alt="text container (canteen)"
          loading="lazy"
-         id="container-img-scenario-canteen"
-         style="left:3rem"/>
+         id="container-img-scenario-canteen"/>
     {# 文字 #}
     <div class="text-scenario-canteen" style="top: 5rem;left: 4rem;">
-        <p>
+        <p id="stage-text-scenario-canteen">
             {% if graduate.graduate_type == 1 %}
-                读研期间，
+                读研期间
             {% elif graduate.graduate_type == 2 %}
-                读博期间，
+                读博期间
             {% else %}
-                在校期间，
+                本科期间
             {% endif %}
+        </p>
+        <p>
             你一共在食堂使用校园卡
         </p>
         <p>

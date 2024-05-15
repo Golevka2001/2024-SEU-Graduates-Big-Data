@@ -23,6 +23,8 @@ def test_view(request):
 
     # 查询指定毕业生的个人统计信息
     graduate = GraduatePersonalStat.objects.get(seu_card_id=seu_card_id)
+    graduate.origin = None
+    graduate.same_origin_num = None
 
     # 毕业生总数
     graduate_total_num = GraduatePersonalStat.objects.count()

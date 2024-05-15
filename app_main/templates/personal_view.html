@@ -47,7 +47,7 @@
                 {% include "slides/slide_4.html" %}
             </div>
 
-            {# ---------- 场景5: 大礼堂 ---------- #}
+            {# ---------- 场景5: 报告厅 ---------- #}
             {% if graduate.show_auditorium_page %}
                 <div class="swiper-slide" id="scenario-auditorium">
                     {% include "slides/slide_5.html" %}
@@ -176,20 +176,20 @@
                 if (curSlide.id === "end") {
                     const titleImg = curSlide.querySelector("#title-img-end");
                     if (titleImg) {
-                        if (titleImg.classList.contains("animate__tada")) {
+                        if (titleImg.classList.contains("animate__fadeOut")) {
                             return;
                         }
-                        titleImg.classList.remove("animate__animated", "animate__fadeOut");
-                        titleImg.classList.add("animate__animated", "animate__tada");
+                        titleImg.classList.remove("animate__animated", "animate__tada");
+                        titleImg.classList.add("animate__animated", "animate__fadeOut");
                         titleImg.style.setProperty("--animate-duration", "2s");
                     }
                     const fgImg = curSlide.querySelector("#fg-img-end");
                     if (fgImg) {
-                        if (fgImg.classList.contains("animate__fadeInLeft")) {
+                        if (fgImg.classList.contains("animate__fadeOutLeft")) {
                             return;
                         }
-                        fgImg.classList.remove("animate__animated", "animate__fadeOutLeft");
-                        fgImg.classList.add("animate__animated", "animate__fadeInLeft");
+                        fgImg.classList.remove("animate__animated", "animate__fadeInLeft");
+                        fgImg.classList.add("animate__animated", "animate__fadeOutLeft");
                         fgImg.style.setProperty("--animate-duration", "1.5s");
                     }
                 }

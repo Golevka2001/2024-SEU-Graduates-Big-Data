@@ -1,50 +1,58 @@
 {# 背景图片 #}
-<img src="{% static 'app_main/images/6-library/background.png' %}"
+<img src="{% static 'app_main/images/6-library/background.svg' %}"
      alt="background image (library)"
      loading="lazy"
      class="bg-img"/>
 {# 前景遮挡 #}
-<img src="{% static 'app_main/images/6-library/mask.png' %}"
+<img src="{% static 'app_main/images/6-library/mask.svg' %}"
      alt="mask (library)"
      loading="lazy"
      class="fg-mask"/>
 <div class="fg-content"
-     style="top:2vh">
+     style="top: 0">
     {# 文字背景 #}
-    <img src="{% static 'app_main/images/6-library/text-container.png' %}"
+    <img src="{% static 'app_main/images/6-library/text-container.svg' %}"
          alt="text container (library)"
          loading="lazy"
-         id="container-img-scenario-library"
-         style="left:2.5rem"/>
+         id="container-img-scenario-library"/>
     {# 文字 #}
-    <div class="text-scenario-library"
-         style="top:5vh;">
-        {% if graduate.lack_of_borrowing_data %}
-            <p>
+    {% if graduate.lack_of_borrowing_data %}
+        {# 缺少借阅数据，只显示进出图书馆次数 #}
+        <div class="lack-of-borrowing-data-text-scenario-library"
+             style="top: 5.5rem;">
+            <p id="lack-of-borrowing-data-stage-text-scenario-library">
                 {% if graduate.graduate_type == 1 %}
-                    读研期间，
+                    读研期间
                 {% elif graduate.graduate_type == 2 %}
-                    读博期间，
+                    读博期间
                 {% else %}
-                    在校期间，
+                    在读期间
                 {% endif %}
+            </p>
+            <p>
                 你累计进出图书馆
-                <span class="highlight-text-scenario-library">{{ graduate.library_visits }}</span>
+                <span class="lack-of-borrowing-data-highlight-text-scenario-library">{{ graduate.library_visits }}</span>
                 次
             </p>
-            <div class="additional-text">
-                <p>你是思想的雕塑家</p>
-                <p>每一次造访图书馆</p>
+            <div id="lack-of-borrowing-data-additional-text-scenario-library">
+                <p>你是思想的雕塑家，</p>
+                <p>每一次造访图书馆，</p>
                 <p>都是在智慧的宫殿内悉心雕琢</p>
-                <p>独属于自己的精神世界</p>
+                <p>独属于自己的精神世界。</p>
             </div>
-        {% else %}
-            <p>
+        </div>
+    {% else %}
+        {# 有借阅数据，正常显示 #}
+        <div class="text-scenario-library"
+             style="top: 5.5rem;">
+            <p id="stage-text-scenario-library">
                 {% if graduate.graduate_type == 1 %}
-                    读研期间，
+                    读研期间
                 {% elif graduate.graduate_type == 2 %}
-                    读博期间，
+                    读博期间
                 {% endif %}
+            </p>
+            <p>
                 你累计借阅书籍
                 <span class="highlight-text-scenario-library">{{ graduate.total_borrowed_books_num }}</span>
                 本
@@ -64,17 +72,20 @@
             {% if top_borrower_in_unit %}
                 {% if top_borrower_in_unit.seu_card_id == graduate.seu_card_id %}
                     <p>
-                        恭喜你成为所在学院借书
-                        <span class="highlight-text-scenario-library">No.1</span>
+                        恭喜你成为所在学院
+                        <span class="highlight-text-scenario-library">借书No.1</span>
                     </p>
                     <p>吹灭读书灯，一身都是月</p>
                 {% else %}
                     <p>
-                        你所在学院的{{ top_borrower_in_unit.full_name }}同学借阅了
-                        <span class="highlight-text-scenario-library">{{ top_borrower_in_unit.total_borrowed_books_num }}</span>
-                        本
+                        你所在学院的
+                        <span class="highlight-text-scenario-library">{{ top_borrower_in_unit.full_name }}</span>
+                        同学
                     </p>
-                    <p>成为学院借书 No.1 ！</p>
+                    <p>
+                        借阅了
+                        <span class="highlight-text-scenario-library">{{ top_borrower_in_unit.total_borrowed_books_num }}</span>
+                        本，成为学院借书 No.1 ！</p>
                 {% endif %}
             {% endif %}
             <br/>
@@ -86,7 +97,6 @@
                 <span class="highlight-text-scenario-library">{{ graduate.get_longest_book_borrowing_days }}</span>
                 天
             </p>
-            <br/>
             <p>
                 你借过的
                 <span class="highlight-text-scenario-library">《{{ graduate.nice_book_name }}》</span>
@@ -97,6 +107,6 @@
                 名同学读过
             </p>
             <p>宝藏图书发现者！</p>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
 </div>

@@ -1,19 +1,18 @@
 {# 背景图片 #}
-<img src="{% static 'app_main/images/5-auditorium/background.png' %}"
+<img src="{% static 'app_main/images/5-auditorium/background.svg' %}"
      alt="background image (auditorium)"
      loading="lazy"
      class="bg-img"/>
 <div class="fg-content"
-     style="top:27vh">
+     style="top: 9%">
     {# 文字背景 #}
-    <img src="{% static 'app_main/images/5-auditorium/text-container.png' %}"
+    <img src="{% static 'app_main/images/5-auditorium/text-container.svg' %}"
          alt="text container (auditorium)"
          loading="lazy"
-         id="container-img-scenario-auditorium"
-         style="left:0"/>
+         id="container-img-scenario-auditorium"/>
     {# 文字 #}
     <div class="text-scenario-auditorium"
-         style="top:2rem;left:1.5rem">
+         style="top: 13rem;left: 1.5rem">
         {# 讲座 #}
         {% if graduate.show_lectures %}
             <p class="subtitle-scenario-auditorium">课 外 讲 座</p>
@@ -48,8 +47,12 @@
             </p>
             <p>创新路上你努力前行！</p>
         {% endif %}
-        {% if graduate.show_volunteer_activities or graduate.first_practice_project_name %}
-            <p class="subtitle-scenario-auditorium">志 愿 与 实 践</p>
+        {% if graduate.show_volunteer_activities and graduate.first_practice_project_name %}
+            <p class="subtitle-scenario-auditorium">志 愿、 实 践 活 动</p>
+        {% elif graduate.show_volunteer_activities and not graduate.first_practice_project_name %}
+            <p class="subtitle-scenario-auditorium">志 愿 活 动</p>
+        {% elif not graduate.show_volunteer_activities and graduate.first_practice_project_name %}
+            <p class="subtitle-scenario-auditorium">实 践 活 动</p>
         {% endif %}
         {# 志愿活动 #}
         {% if graduate.show_volunteer_activities %}
@@ -65,7 +68,7 @@
                     小时
                 </p>
             {% endif %}
-            {% if graduate.show_practice_projects %}
+            {% if not graduate.show_practice_projects %}
                 <p>善意在活动中传递！</p>
             {% endif %}
         {% endif %}

@@ -1,30 +1,31 @@
 {# 背景图片 #}
-<img src="{% static 'app_main/images/4-classroom/background.png' %}"
+<img src="{% static 'app_main/images/4-classroom/background.svg' %}"
      alt="background image (classroom)"
      loading="lazy"
      class="bg-img"/>
 {# 前景遮挡 #}
-<img src="{% static 'app_main/images/4-classroom/mask.png' %}"
+<img src="{% static 'app_main/images/4-classroom/mask.svg' %}"
      alt="mask (classroom)"
      loading="lazy"
      class="fg-mask"/>
 <div class="fg-content"
-     style="top: 3vh">
+     style="top: 0">
     {# 文字背景 #}
-    <img src="{% static 'app_main/images/4-classroom/text-container.png' %}"
+    <img src="{% static 'app_main/images/4-classroom/text-container.svg' %}"
          alt="text container (classroom)"
          loading="lazy"
-         id="container-img-scenario-classroom"
-         style="left:3rem"/>
+         id="container-img-scenario-classroom"/>
     {# 文字 #}
     <div class="text-scenario-classroom"
-         style="top:7rem; left:4.5rem">
-        <p>
+         style="top: 9.5rem; left: 5rem">
+        <p id="stage-text-scenario-classroom">
             {% if graduate.graduate_type == 1 %}
-                读研期间，
+                读研期间
             {% elif graduate.graduate_type == 2 %}
-                读博期间，
+                读博期间
             {% endif %}
+        </p>
+        <p>
             你选择了
             <span class="highlight-text-scenario-classroom">{{ graduate.unit_name }}</span>
             -
@@ -40,7 +41,10 @@
                     <span class="highlight-text-scenario-classroom">{{ graduate.first_class_place }}</span>
                 {% endif %}
             </p>
-            <p>{{ graduate.first_class_teacher }}老师的</p>
+            <p>
+                <span class="highlight-text-scenario-classroom">{{ graduate.first_class_teacher }}</span>
+                老师的
+            </p>
             <p class="highlight-text-scenario-classroom">《{{ graduate.first_class_name }}》</p>
             <p>是你在教室里上的第一课</p>
         {% endif %}
@@ -59,5 +63,11 @@
             <p class="highlight-text-scenario-classroom">《{{ graduate.highest_score_course }}》</p>
         {% endif %}
         <p>努力终有收获！</p>
+        {% if not graduate.show_first_class_data %}
+            <div id="additional-text-scenario-classroom">
+                <p>功不唐捐，玉汝于成</p>
+                <p>行而不辍，未来可期</p>
+            </div>
+        {% endif %}
     </div>
 </div>

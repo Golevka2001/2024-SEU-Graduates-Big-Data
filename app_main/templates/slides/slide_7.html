@@ -1,5 +1,5 @@
 {# 背景图片 #}
-<img src="{% static 'app_main/images/7-gym/background.png' %}"
+<img src="{% static 'app_main/images/7-gym/background.svg' %}"
      alt="background image (gym)"
      loading="lazy"
      class="bg-img"/>
@@ -9,9 +9,9 @@
      loading="lazy"
      class="fg-mask"/>
 <div class="fg-content"
-     style="top:5vh">
+     style="top: 5%">
     {# 文字背景 #}
-    <img src="{% static 'app_main/images/7-gym/text-container.png' %}"
+    <img src="{% static 'app_main/images/7-gym/text-container.svg' %}"
          alt="text container (gym)"
          loading="lazy"
          id="container-img-scenario-gym"/>
@@ -53,11 +53,15 @@
             {# 补充 #}
             {% if not graduate.show_morning_exercise and not show_sports_competitions %}
                 <div class="additional-text">
-                    <p>在场馆中挥洒汗水，突破自我</p>
-                    <p>体现青春风采，运动美好人生！</p>
+                    <p>在场馆中挥洒汗水，</p>
+                    <p>突破自我，</p>
+                    <p>体现青春风采，</p>
+                    <p>运动美好人生！</p>
                 </div>
             {% endif %}
-            <br/>
+            {% if not graduate.show_morning_exercise or not show_sports_competitions %}
+                <br/>
+            {% endif %}
         {% endif %}
         {# 跑操 #}
         {% if graduate.show_morning_exercise %}
@@ -75,41 +79,47 @@
             {# 补充 #}
             {% if not graduate.show_gym_data and not show_sports_competitions %}
                 <div class="additional-text">
-                    <p>那些日子的运动时光</p>
-                    <p>是属于你的独特记忆</p>
+                    <p>那些日子的运动时光，</p>
+                    <p>是属于你的独特记忆，</p>
                     <p>东大陪你在健康路上前行！</p>
                 </div>
             {% endif %}
-            <br/>
+            {% if not graduate.show_gym_data or not show_sports_competitions %}
+                <br/>
+            {% endif %}
         {% endif %}
         {# 赛事 #}
         {% if show_sports_competitions %}
-            <p>
-                {% if graduate.show_gym_data and graduate.show_morning_exercise %}
-                    还记得那些属于你的高光时刻吗？
-                {% else %}
-                    还记得那些精彩的赛事吗？这是属于你的高光时刻：
-                {% endif %}
-            </p>
-            <p>
-                在
-                <span class="highlight-text-scenario-gym">{{ sports_competition.competition_name }}</span>
-                中
-            </p>
+            <div style="width: 65%">
+                <p>
+                    {% if graduate.show_gym_data and graduate.show_morning_exercise %}
+                        还记得那些属于你的高光时刻吗？
+                    {% else %}
+                        还记得那些精彩的赛事吗？这是属于你的高光时刻：
+                    {% endif %}
+                </p>
+                <p>
+                    在
+                    <span class="highlight-text-scenario-gym">{{ sports_competition.competition_name }}</span>
+                    中
+                </p>
 
-            <p>
-                获得
-                <span class="highlight-text-scenario-gym">{{ sports_competition.score }}</span>
-                的好成绩！
-            </p>
-            <p class="highlight-text-scenario-gym">……</p>
-            {# 补充 #}
-            {% if not graduate.first_ordered_date and not graduate.show_morning_exercise %}
-                <div class="additional-text">
-                    <p style="margin-top: 2rem">比赛中的心潮澎湃与坚持不懈，你认真的身影</p>
-                    <p>是对体育精神的完美践行，运动美好人生！</p>
-                </div>
-            {% endif %}
+                <p>
+                    获得
+                    <span class="highlight-text-scenario-gym">{{ sports_competition.score }}</span>
+                    的好成绩！
+                </p>
+                <p class="highlight-text-scenario-gym">……</p>
+                {# 补充 #}
+                {% if not graduate.first_ordered_date and not graduate.show_morning_exercise %}
+                    <div class="additional-text">
+                        <p style="margin-top: 2rem">比赛中的心潮澎湃与坚持不懈，</p>
+                        <p>你认真的身影，</p>
+                        <p>是对体育精神的完美践行，</p>
+                        <p>运动美好人生！</p>
+                    </div>
+                {% endif %}
+            </div>
         {% endif %}
     </div>
 </div>

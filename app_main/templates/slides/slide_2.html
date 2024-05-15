@@ -3,16 +3,20 @@
      alt="background image (dormitory)"
      loading="lazy"
      class="bg-img"/>
-<div class="fg-content">
+<div class="fg-content"
+     style="top: -2%">
     {# 顶部文字 #}
-    <div class="text-scenario-dormitory" style="left:0">
+    <div class="text-scenario-dormitory" style="left: 3rem">
         {% if graduate.dormitory_name %}
             <p>欢笑喜悦，迷茫困苦</p>
             <p>你与室友相互陪伴</p>
             <p>
                 在
                 <span class="highlight-text-scenario-dormitory">{{ graduate.dormitory_name }}</span>
-                宿舍留下毕业前的青葱回忆
+                宿舍中
+            </p>
+            <p>
+                留下毕业前的青葱回忆
             </p>
         {% else %}
             <p>“有一份安心是 SEU-WLAN 给的”</p>
@@ -21,10 +25,12 @@
         {% endif %}
     </div>
     {# 图片 #}
-    <img src="{% static 'app_main/images/2-dormitory/middle.png' %}"
-         alt="middle image (dormitory)"
-         loading="lazy"
-         class="img-scenario-dormitory"/>
+    <div style="width: 100%;margin-top: -2.5rem;margin-bottom: 1rem">
+        <img src="{% static 'app_main/images/2-dormitory/middle.svg' %}"
+             alt="middle image (dormitory)"
+             loading="lazy"
+             id="img-scenario-dormitory"/>
+    </div>
     {# 底部文字 #}
     <div class="text-scenario-dormitory">
         {% if graduate.show_network_data %}

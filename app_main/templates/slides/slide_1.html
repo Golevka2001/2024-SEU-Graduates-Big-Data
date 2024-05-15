@@ -1,19 +1,24 @@
 {# 背景图片 #}
-<img src="{% static 'app_main/images/1-gate/background.png' %}"
+<img src="{% static 'app_main/images/1-gate/background.svg' %}"
      alt="background image (gate)"
      class="bg-img"/>
 {# 前景遮挡 #}
-<img src="{% static 'app_main/images/1-gate/mask.png' %}"
+<img src="{% static 'app_main/images/1-gate/mask.svg' %}"
      alt="mask (gate)"
      class="fg-mask"/>
 <div class="fg-content"
-     style="top: 10vh;">
+     style="top: 4%;">
     {# 文字背景 #}
-    <img src="{% static 'app_main/images/1-gate/text-container.png' %}"
+    <img src="{% static 'app_main/images/1-gate/text-container.svg' %}"
          alt="text container (gate)"
          id="container-img-scenario-gate"/>
     {# 文字 #}
-    <div class="text-scenario-gate" style="top: 2rem;left: 4rem;">
+    <div class="text-scenario-gate"
+            {% if graduate.origin or graduate.show_same_origin_num %}
+         style="left: 4.5rem;top: 4.5rem"
+            {% else %}
+         style="left: 4.5rem;top: 5rem;line-height: 1.7rem"
+            {% endif %}>
         <p class="highlight-text-scenario-gate">{{ graduate.enroll_date|date:"Y年m月d日" }}</p>
         <p>
             {% if graduate.origin %}
@@ -38,7 +43,7 @@
         <p>在同届中</p>
         <p>
             {% if graduate.is_birthdate_unique %}
-                你的生日独一无二
+                <span class="highlight-text-scenario-gate">你的生日独一无二</span>
             {% else %}
                 有
                 <span class="highlight-text-scenario-gate">{{ graduate.same_birthdate_num }}</span>

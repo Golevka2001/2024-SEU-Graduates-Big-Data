@@ -112,7 +112,7 @@ class GraduatePersonalStat(models.Model):
         max_length=255, db_comment="最高分课程名", null=True
     )
 
-    # ---------- 场景5: 大礼堂 ---------- #
+    # ---------- 场景5: 报告厅 ---------- #
     # 参加讲座次数
     lecture_attended_times = models.CharField(
         max_length=255, db_comment="参加讲座次数", null=True, default="0"

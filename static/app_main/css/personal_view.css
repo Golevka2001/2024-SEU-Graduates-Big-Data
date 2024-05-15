@@ -43,15 +43,16 @@
 /* 文字背景 */
 #container-img-scenario-gate {
     z-index: 10;
-    width: 23rem;
+    width: 100%;
     position: absolute;
     top: 0;
+    object-fit: cover;
 }
 
 /* 普通样式文字 */
 .text-scenario-gate {
     z-index: 20;
-    width: 20rem;
+    width: 18.67rem;
     position: absolute;
     font-size: 1rem;
     font-weight: normal;
@@ -60,9 +61,9 @@
     line-height: 1.3rem;
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-gate {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #e8822e;
 }
@@ -79,16 +80,16 @@
     line-height: 1.3rem;
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-dormitory {
     font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
-    background: linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
-    background: -ms-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
-    background: -moz-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
-    background: -o-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
-    background: -webkit-linear-gradient(to bottom, #ffd1c6, #cab3f5, #84bfff);
+    background: linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
+    background: -ms-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
+    background: -moz-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
+    background: -o-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
+    background: -webkit-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
     background-clip: text;
     -webkit-background-clip: text;
 }
@@ -96,14 +97,15 @@
 /* 中间的图片 */
 #img-scenario-dormitory {
     z-index: 10;
-    width: 100%;
+    width: 80%;
+    margin-left: 0;
 }
 
 /* ---------- 场景3: 食堂 ---------- */
 /* 文字背景 */
 #container-img-scenario-canteen {
     z-index: 10;
-    width: 25rem;
+    width: 100%;
     position: absolute;
     top: 0;
 }
@@ -111,18 +113,18 @@
 /* 普通样式文字 */
 .text-scenario-canteen {
     z-index: 20;
-    width: 20rem;
+    width: 17.2rem;
     position: absolute;
     font-size: 1rem;
     font-weight: normal;
     color: #ff718c;
     text-align: start;
-    line-height: 1.4rem;
+    line-height: 1.3rem;
     transform: skewY(-9.5deg);
     -ms-transform: skewY(-9.5deg);
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-canteen {
     font-size: 1.3rem;
     font-weight: bold;
@@ -136,11 +138,20 @@
     -webkit-background-clip: text;
 }
 
+/* 顶部的本科/读研/读博期间文字 */
+#stage-text-scenario-canteen {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffa9bc;
+    text-align: center;
+}
+
 /* ---------- 场景4: 教室 ---------- */
 /* 文字背景 */
 #container-img-scenario-classroom {
     z-index: 10;
-    width: 22rem;
+    width: 100%;
     position: absolute;
     top: 0;
 }
@@ -148,37 +159,54 @@
 /* 普通样式文字 */
 .text-scenario-classroom {
     z-index: 20;
-    width: 19rem;
+    width: 16.67rem;
     position: absolute;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: normal;
-    color: #2e93ef;
+    color: #63b0dc;
     text-align: center;
-    line-height: 1.2rem;
-    transform: skewY(-6.5deg);
-    -ms-transform: skewY(-6.5deg);
+    line-height: 1rem;
+    transform: skew(-0.4deg, -6.5deg);
+    -ms-transform: skew(-0.4deg, -6.5deg);
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-classroom {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    line-height: 1.4rem;
+    line-height: 1.2rem;
     color: transparent;
-    background: linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
-    background: -ms-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
-    background: -moz-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
-    background: -o-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
-    background: -webkit-linear-gradient(to bottom, #a4c2db, #5881c8, #4a75c5);
+    background: linear-gradient(to bottom, #a4c2db, #4a75c5);
+    background: -ms-linear-gradient(to bottom, #a4c2db, #4a75c5);
+    background: -moz-linear-gradient(to bottom, #a4c2db, #4a75c5);
+    background: -o-linear-gradient(to bottom, #a4c2db, #4a75c5);
+    background: -webkit-linear-gradient(to bottom, #a4c2db, #4a75c5);
     background-clip: text;
     -webkit-background-clip: text;
 }
 
-/* ---------- 场景5: 大礼堂 ---------- */
+/* 顶部的读研/读博期间文字 */
+#stage-text-scenario-classroom {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #63b0dc;
+    text-align: center;
+}
+
+/* 底部补充文字 */
+#additional-text-scenario-classroom {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    line-height: 1.5rem;
+}
+
+/* ---------- 场景5: 报告厅 ---------- */
 /* 文字背景 */
 #container-img-scenario-auditorium {
     z-index: 10;
-    width: 26rem;
+    width: 100%;
     position: absolute;
     top: 0;
 }
@@ -190,7 +218,7 @@
     font-size: 1.3rem;
     font-weight: bold;
     color: white;
-    word-spacing: -0.3rem;
+    word-spacing: -0.2rem;
     background: linear-gradient(to bottom, #ffc19c, #ffab91, #ff83b0);
     border-radius: 0.5rem;
     -moz-border-radius: 0.5rem;
@@ -206,19 +234,19 @@
     font-weight: normal;
     color: #e28191;
     text-align: start;
-    line-height: 1.3rem;
+    line-height: 1.1rem;
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-auditorium {
     font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
-    background: linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
-    background: -ms-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
-    background: -moz-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
-    background: -o-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
-    background: -webkit-linear-gradient(to bottom, #ffcfc5, #ed5f84, #fe5a56);
+    background: linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
+    background: -ms-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
+    background: -moz-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
+    background: -o-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
+    background: -webkit-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
     background-clip: text;
     -webkit-background-clip: text;
 }
@@ -227,7 +255,7 @@
 /* 文字背景 */
 #container-img-scenario-library {
     z-index: 10;
-    width: 23rem;
+    width: 100%;
     position: absolute;
     top: 0;
 }
@@ -239,16 +267,56 @@
     position: absolute;
     font-size: 1rem;
     font-weight: normal;
-    color: #7769b2;
+    color: #508fa5;
     text-align: start;
     line-height: 1.3rem;
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-library {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #1b1464;
+    color: #1a5784;
+}
+
+/* 顶部的在读/读研/读博期间文字 */
+#stage-text-scenario-library {
+    margin-bottom: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #79bdc6;
+}
+
+/* 只显示图书馆进出次数时的文字样式 */
+.lack-of-borrowing-data-text-scenario-library {
+    z-index: 20;
+    width: 20.5rem;
+    position: absolute;
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #508fa5;
+    text-align: center;
+    line-height: 3rem;
+}
+
+.lack-of-borrowing-data-highlight-text-scenario-library {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1a5784;
+}
+
+#lack-of-borrowing-data-additional-text-scenario-library {
+    margin-top: 2.5rem;
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 2.5rem;
+}
+
+#lack-of-borrowing-data-stage-text-scenario-library {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #79bdc6;
 }
 
 /* ---------- 场景7: 体育馆 ---------- */
@@ -267,14 +335,14 @@
     position: absolute;
     font-size: 1rem;
     font-weight: normal;
-    color: #662d91;
+    color: #8d62b7;
     text-align: start;
     line-height: 1.3rem;
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-gym {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #662d91;
 }
@@ -302,31 +370,46 @@
     -ms-transform: skew(-5deg, 4.8deg);
 }
 
-/* 普通样式文字 */
+/* 文字下方线条 */
 .text-line-scenario-leave {
-    border-bottom: 0.1rem solid #6aa386;
-    padding-bottom: 0.3rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.1rem dashed #8bba87;
 }
 
-/* 高亮样式文字 */
+/* 强调样式文字 */
 .highlight-text-scenario-leave {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #3c604e;
 }
 
 /* ---------- 结束 ---------- */
-#title-img-end {
+/* 文字背景 */
+#container-img-end {
     z-index: 20;
-    width: 80%;
-    position: relative;
-    bottom: 14%;
+    width: 100%;
+    position: absolute;
+    top: 2%;
+}
+
+/* 毕业快乐文字 */
+#title-img-end {
+    z-index: 30;
+    width: 100%;
+    position: absolute;
+    top: 4.5%;
 }
 
 #fg-img-end {
     z-index: 10;
-    width: 90%;
+    height: 100%;
+    width: 100%;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 0;
+    display: flex;
+    overflow: clip;
+    object-fit: cover;
+    -o-object-fit: cover;
+    transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
 }
