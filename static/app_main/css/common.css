@@ -1,11 +1,21 @@
 @font-face {
+    font-family: "Zhiyong-Handwriting";
+    font-weight: 400;
+    src: url("/static/app_main/fonts/Zhiyong-Handwriting.ttf");
+}
+@font-face {
     font-family: "Alibaba-PuHuiTi";
-    font-weight: normal;
+    font-weight: 300;
+    src: url("/static/app_main/fonts/Alibaba-PuHuiTi-Light.otf");
+}
+@font-face {
+    font-family: "Alibaba-PuHuiTi";
+    font-weight: 400;
     src: url("/static/app_main/fonts/Alibaba-PuHuiTi-Regular.otf");
 }
 @font-face {
     font-family: "Alibaba-PuHuiTi";
-    font-weight: bold;
+    font-weight: 700;
     src: url("/static/app_main/fonts/Alibaba-PuHuiTi-Bold.otf");
 }
 
@@ -17,6 +27,7 @@ main {
     position: relative;
     margin: auto;
     padding: 0;
+    overflow: clip;
     font-size: 3.75vw;
     font-family: Alibaba-PuHuiTi, sans-serif;
     -webkit-user-drag: none;
@@ -69,7 +80,7 @@ main {
     height: 100%;
     width: 100%;
     position: absolute;
-    top: 0;
+    /*top: 0;*/
     opacity: 0;
     -moz-opacity: 0;
     display: flex;
