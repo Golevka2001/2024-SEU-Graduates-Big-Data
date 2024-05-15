@@ -90,4 +90,8 @@ main {
     flex-direction: column;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
+    transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    -webkit-transition: opacity 1s;
 }

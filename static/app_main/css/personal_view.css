@@ -390,6 +390,8 @@
     width: 100%;
     position: absolute;
     top: 2%;
+    /*transform: translate3d(0, 0, 0);*/
+    /*-ms-transform: translate3d(0, 0, 0);*/
 }
 
 /* 毕业快乐文字 */
@@ -398,18 +400,51 @@
     width: 100%;
     position: absolute;
     top: 4.5%;
-}
-
-#fg-img-end {
-    z-index: 10;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    display: flex;
-    overflow: clip;
-    object-fit: cover;
-    -o-object-fit: cover;
     transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
+    animation-delay: 2s;
+    animation-duration: 2s;
+}
+
+#pic-end {
+    z-index: 10;
+    width: 85%;
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    animation-duration: 2s;
+}
+
+/* ---------- 动画 ---------- */
+@keyframes fadeInLeft {
+    from {
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes tada {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    10%,
+    20% {
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+    40%,
+    60%,
+    80% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
 }

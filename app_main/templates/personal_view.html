@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>东南大学 2024 毕业生大数据</title>
 
-    {# Animate CSS #}
-    <link rel="stylesheet" href="{% static 'animate-4.1.1/animate.min.css' %}"/>
     {# Swiper CSS #}
     <link rel="stylesheet" href="{% static 'swiper-11.1.1/swiper-bundle.min.css' %}"/>
     {# 自定义 CSS #}
@@ -112,12 +110,9 @@
             // 动画相关逻辑
             // 原因：如果只是把动画添加到class中，只会在第一次加载时生效，之后的页面切换不会触发动画
             init: function () {
-                // 动画初始化
                 // 当前页面内容fadeIn
                 const initFgContent = this.wrapperEl.querySelector(".swiper-slide-active .fg-content");
-                if (initFgContent) {
-                    initFgContent.classList.add("animate__animated", "animate__fadeIn");
-                }
+                initFgContent && (initFgContent.style.opacity = "1");
             },
             touchStart: function () {
                 // 记录开始滑动时的页面
@@ -134,97 +129,39 @@
                     return;
                 }
                 // 开始滑动时，隐藏该页内容
-                const curFgContent = curSlide.querySelector(".fg-content");
-                if (curFgContent) {
-                    if (curFgContent.classList.contains("animate__fadeOut")) {
-                        return;
-                    }
-                    curFgContent.classList.remove("animate__animated", "animate__fadeIn");
-                    curFgContent.classList.add("animate__animated", "animate__fadeOut");
-                }
+                const lastFgContent = curSlide.querySelector(".fg-content");
+                lastFgContent && (lastFgContent.style.opacity = "0");
                 // 结束页特殊处理
                 if (curSlide.id === "end") {
-                    const titleImg = curSlide.querySelector("#title-img-end");
-                    if (titleImg) {
-                        if (titleImg.classList.contains("animate__fadeOut")) {
-                            return;
-                        }
-                        titleImg.classList.remove("animate__animated", "animate__tada");
-                        titleImg.classList.add("animate__animated", "animate__fadeOut");
-                    }
-                    const fgImg = curSlide.querySelector("#fg-img-end");
-                    if (fgImg) {
-                        if (fgImg.classList.contains("animate__fadeOutLeft")) {
-                            return;
-                        }
-                        fgImg.classList.remove("animate__animated", "animate__fadeInLeft");
-                        fgImg.classList.add("animate__animated", "animate__fadeOutLeft");
-                    }
+                    const titleImg = lastFgContent.querySelector("#title-img-end");
+                    const pic = lastFgContent.querySelector("#pic-end");
+                    titleImg && (titleImg.style.animationName = "none");
+                    pic && (pic.style.animationName = "none");
                 }
             },
             slideChange: function () {
-                // 清除前一页动画（处理没有触发touchMove中清除操作的情况）
+                // 隐藏前一页内容（处理没有触发touchMove中操作的情况）
                 const lastFgContent = curSlide.querySelector(".fg-content");
-                if (lastFgContent) {
-                    if (lastFgContent.classList.contains("animate__fadeOut")) {
-                        return;
-                    }
-                    lastFgContent.classList.remove("animate__animated", "animate__fadeIn");
-                    lastFgContent.classList.add("animate__animated", "animate__fadeOut");
-                }
+                lastFgContent && (lastFgContent.style.opacity = "0");
                 // 结束页特殊处理
                 if (curSlide.id === "end") {
-                    const titleImg = curSlide.querySelector("#title-img-end");
-                    if (titleImg) {
-                        if (titleImg.classList.contains("animate__fadeOut")) {
-                            return;
-                        }
-                        titleImg.classList.remove("animate__animated", "animate__tada");
-                        titleImg.classList.add("animate__animated", "animate__fadeOut");
-                        titleImg.style.setProperty("--animate-duration", "2s");
-                    }
-                    const fgImg = curSlide.querySelector("#fg-img-end");
-                    if (fgImg) {
-                        if (fgImg.classList.contains("animate__fadeOutLeft")) {
-                            return;
-                        }
-                        fgImg.classList.remove("animate__animated", "animate__fadeInLeft");
-                        fgImg.classList.add("animate__animated", "animate__fadeOutLeft");
-                        fgImg.style.setProperty("--animate-duration", "1.5s");
-                    }
+                    const titleImg = lastFgContent.querySelector("#title-img-end");
+                    const pic = lastFgContent.querySelector("#pic-end");
+                    titleImg && (titleImg.style.animationName = "none");
+                    pic && (pic.style.animationName = "none");
                 }
             },
             transitionEnd: function () {
                 // 页面切换完成后，显示该页内容
                 const newSlide = this.wrapperEl.querySelector(".swiper-slide-active");
                 const newFgContent = newSlide.querySelector(".fg-content");
-                if (newFgContent) {
-                    if (newFgContent.classList.contains("animate__fadeIn")) {
-                        return;
-                    }
-                    newFgContent.classList.remove("animate__animated", "animate__fadeOut");
-                    newFgContent.classList.add("animate__animated", "animate__fadeIn");
-                }
+                newFgContent && (newFgContent.style.opacity = "1");
                 // 结束页特殊处理
                 if (newSlide.id === "end") {
-                    const titleImg = newSlide.querySelector("#title-img-end");
-                    if (titleImg) {
-                        if (titleImg.classList.contains("animate__tada")) {
-                            return;
-                        }
-                        titleImg.classList.remove("animate__animated", "animate__fadeOut");
-                        titleImg.classList.add("animate__animated", "animate__tada");
-                        titleImg.style.setProperty("--animate-duration", "2s");
-                    }
-                    const fgImg = newSlide.querySelector("#fg-img-end");
-                    if (fgImg) {
-                        if (fgImg.classList.contains("animate__fadeInLeft")) {
-                            return;
-                        }
-                        fgImg.classList.remove("animate__animated", "animate__fadeOutLeft");
-                        fgImg.classList.add("animate__animated", "animate__fadeInLeft");
-                        fgImg.style.setProperty("--animate-duration", "1.5s");
-                    }
+                    const titleImg = newFgContent.querySelector("#title-img-end");
+                    const pic = newFgContent.querySelector("#pic-end");
+                    titleImg && (titleImg.style.animationName = "tada");
+                    pic && (pic.style.animationName = "fadeInLeft");
                 }
             },
         },
