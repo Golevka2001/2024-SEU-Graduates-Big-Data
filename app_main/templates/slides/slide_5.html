@@ -27,7 +27,7 @@
             </p>
             <p>
                 第一次听了
-                <span class="highlight-text-scenario-auditorium">“{{ graduate.first_lecture_name }}”</span>
+                <span class="highlight-text-scenario-auditorium">{{ graduate.first_lecture_name }}</span>
                 讲座
             </p>
             <p>知识拓宽视野！</p>
@@ -57,7 +57,7 @@
         {# 志愿活动 #}
         {% if graduate.show_volunteer_activities %}
             <p>
-                一共参加了
+                你一共参加了
                 <span class="highlight-text-scenario-auditorium">{{ graduate.volunteer_activity_num }}</span>
                 次志愿活动
             </p>
@@ -83,7 +83,7 @@
                 还记得那次你与
                 <span class="highlight-text-scenario-auditorium">{{ graduate.first_practice_project_member }}</span>
                 共同完成的
-                <span class="highlight-text-scenario-auditorium">“{{ graduate.first_practice_project_name }}”</span>
+                <span class="highlight-text-scenario-auditorium">{{ graduate.first_practice_project_name }}</span>
                 吗？
             </p>
         {% endif %}
