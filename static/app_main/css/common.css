@@ -37,10 +37,8 @@ main {
     -webkit-user-select: none;
     @media (min-aspect-ratio: 75/100) {
         width: fit-content;
-        /*font-size: 1.7vh;*/
     }
     @media (min-aspect-ratio: 53/100) {
-    /*    width: fit-content;*/
         font-size: 1.8vh;
     }
 }
@@ -91,19 +89,13 @@ main {
     flex-direction: column;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    /*@media (min-aspect-ratio: 5/8) {*/
-    /*    width: fit-content;*/
-    /*    font-size: 1.7vh;*/
-    /*}*/
 }
 
 /* 每页中的前景内容 */
 .fg-content {
     height: 100%;
     width: 100%;
-    /*aspect-ratio: 1/2;*/
     position: absolute;
-    /*top: 0;*/
     opacity: 0;
     -moz-opacity: 0;
     display: flex;

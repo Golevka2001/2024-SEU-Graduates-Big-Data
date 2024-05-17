@@ -1,6 +1,9 @@
 # Mac OS
 .DS_Store
 
+# Test user list
+test_users.txt
+
 # Database configuration
 my.cnf
 

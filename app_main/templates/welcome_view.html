@@ -22,39 +22,41 @@
          alt="background image (welcome)"
          class="bg-img"/>
 
-    <div class="fg-content"
-         style="top: 0;opacity: 1;-moz-opacity: 1;">
-        {# 顶部文字 #}
-        <div id="text-1">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;时光流转，又是一年盛夏毕业季，</p>
-            {% if is_eligible and graduate_name %}
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ graduate_name }}同学，</p>
-            {% endif %}
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;你是否还记得那天第一次相遇？</p>
-        </div>
-
-        <div id="btn-area">
-            {# 页面跳转按钮 #}
-            <button id="jump-btn">
-                <img src="{% static 'app_main/images/0-welcome/jump-button.svg' %}"
-                     alt="jump button"/>
-            </button>
-
-            {# 底部文字 #}
-            <p id="text-2">回顾那些独特的校园时光</p>
-        </div>
-
-
-        {% if not is_eligible %}
-            {# 退出登录链接 #}
-            <a href="{% url 'cas_ng_logout' %}" id="bottom-content">退出登录</a>
-        {% else %}
-            {# 底部复选框 #}
-            <div id="bottom-content">
-                <input type="checkbox" id="agree-checkbox" name="agree-checkbox" value="agree"/>
-                <label for="agree-checkbox">同意使用个人数据生成毕业生数据报告</label>
+    <div class="width-limiter">
+        <div class="fg-content"
+             style="top: 0;opacity: 1;-moz-opacity: 1;">
+            {# 顶部文字 #}
+            <div id="text-1">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;时光流转，又是一年盛夏毕业季，</p>
+                {% if is_eligible and graduate_name %}
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ graduate_name }}同学，</p>
+                {% endif %}
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;你是否还记得那天第一次相遇？</p>
             </div>
-        {% endif %}
+
+            <div id="btn-area">
+                {# 页面跳转按钮 #}
+                <button id="jump-btn">
+                    <img src="{% static 'app_main/images/0-welcome/jump-button.svg' %}"
+                         alt="jump button"/>
+                </button>
+
+                {# 底部文字 #}
+                <p id="text-2">回顾那些独特的校园时光</p>
+            </div>
+
+
+            {% if not is_eligible %}
+                {# 退出登录链接 #}
+                <a href="{% url 'cas_ng_logout' %}" id="bottom-content">退出登录</a>
+            {% else %}
+                {# 底部复选框 #}
+                <div id="bottom-content">
+                    <input type="checkbox" id="agree-checkbox" name="agree-checkbox" value="agree"/>
+                    <label for="agree-checkbox">同意使用个人数据生成毕业生数据报告</label>
+                </div>
+            {% endif %}
+        </div>
     </div>
 </main>
 
@@ -62,7 +64,8 @@
     window.addEventListener("pageshow", () => {
         // 非本届毕业生提示
         {% if not is_eligible %}
-            alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");
+            {#alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");#}
+            alert("测试中，尚未开放，敬请期待！");
         {% else %}
             // 推荐竖屏浏览提示
             if (window.innerWidth > window.innerHeight) {
@@ -77,7 +80,8 @@
     document.getElementById("jump-btn").addEventListener("click", (event) => {
         // 非本届毕业生提示
         {% if not is_eligible %}
-            alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");
+            {#alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");#}
+            alert("测试中，尚未开放，敬请期待！");
         {% else %}
             // 若用户未勾选同意复选框，弹出提示
             if (!document.getElementById("agree-checkbox").checked) {

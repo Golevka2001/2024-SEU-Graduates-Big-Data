@@ -17,6 +17,11 @@ SHOW_BORROWING_RANK_THRESHOLD = 0.5
 def personal_view(request):
     # 获取当前用户的一卡通号
     seu_card_id = request.user.username
+    # 非内测用户，显示提示信息
+    with open("./test_users.txt", "r") as f:
+        test_users = f.read().splitlines()
+    if seu_card_id not in test_users:
+        return render(request, "welcome_view.html", {"is_eligible": False})
     # 若不在毕业生数据中，则显示提示信息
     if not GraduatePersonalStat.objects.filter(seu_card_id=seu_card_id).exists():
         return render(request, "welcome_view.html", {"is_eligible": False})
