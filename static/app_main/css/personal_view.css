@@ -89,11 +89,27 @@
     -webkit-background-clip: text;
 }
 
-/* 中间的图片 */
-#img-scenario-dormitory {
-    z-index: 10;
-    width: 80%;
-    margin-left: 0;
+/* 用于调整两段文字间距 */
+#bottom-text-scenario-dormitory {
+    padding-top: 150%;
+    @media (min-aspect-ratio: 30/100) {
+        padding-top: 80%;
+    }
+    @media (min-aspect-ratio: 47/100) {
+        padding-top: 70%;
+    }
+    @media (min-aspect-ratio: 53/100) {
+        padding-top: 80%;
+    }
+    @media (min-aspect-ratio: 60/100) {
+        padding-top: 95%;
+    }
+    @media (min-aspect-ratio: 70/100) {
+        padding-top: 100%;
+    }
+    @media (min-aspect-ratio: 75/100) {
+        padding-top: 70%;
+    }
 }
 
 /* ---------- 场景3: 食堂 ---------- */
@@ -198,8 +214,27 @@
 }
 
 /* ---------- 场景5: 报告厅 ---------- */
+/* 用于调整文本框位置 */
 #fg-content-scenario-auditorium {
-    top: 5%;
+    top: 10%;
+    @media (min-aspect-ratio: 46/100) {
+        top: 4%;
+    }
+    @media (min-aspect-ratio: 49/100) {
+        top: 2%;
+    }
+    @media (min-aspect-ratio: 50/100) {
+        top: 1%;
+    }
+    @media (min-aspect-ratio: 51/100) {
+        top: 0;
+    }
+    @media (min-aspect-ratio: 53/100) {
+        top: 5%;
+    }
+    @media (min-aspect-ratio: 75/100) {
+        top: 5%;
+    }
 }
 
 /* 文字背景 */
@@ -407,11 +442,20 @@
 
 #pic-end {
     z-index: 10;
-    width: 85%;
+    width: 95%;
     position: absolute;
     bottom: 0;
     left: -5%;
     animation-duration: 2s;
+    @media (min-aspect-ratio: 47/100) {
+        width: 75%;
+    }
+    @media (min-aspect-ratio: 60/100) {
+        width: 60%;
+    }
+    @media (min-aspect-ratio: 75/100) {
+        width: 95%;
+    }
 }
 
 /* ---------- 动画 ---------- */

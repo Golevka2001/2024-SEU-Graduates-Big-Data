@@ -134,7 +134,7 @@
                 // 结束页特殊处理
                 if (curSlide.id === "end") {
                     const titleImg = lastFgContent.querySelector("#title-img-end");
-                    const pic = lastFgContent.querySelector("#pic-end");
+                    const pic = curSlide.querySelector("#pic-end");
                     titleImg && (titleImg.style.animationName = "none");
                     pic && (pic.style.animationName = "none");
                 }
@@ -146,7 +146,7 @@
                 // 结束页特殊处理
                 if (curSlide.id === "end") {
                     const titleImg = lastFgContent.querySelector("#title-img-end");
-                    const pic = lastFgContent.querySelector("#pic-end");
+                    const pic = curSlide.querySelector("#pic-end");
                     titleImg && (titleImg.style.animationName = "none");
                     pic && (pic.style.animationName = "none");
                 }
@@ -159,7 +159,7 @@
                 // 结束页特殊处理
                 if (newSlide.id === "end") {
                     const titleImg = newFgContent.querySelector("#title-img-end");
-                    const pic = newFgContent.querySelector("#pic-end");
+                    const pic = newSlide.querySelector("#pic-end");
                     titleImg && (titleImg.style.animationName = "tada");
                     pic && (pic.style.animationName = "fadeInLeft");
                 }

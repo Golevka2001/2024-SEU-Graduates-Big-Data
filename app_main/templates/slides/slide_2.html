@@ -3,8 +3,7 @@
      alt="background image (dormitory)"
      loading="lazy"
      class="bg-img"/>
-<div class="width-limiter"
-     style="justify-content: flex-start;align-items: flex-start;-webkit-align-items: flex-start;">
+<div class="width-limiter">
     <div class="fg-content"
          style="top: -2%">
         {# 顶部文字 #}
@@ -27,14 +26,14 @@
             {% endif %}
         </div>
         {# 图片 #}
-        <div style="width: 100%;margin-top: -2.5rem;margin-bottom: 1rem">
-            <img src="{% static 'app_main/images/2-dormitory/middle.svg' %}"
-                 alt="middle image (dormitory)"
-                 loading="lazy"
-                 id="img-scenario-dormitory"/>
-        </div>
+{#        <div style="width: 100%;margin-top: -2.5rem;margin-bottom: 1rem">#}
+{#            <img src="{% static 'app_main/images/2-dormitory/middle.svg' %}"#}
+{#                 alt="middle image (dormitory)"#}
+{#                 loading="lazy"#}
+{#                 id="img-scenario-dormitory"/>#}
+{#        </div>#}
         {# 底部文字 #}
-        <div class="text-scenario-dormitory">
+        <div class="text-scenario-dormitory" id="bottom-text-scenario-dormitory">
             {% if graduate.show_network_data %}
                 <p>校园网是你的贴心助手</p>
                 <p>
