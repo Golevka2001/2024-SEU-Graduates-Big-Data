@@ -87,7 +87,7 @@ def test_view(request):
     )
     show_sports_competitions = bool(sports_competition_list)
     sports_competition = (
-        sports_competition_list[0] if show_sports_competitions else None
+        sports_competition_list.order_by("?")[0] if show_sports_competitions else None
     )
 
     return render(

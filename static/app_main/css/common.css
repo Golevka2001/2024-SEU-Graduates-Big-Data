@@ -35,9 +35,13 @@ main {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
-    @media (min-aspect-ratio: 2/3) {
+    @media (min-aspect-ratio: 75/100) {
         width: fit-content;
-        font-size: 1.7vh;
+        /*font-size: 1.7vh;*/
+    }
+    @media (min-aspect-ratio: 53/100) {
+    /*    width: fit-content;*/
+        font-size: 1.8vh;
     }
 }
 
@@ -70,15 +74,34 @@ main {
     -o-object-fit: cover;
     transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    @media (min-aspect-ratio: 2/3) {
+    @media (min-aspect-ratio: 75/100) {
         width: auto;
     }
+}
+
+.width-limiter {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    overflow: clip;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    /*@media (min-aspect-ratio: 5/8) {*/
+    /*    width: fit-content;*/
+    /*    font-size: 1.7vh;*/
+    /*}*/
 }
 
 /* 每页中的前景内容 */
 .fg-content {
     height: 100%;
     width: 100%;
+    /*aspect-ratio: 1/2;*/
     position: absolute;
     /*top: 0;*/
     opacity: 0;
@@ -94,4 +117,8 @@ main {
     -moz-transition: opacity 1s;
     -o-transition: opacity 1s;
     -webkit-transition: opacity 1s;
+    @media (min-aspect-ratio: 53/100) {
+        width: auto;
+        aspect-ratio: 48/100;
+    }
 }

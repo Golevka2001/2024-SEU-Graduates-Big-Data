@@ -1,8 +1,3 @@
-:root {
-    /*--animate-delay: 1s;*/
-    --animate-duration: 1s;
-}
-
 .swiper,
 .swiper-wrapper {
     height: 100%;
@@ -203,6 +198,10 @@
 }
 
 /* ---------- 场景5: 报告厅 ---------- */
+#fg-content-scenario-auditorium {
+    top: 5%;
+}
+
 /* 文字背景 */
 #container-img-scenario-auditorium {
     z-index: 10;

@@ -6,56 +6,58 @@
 <img src="{% static 'app_main/images/1-gate/mask.svg' %}"
      alt="mask (gate)"
      class="fg-mask"/>
-<div class="fg-content"
-     style="top: 4%;">
-    {# 文字背景 #}
-    <img src="{% static 'app_main/images/1-gate/text-container.svg' %}"
-         alt="text container (gate)"
-         id="container-img-scenario-gate"/>
-    {# 文字 #}
-    <div class="text-scenario-gate"
-            {% if graduate.origin or graduate.show_same_origin_num %}
-         style="left: 4.5rem;top: 4.5rem"
-            {% else %}
-         style="left: 4.5rem;top: 5rem;line-height: 1.7rem"
-            {% endif %}>
-        <p class="highlight-text-scenario-gate">{{ graduate.enroll_date|date:"Y年m月d日" }}</p>
-        <p>
-            {% if graduate.origin %}
-                你从{{ graduate.origin }}来到东南大学
-            {% else %}
-                你来到了东南大学
-            {% endif %}
-        </p>
-        <p>
-            拥有了专属一卡通号
-            <span class="highlight-text-scenario-gate">{{ graduate.seu_card_id }}</span>
-        </p>
-        <p style="margin-bottom: 2rem">
-            {% if graduate.graduate_type == 1 %}
-                成为了东大研究生
-            {% elif graduate.graduate_type == 2 %}
-                成为了东大博士生
-            {% else %}
-                正式成为了东大人
-            {% endif %}
-        </p>
-        <p>在同届中</p>
-        <p>
-            {% if graduate.is_birthdate_unique %}
-                <span class="highlight-text-scenario-gate">你的生日独一无二</span>
-            {% else %}
-                有
-                <span class="highlight-text-scenario-gate">{{ graduate.same_birthdate_num }}</span>
-                人与你同月同日生
-            {% endif %}
-        </p>
-        {% if graduate.show_same_origin_num %}
+<div class="width-limiter">
+    <div class="fg-content"
+         style="top: 4%;">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/1-gate/text-container.svg' %}"
+             alt="text container (gate)"
+             id="container-img-scenario-gate"/>
+        {# 文字 #}
+        <div class="text-scenario-gate"
+                {% if graduate.origin or graduate.show_same_origin_num %}
+             style="left: 4.5rem;top: 4.5rem"
+                {% else %}
+             style="left: 4.5rem;top: 5rem;line-height: 1.7rem"
+                {% endif %}>
+            <p class="highlight-text-scenario-gate">{{ graduate.enroll_date|date:"Y年m月d日" }}</p>
             <p>
-                同届有
-                <span class="highlight-text-scenario-gate">{{ graduate.same_origin_num }}</span>
-                人与你从同一省份来到东大
+                {% if graduate.origin %}
+                    你从{{ graduate.origin }}来到东南大学
+                {% else %}
+                    你来到了东南大学
+                {% endif %}
             </p>
-        {% endif %}
+            <p>
+                拥有了专属一卡通号
+                <span class="highlight-text-scenario-gate">{{ graduate.seu_card_id }}</span>
+            </p>
+            <p style="margin-bottom: 2rem">
+                {% if graduate.graduate_type == 1 %}
+                    成为了东大研究生
+                {% elif graduate.graduate_type == 2 %}
+                    成为了东大博士生
+                {% else %}
+                    正式成为了东大人
+                {% endif %}
+            </p>
+            <p>在同届中</p>
+            <p>
+                {% if graduate.is_birthdate_unique %}
+                    <span class="highlight-text-scenario-gate">你的生日独一无二</span>
+                {% else %}
+                    有
+                    <span class="highlight-text-scenario-gate">{{ graduate.same_birthdate_num }}</span>
+                    人与你同月同日生
+                {% endif %}
+            </p>
+            {% if graduate.show_same_origin_num %}
+                <p>
+                    同届有
+                    <span class="highlight-text-scenario-gate">{{ graduate.same_origin_num }}</span>
+                    人与你从同一省份来到东大
+                </p>
+            {% endif %}
+        </div>
     </div>
 </div>

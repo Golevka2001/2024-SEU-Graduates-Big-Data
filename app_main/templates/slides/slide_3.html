@@ -8,55 +8,57 @@
      alt="mask (canteen)"
      loading="lazy"
      class="fg-mask"/>
-<div class="fg-content"
-     style="top: 3%">
-    {# 文字背景 #}
-    <img src="{% static 'app_main/images/3-canteen/text-container.svg' %}"
-         alt="text container (canteen)"
-         loading="lazy"
-         id="container-img-scenario-canteen"/>
-    {# 文字 #}
-    <div class="text-scenario-canteen" style="top: 5rem;left: 4rem;">
-        <p id="stage-text-scenario-canteen">
-            {% if graduate.graduate_type == 1 %}
-                读研期间
-            {% elif graduate.graduate_type == 2 %}
-                读博期间
-            {% else %}
-                本科期间
-            {% endif %}
-        </p>
-        <p>
-            你一共在食堂使用校园卡
-        </p>
-        <p>
-            消费
-            <span class="highlight-text-scenario-canteen">{{ graduate.consumption_amount }}</span>
-            元
-        </p>
-        <p>
-            刷卡
-            <span class="highlight-text-scenario-canteen">{{ graduate.consumption_times }}</span>
-            次
-        </p>
-        {% if graduate.most_frequent_consumption_place %}
-            <p>
-                你最常去
-                <span class="highlight-text-scenario-canteen">{{ graduate.most_frequent_consumption_place }}</span>
+<div class="width-limiter">
+    <div class="fg-content"
+         style="top: 3%">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/3-canteen/text-container.svg' %}"
+             alt="text container (canteen)"
+             loading="lazy"
+             id="container-img-scenario-canteen"/>
+        {# 文字 #}
+        <div class="text-scenario-canteen" style="top: 5rem;left: 4rem;">
+            <p id="stage-text-scenario-canteen">
+                {% if graduate.graduate_type == 1 %}
+                    读研期间
+                {% elif graduate.graduate_type == 2 %}
+                    读博期间
+                {% else %}
+                    本科期间
+                {% endif %}
             </p>
             <p>
-                有
-                <span class="highlight-text-scenario-canteen">{{ same_favorite_canteen_percent }}</span>
-                的人与你拥有共同喜好
+                你一共在食堂使用校园卡
             </p>
-        {% endif %}
-        {% if graduate.highest_single_consumption_date %}
-            <p class="highlight-text-scenario-canteen">{{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}</p>
             <p>
-                你创下最高的单次消费记录
-                <span class="highlight-text-scenario-canteen">{{ graduate.highest_single_consumption_amount }}</span>
+                消费
+                <span class="highlight-text-scenario-canteen">{{ graduate.consumption_amount }}</span>
                 元
             </p>
-        {% endif %}
+            <p>
+                刷卡
+                <span class="highlight-text-scenario-canteen">{{ graduate.consumption_times }}</span>
+                次
+            </p>
+            {% if graduate.most_frequent_consumption_place %}
+                <p>
+                    你最常去
+                    <span class="highlight-text-scenario-canteen">{{ graduate.most_frequent_consumption_place }}</span>
+                </p>
+                <p>
+                    有
+                    <span class="highlight-text-scenario-canteen">{{ same_favorite_canteen_percent }}</span>
+                    的人与你拥有共同喜好
+                </p>
+            {% endif %}
+            {% if graduate.highest_single_consumption_date %}
+                <p class="highlight-text-scenario-canteen">{{ graduate.highest_single_consumption_date|date:"Y年m月d日" }}</p>
+                <p>
+                    你创下最高的单次消费记录
+                    <span class="highlight-text-scenario-canteen">{{ graduate.highest_single_consumption_amount }}</span>
+                    元
+                </p>
+            {% endif %}
+        </div>
     </div>
 </div>
