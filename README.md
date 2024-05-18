@@ -1,5 +1,7 @@
 # 2024-SEU-Graduates-Big-Data
 
+东南大学 2024 届毕业报告（毕业生大数据）项目
+
 ## :open_file_folder: 目录结构
 
 ```text
@@ -9,21 +11,28 @@
 |   |---urls.py                     # - 项目 URL 配置
 |   \---wsgi.py                     # - 项目 WSGI 配置
 |
-|---app_health_check                # 健康检查应用（提供给数据中心用于检查服务状态）
+|---app_health_check                # 健康检查应用目录（提供给数据中心用于检查服务状态）
 |
-|---app_main                        # 向用户展示的主应用
+|---app_main                        # 向用户展示的主应用目录
 |   |---models                      # - 数据模型目录
 |   |---templates                   # - HTML 模板目录
 |   |---views                       # - 视图函数目录（欢迎页面、个人数据展示页面）
 |   \---urls.py                     # - 应用 URL 配置
 |
-|---django_cas_ng                   # CAS 认证客户端（在 django-cas-ng 基础上进行了一定的修改）
+|---django_cas_ng                   # CAS 认证客户端目录（修改自 django-cas-ng ）
 |
 |---sql_scripts                     # SQL 脚本
 |   |---fill_null_values.sql        # - 填充 graduates_big_data 表中的空值
 |   \---gen_xxx_table.sql           # - 生成辅助统计表
 |
-\---static                          # 静态文件
+|---static                          # 静态文件
+|   |---app_main                    # - 主应用静态文件（CSS、字体、图片）
+|   \---swiper-11.1.1               # - Swiper 轮播图插件
+|
+|---Dockfile                        # Docker 镜像构建文件
+|---my.cnf                          # MySQL 连接信息（需自行创建）
+|---requirements.txt                # 依赖包列表
+\---uwsgi.ini                       # uWSGI 配置文件
 ```
 
 ## :compass: 本地开发指导
@@ -113,8 +122,8 @@ server {
 server {
     listen 443 ssl;
     server_name gradudata2024.seu.edu.cn;
-    ssl_certificate /path/to/cert.pem;
-    ssl_certificate_key /path/to/cert.key;
+    ssl_certificate /path/to/cert.pem;  # 证书路径
+    ssl_certificate_key /path/to/cert.key;  # 证书密钥路径
     location / {
         proxy_pass http://127.0.0.1:8000;
     }
@@ -130,6 +139,10 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 ## :whale: 使用 Docker 部署
+
+当项目开发基本完成后，需要将服务部署到服务器上。为了简化环境配置的过程，强烈建议使用 Docker 部署。
+
+在本项目中，Docker 仅用于提供 Django 服务所需的 Python 及其依赖包的运行环境，而没有将 MySQL 和 Nginx 一并打包，如有需要也可自行修改。
 
 ### 0. 环境
 
@@ -154,7 +167,7 @@ DJANGO_DEBUG=False
 DJANGO_SECRET_KEY='xxxx'
 ```
 
-_注：`SECRET_KEY` 可以通过以下命令生成（可本地生成）：_
+_注：`SECRET_KEY` 可以通过以下命令生成：_
 
 ```bash
 python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
@@ -167,7 +180,7 @@ python -c 'from django.core.management.utils import get_random_secret_key; print
 
 #### 1.3 Nginx
 
-避免在生产环境使用 `runserver`，本项目中使用 `uWSGI` 配合 Nginx 进行部署。
+避免在生产环境使用 `runserver` 命令，本项目中使用 uWSGI 配合 Nginx 进行部署。
 
 在 Nginx 配置文件中添加以下内容，配置静态文件服务和 uWSGI 代理：
 
@@ -177,7 +190,7 @@ server {
     server_name  gradudata2024.seu.edu.cn;
 
     location /static {
-        alias /path/to/2024-SEU-Graduates-Big-Data/static;
+        alias /path/to/2024-SEU-Graduates-Big-Data/static;  # 静态文件目录
     }
     location / {
         include uwsgi_params;
@@ -198,12 +211,12 @@ docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
 
 ### 3. 【服务器】导入并运行镜像
 
-使用 `scp` 或其他方式将**导出的镜像文件**及**整个项目目录**传输到服务器上。
+使用 scp 或其他方式将**导出的镜像文件**及**整个项目目录**传输到服务器上。
 
 执行以下命令导入镜像：
 
 ```bash
-docker load < docker-img-graduates-big-data.tar
+docker load < /path/to/docker-img-graduates-big-data.tar
 ```
 
 进入容器交互模式（个人倾向于将项目目录挂载，方便后续修改），在容器中执行数据库迁移、静态文件收集等操作：
@@ -224,7 +237,7 @@ uwsgi --ini uwsgi.ini  # 测试 uWSGI
 exit
 ```
 
-在数据推送完成、静态文件服务配置完成后，以守护进程方式运行容器：
+在数据推送完成、静态文件服务配置完成，且测试运行正常后，可以守护进程方式运行容器：
 
 ```bash
 docker run -d --name graduates-big-data \
@@ -232,6 +245,8 @@ docker run -d --name graduates-big-data \
            --env-file /path/to/2024-SEU-Graduates-Big-Data/.env \
            --network host graduates-big-data:latest
 ```
+
+_注：上述各命令中的 `/path/to/xxx` 需要替换为实际路径。_
 
 ## :screwdriver: 补充说明
 
