@@ -1,3 +1,5 @@
+USE graduates_big_data;
+
 -- 清除表中原有数据
 TRUNCATE TABLE gbd_favorite_canteen_stat;
 

@@ -21,7 +21,9 @@
 -- gym_ordered_times : '0'
 -- favorite_gym_ordered_times : '0'
 -- morning_exercise_times : '0'
-UPDATE graduates_big_data.gbd_graduate_personal_stat
+USE graduates_big_data;
+
+UPDATE gbd_graduate_personal_stat
 SET same_birthdate_num                = IF(same_birthdate_num IS NULL OR same_birthdate_num = '', '0',
                                            same_birthdate_num),
     same_origin_num                   = IF(same_origin_num IS NULL OR same_origin_num = '', '0', same_origin_num),
