@@ -8,7 +8,7 @@
     height: 100%;
     width: 100%;
     padding: 0;
-    overflow: clip;
+    overflow: hidden;
 }
 
 /* 每页中文字上方的遮挡 */
@@ -19,11 +19,11 @@
     position: absolute;
     top: 0;
     display: flex;
-    overflow: clip;
-    object-fit: cover;
+    overflow: hidden;
     -o-object-fit: cover;
-    transform: translate3d(0, 0, 0);
+    object-fit: cover;
     -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 /* 额外补充的文字内容 */
@@ -80,13 +80,13 @@
     font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
-    background: linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
     background: -ms-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
     background: -moz-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
     background: -o-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
     background: -webkit-linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
-    background-clip: text;
+    background: linear-gradient(to bottom, #ffd1c6, #beacff, #84bfff);
     -webkit-background-clip: text;
+    background-clip: text;
 }
 
 /* 用于调整两段文字间距 */
@@ -140,13 +140,13 @@
     font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
-    background: linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
     background: -ms-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
     background: -moz-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
     background: -o-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
     background: -webkit-linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
-    background-clip: text;
+    background: linear-gradient(to bottom, #9bdcff, #de6b8d, #df698b);
     -webkit-background-clip: text;
+    background-clip: text;
 }
 
 /* 顶部的本科/读研/读博期间文字 */
@@ -187,13 +187,13 @@
     font-weight: bold;
     line-height: 1.2rem;
     color: transparent;
-    background: linear-gradient(to bottom, #a4c2db, #4a75c5);
     background: -ms-linear-gradient(to bottom, #a4c2db, #4a75c5);
     background: -moz-linear-gradient(to bottom, #a4c2db, #4a75c5);
     background: -o-linear-gradient(to bottom, #a4c2db, #4a75c5);
     background: -webkit-linear-gradient(to bottom, #a4c2db, #4a75c5);
-    background-clip: text;
+    background: linear-gradient(to bottom, #a4c2db, #4a75c5);
     -webkit-background-clip: text;
+    background-clip: text;
 }
 
 /* 顶部的读研/读博期间文字 */
@@ -247,6 +247,7 @@
 
 /* 小标题 */
 .subtitle-scenario-auditorium {
+    width: -moz-fit-content;
     width: fit-content;
     padding: 0.2rem 1.5rem;
     font-size: 1.3rem;
@@ -254,9 +255,9 @@
     color: white;
     word-spacing: -0.2rem;
     background: linear-gradient(to bottom, #ffc19c, #ffab91, #ff83b0);
-    border-radius: 0.5rem;
     -moz-border-radius: 0.5rem;
     -webkit-border-radius: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 /* 普通样式文字 */
@@ -276,13 +277,13 @@
     font-size: 1.3rem;
     font-weight: bold;
     color: transparent;
-    background: linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
     background: -ms-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
     background: -moz-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
     background: -o-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
     background: -webkit-linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
-    background-clip: text;
+    background: linear-gradient(to bottom, #ffd1c6, #e94575, #ff5b54);
     -webkit-background-clip: text;
+    background-clip: text;
 }
 
 /* ---------- 场景6: 图书馆 ---------- */
@@ -461,59 +462,59 @@
 /* ---------- 动画 ---------- */
 @keyframes fadeInLeft {
     from {
-        opacity: 0;
         -moz-opacity: 0;
+        opacity: 0;
         transform: translate3d(-100%, 0, 0);
         -ms-transform: translate3d(-100%, 0, 0);
     }
     to {
-        opacity: 1;
         -moz-opacity: 1;
-        transform: translate3d(0, 0, 0);
+        opacity: 1;
         -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
 @keyframes fadeOutLeft {
     from {
-        opacity: 1;
         -moz-opacity: 1;
-        transform: translate3d(0, 0, 0);
+        opacity: 1;
         -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        opacity: 0;
         -moz-opacity: 0;
-        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
         -ms-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
     }
 }
 
 @keyframes tada {
     from {
-        transform: scale3d(1, 1, 1);
         -ms-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
     10%,
     20% {
-        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
         -ms-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
     }
     30%,
     50%,
     70%,
     90% {
-        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
         -ms-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
     }
     40%,
     60%,
     80% {
-        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
         -ms-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
     }
     to {
-        transform: scale3d(1, 1, 1);
         -ms-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
 }
