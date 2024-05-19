@@ -9,7 +9,7 @@
     <title>东南大学 2024 毕业生大数据</title>
 
     {# Swiper CSS #}
-    <link rel="stylesheet" href="{% static 'swiper-11.1.1/swiper-bundle.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'swiper-11.1.3/swiper-bundle.min.css' %}"/>
     {# 自定义 CSS #}
     <link rel="stylesheet" href="{% static 'app_main/css/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'app_main/css/personal_view.css' %}"/>
@@ -82,7 +82,7 @@
 
 
 {# Swiper JS #}
-<script src="{% static 'swiper-11.1.1/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'swiper-11.1.3/swiper-bundle.min.js' %}"></script>
 <script>
     let curSlide = null;
     let prevSlidePos = 0;
@@ -137,7 +137,8 @@
                     const titleImg = lastFgContent.querySelector("#title-img-end");
                     const pic = curSlide.querySelector("#pic-end");
                     titleImg && (titleImg.style.animationName = "none");
-                    pic && (pic.style.animationName = "none");
+                    pic && (pic.style.animationName = "fadeOutLeft");
+                    pic && (pic.style.opacity = "0");
                 }
             },
             slideChange: function () {
@@ -149,7 +150,8 @@
                     const titleImg = lastFgContent.querySelector("#title-img-end");
                     const pic = curSlide.querySelector("#pic-end");
                     titleImg && (titleImg.style.animationName = "none");
-                    pic && (pic.style.animationName = "none");
+                    pic && (pic.style.animationName = "fadeOutLeft");
+                    pic && (pic.style.opacity = "0");
                 }
             },
             transitionEnd: function () {
@@ -163,6 +165,7 @@
                     const pic = newSlide.querySelector("#pic-end");
                     titleImg && (titleImg.style.animationName = "tada");
                     pic && (pic.style.animationName = "fadeInLeft");
+                    pic && (pic.style.opacity = "1");
                 }
             },
         },

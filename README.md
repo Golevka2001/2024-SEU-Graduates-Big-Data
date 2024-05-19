@@ -27,7 +27,7 @@
 |
 |---static                          # 静态文件
 |   |---app_main                    # - 主应用静态文件（CSS、字体、图片）
-|   \---swiper-11.1.1               # - Swiper 轮播图插件
+|   \---swiper-11.1.3               # - Swiper 轮播图插件
 |
 |---Dockfile                        # Docker 镜像构建文件
 |---my.cnf                          # MySQL 连接信息（需自行创建）
