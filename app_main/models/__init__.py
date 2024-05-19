@@ -2,4 +2,5 @@ from .borrowing_rank_stat import BorrowingRankStat
 from .favorite_canteen_stat import FavoriteCanteenStat
 from .graduate_personal_stat import GraduatePersonalStat
 from .library_borrowing_stat import LibraryBorrowingStat
+from .ordering_rank_stat import OrderingRankStat
 from .sports_competition_stat import SportsCompetitionStat

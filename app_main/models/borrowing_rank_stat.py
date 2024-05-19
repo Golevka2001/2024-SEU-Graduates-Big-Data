@@ -11,8 +11,8 @@ class BorrowingRankStat(models.Model):
         ordering = ["borrowing_rank"]
 
     # 借阅量
-    borrowing_num = models.CharField(
-        max_length=255, primary_key=True, unique=True, db_comment="总借阅量"
+    borrowing_num = models.IntegerField(
+        db_comment="借阅量", primary_key=True, unique=True
     )
     # 此借阅量在全体毕业生中的排名
     borrowing_rank = models.IntegerField(db_comment="此借阅量在全体毕业生中的排名")
