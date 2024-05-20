@@ -30,6 +30,10 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
+SESSION_COOKIE_SECURE = not DEBUG
+
+SECURE_CONTENT_TYPE_NOSNIFF = not DEBUG
+
 # Application definition
 
 INSTALLED_APPS = [

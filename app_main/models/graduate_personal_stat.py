@@ -210,7 +210,7 @@ class GraduatePersonalStat(models.Model):
 
     # ----- 判断是否显示某部分文案的函数 ----- #
     def is_birthdate_unique(self):
-        return int(self.same_birthdate_num or 0) == 1
+        return int(self.same_birthdate_num or 0) <= 0
 
     def show_same_origin_num(self):
         return int(self.same_origin_num or 0) > 0
