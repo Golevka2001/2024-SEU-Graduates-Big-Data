@@ -3,6 +3,11 @@
      alt="background image (auditorium)"
      loading="lazy"
      class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'app_main/images/5-auditorium/mask.svg' %}"
+     alt="mask (auditorium)"
+     loading="lazy"
+     class="fg-mask"/>
 <div class="width-limiter">
     <div class="fg-content" id="fg-content-scenario-auditorium">
         {# 文字背景 #}
@@ -12,7 +17,7 @@
              id="container-img-scenario-auditorium"/>
         {# 文字 #}
         <div class="text-scenario-auditorium"
-             style="top: 13rem;left: 1.5rem">
+             style="top: 19rem;left: 3.5rem">
             {# 讲座 #}
             {% if graduate.show_lectures %}
                 <p class="subtitle-scenario-auditorium">课 外 讲 座</p>
