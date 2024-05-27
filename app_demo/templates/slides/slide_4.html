@@ -1,0 +1,54 @@
+{# 背景图片 #}
+<img src="{% static 'app_main/images/4-classroom/background.svg' %}"
+     alt="background image (classroom)"
+     loading="lazy"
+     class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'app_main/images/4-classroom/mask.svg' %}"
+     alt="mask (classroom)"
+     loading="lazy"
+     class="fg-mask"/>
+<div class="width-limiter">
+    <div class="fg-content" id="fg-content-scenario-classroom">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/4-classroom/text-container.svg' %}"
+             alt="text container (classroom)"
+             id="container-img-scenario-classroom"/>
+        {# 文字 #}
+        <div class="text-scenario-classroom"
+             style="top: 9.5rem; left: 5rem">
+            <p>
+                你选择了
+                <span class="highlight-text-scenario-classroom">建筑学院</span>
+                -
+                <span class="highlight-text-scenario-classroom">建筑系</span>
+                专业
+            </p>
+            <p>
+                在
+                <span class="highlight-text-scenario-classroom">2020年9月1日</span>
+                ，
+                <span class="highlight-text-scenario-classroom">教一-234</span>
+            </p>
+            <p>
+                <span class="highlight-text-scenario-classroom">王东南</span>
+                老师的
+            </p>
+            <p class="highlight-text-scenario-classroom">《工科数学分析Ⅰ》</p>
+            <p>是你在教室里上的第一课</p>
+            <p style="margin-top: 2rem">
+                你累计选了
+                <span class="highlight-text-scenario-classroom">99</span>
+                门课
+            </p>
+            <p>
+                获得了
+                <span class="highlight-text-scenario-classroom">123.75</span>
+                学分
+            </p>
+            <p>而你成绩最优异的课程是</p>
+            <p class="highlight-text-scenario-classroom">《马克思主义基本原理概论》</p>
+            <p>努力终有收获！</p>
+        </div>
+    </div>
+</div>

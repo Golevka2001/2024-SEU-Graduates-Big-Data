@@ -1,0 +1,42 @@
+{# 背景图片 #}
+<img src="{% static 'app_main/images/1-gate/background.svg' %}"
+     alt="background image (gate)"
+     class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'app_main/images/1-gate/mask.svg' %}"
+     alt="mask (gate)"
+     class="fg-mask"/>
+<div class="width-limiter">
+    <div class="fg-content"
+         style="top: 4%;">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/1-gate/text-container.svg' %}"
+             alt="text container (gate)"
+             id="container-img-scenario-gate"/>
+        {# 文字 #}
+        <div class="text-scenario-gate" style="left: 4.5rem;top: 4.5rem">
+            <p class="highlight-text-scenario-gate">2020年9月1日</p>
+            <p>
+                你从江苏省来到东南大学
+            </p>
+            <p>
+                拥有了专属一卡通号
+                <span class="highlight-text-scenario-gate">213209999</span>
+            </p>
+            <p style="margin-bottom: 2rem">
+                正式成为了东大人
+            </p>
+            <p>在同届中</p>
+            <p>
+                有
+                <span class="highlight-text-scenario-gate">123</span>
+                人与你同月同日生
+            </p>
+            <p>
+                同届有
+                <span class="highlight-text-scenario-gate">234</span>
+                人与你从同一省份来到东大
+            </p>
+        </div>
+    </div>
+</div>

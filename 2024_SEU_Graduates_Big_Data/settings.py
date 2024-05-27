@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_cas_ng",
     "app_health_check",
+    "app_demo",
     "app_main",
 ]
 

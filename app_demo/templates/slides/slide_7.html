@@ -1,0 +1,70 @@
+{# 背景图片 #}
+<img src="{% static 'app_main/images/7-gym/background.svg' %}"
+     alt="background image (gym)"
+     loading="lazy"
+     class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'app_main/images/7-gym/mask.png' %}"
+     alt="mask (gym)"
+     loading="lazy"
+     class="fg-mask"/>
+<div class="width-limiter">
+    <div class="fg-content"
+         style="top: 5%">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/7-gym/text-container.svg' %}"
+             alt="text container (gym)"
+             loading="lazy"
+             id="container-img-scenario-gym"/>
+        {# 文字 #}
+        <div class="text-scenario-gym"
+             style="top:1.5rem;">
+            {# 场馆 #}
+            <p>
+                你一共预约场馆
+                <span class="highlight-text-scenario-gym">12</span>
+                次
+            </p>
+            <p>
+                超过了
+                <span class="highlight-text-scenario-gym">78.90%</span>
+                的老师同学
+            </p>
+            <p>
+                其中你最喜欢去的是
+                <span class="highlight-text-scenario-gym">九龙湖校区-游泳馆</span>
+            </p>
+            <p>
+                预约了
+                <span class="highlight-text-scenario-gym">9</span>
+                次
+            </p>
+            {# 跑操 #}
+            <p>
+                你累计跑操打卡
+                <span class="highlight-text-scenario-gym">123</span>
+                次
+            </p>
+            <p class="highlight-text-scenario-gym">2020年12月3日</p>
+            <p>是你最早打卡的一次</p>
+            <br/>
+            {# 赛事 #}
+            <div style="width: 65%">
+                <p>
+                    还记得那些属于你的高光时刻吗？
+                </p>
+                <p>
+                    在
+                    <span class="highlight-text-scenario-gym">2023年东南大学校园马拉松</span>
+                    中
+                </p>
+                <p>
+                    获得
+                    <span class="highlight-text-scenario-gym">0:23:45</span>
+                    的好成绩！
+                </p>
+                <p class="highlight-text-scenario-gym">……</p>
+            </div>
+        </div>
+    </div>
+</div>

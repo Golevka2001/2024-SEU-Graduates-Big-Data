@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="Resource-type" content="Document"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
+    <title>【示例】东南大学 2024 毕业生大数据</title>
+
+    {# 自定义 CSS #}
+    <link rel="stylesheet" href="{% static 'app_main/css/common.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app_main/css/welcome_view.css' %}"/>
+</head>
+
+<body>
+<main>
+    {# 遮罩层（用于转场动画） #}
+    <div id="overlay"></div>
+
+    {# 背景图片 #}
+    <img src="{% static 'app_main/images/0-welcome/background.png' %}"
+         alt="background image (welcome)"
+         class="bg-img"/>
+
+    <div class="width-limiter">
+        <div class="fg-content"
+             style="top: 0;opacity: 1;-moz-opacity: 1;">
+            {# 顶部文字 #}
+            <div id="text-1">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;时光流转，又是一年盛夏毕业季，</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;晓东同学，</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;你是否还记得那天第一次相遇？</p>
+            </div>
+
+            <div id="btn-area">
+                {# 页面跳转按钮 #}
+                <button id="jump-btn">
+                    <img src="{% static 'app_main/images/0-welcome/jump-button.svg' %}"
+                         alt="jump button"/>
+                </button>
+
+                {# 底部文字 #}
+                <p id="text-2">回顾那些独特的校园时光</p>
+            </div>
+
+
+            {# 底部复选框 #}
+            <div id="bottom-content">
+                <input type="checkbox" id="agree-checkbox" name="agree-checkbox" value="agree"/>
+                <label for="agree-checkbox">同意使用个人数据生成毕业生数据报告</label>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    window.addEventListener("pageshow", () => {
+        // 推荐竖屏浏览提示
+        if (window.innerWidth > window.innerHeight) {
+            alert("推荐使用竖屏浏览");
+        }
+        // 进入页面的转场动画
+        document.getElementById("overlay").style.opacity = "0";
+    });
+
+    // 页面跳转按钮点击事件
+    document.getElementById("jump-btn").addEventListener("click", (event) => {
+        // 若用户未勾选同意复选框，弹出提示
+        if (!document.getElementById("agree-checkbox").checked) {
+            alert("请先勾选同意使用个人数据");
+            event.preventDefault();
+        }
+        // 显示转场动画，执行页面跳转
+        else {
+            document.getElementById("overlay").style.opacity = "1";
+            setTimeout(() => {
+                window.location.href = "{% url 'app_demo:personal_view' %}";
+            }, 1000);
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{# 背景图片 #}
+<img src="{% static 'app_main/images/3-canteen/background.svg' %}"
+     alt="background image (canteen)"
+     loading="lazy"
+     class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'app_main/images/3-canteen/mask.svg' %}"
+     alt="mask (canteen)"
+     loading="lazy"
+     class="fg-mask"/>
+<div class="width-limiter">
+    <div class="fg-content"
+         style="top: 3%">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/3-canteen/text-container.svg' %}"
+             alt="text container (canteen)"
+             loading="lazy"
+             id="container-img-scenario-canteen"/>
+        {# 文字 #}
+        <div class="text-scenario-canteen" style="top: 5rem;left: 4rem;">
+            <p id="stage-text-scenario-canteen">
+                本科期间
+            </p>
+            <p>你一共在食堂使用校园卡</p>
+            <p>
+                消费
+                <span class="highlight-text-scenario-canteen">12345.67</span>
+                元
+            </p>
+            <p>
+                刷卡
+                <span class="highlight-text-scenario-canteen">2345</span>
+                次
+            </p>
+            <p>
+                你最常去
+                <span class="highlight-text-scenario-canteen">九龙湖校区-桃园食堂</span>
+            </p>
+            <p>
+                有
+                <span class="highlight-text-scenario-canteen">34.56%</span>
+                的人与你拥有共同喜好
+            </p>
+            <p class="highlight-text-scenario-canteen">2022年4月5日</p>
+            <p>
+                你创下最高的单次消费记录
+                <span class="highlight-text-scenario-canteen">56.78</span>
+                元
+            </p>
+        </div>
+    </div>
+</div>

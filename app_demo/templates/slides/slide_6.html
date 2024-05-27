@@ -1,0 +1,67 @@
+{# 背景图片 #}
+<img src="{% static 'app_main/images/6-library/background.svg' %}"
+     alt="background image (library)"
+     loading="lazy"
+     class="bg-img"/>
+{# 前景遮挡 #}
+<img src="{% static 'app_main/images/6-library/mask.svg' %}"
+     alt="mask (library)"
+     loading="lazy"
+     class="fg-mask"/>
+<div class="width-limiter">
+    <div class="fg-content"
+         style="top: 0">
+        {# 文字背景 #}
+        <img src="{% static 'app_main/images/6-library/text-container.svg' %}"
+             alt="text container (library)"
+             loading="lazy"
+             id="container-img-scenario-library"/>
+        {# 文字 #}
+        <div class="text-scenario-library"
+             style="top: 5.5rem;">
+            <p>
+                你累计借阅书籍
+                <span class="highlight-text-scenario-library">12</span>
+                本
+            </p>
+            <p>
+                超过了
+                <span class="highlight-text-scenario-library">67.89%</span>
+                的人
+            </p>
+            <p>
+                全校借书数量 No.1 的同学借阅了
+                <span class="highlight-text-scenario-library">999</span>
+                本
+            </p>
+            <p>
+                你所在学院的
+                <span class="highlight-text-scenario-library">晓南</span>
+                同学
+            </p>
+            <p>
+                借阅了
+                <span class="highlight-text-scenario-library">234</span>
+                本，成为学院借书 No.1 ！</p>
+            <br/>
+            <p>在借阅过的图书中，你阅读时间最长的一本是</p>
+            <p class="highlight-text-scenario-library">
+                《切尔诺贝利的悲鸣》</p>
+            <p>
+                共计阅读了
+                <span class="highlight-text-scenario-library">34</span>
+                天
+            </p>
+            <p>
+                你借过的
+                <span class="highlight-text-scenario-library">《拓扑学基础》</span>
+            </p>
+            <p>
+                只有
+                <span class="highlight-text-scenario-library">1</span>
+                名同学读过
+            </p>
+            <p>宝藏图书发现者！</p>
+        </div>
+    </div>
+</div>
