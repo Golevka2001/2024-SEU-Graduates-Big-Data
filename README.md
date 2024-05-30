@@ -1,6 +1,18 @@
-# 2024-SEU-Graduates-Big-Data
+<div style="width: 100%; text-align: center;">
+  <img src="README.assets/congratulations.svg" 
+    alt="congratulations image" 
+    style="height: 300px; margin-bottom: -75px;">
+  <h1>2024-SEU-Graduates-Big-Data</h1>
+  <p>东南大学 2024 届毕业生大数据项目</p>
+</div>
 
-东南大学 2024 届毕业报告（毕业生大数据）项目
+## :movie_camera: 演示
+
+<div style="text-align: center;">
+  <img src="README.assets/demo.gif" 
+    alt="demo gif" 
+    style="height: 400px">
+</div>
 
 ## :open_file_folder: 目录结构
 
@@ -12,6 +24,8 @@
 |   \---wsgi.py                     # - 项目 WSGI 配置
 |
 |---app_health_check                # 健康检查应用目录（提供给数据中心用于检查服务状态）
+|
+|---app_demo                        # 演示应用目录（页面样式与主应用相同，但不使用真实数据）
 |
 |---app_main                        # 向用户展示的主应用目录
 |   |---models                      # - 数据模型目录
