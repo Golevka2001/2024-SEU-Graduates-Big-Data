@@ -1,17 +1,17 @@
-<div style="width: 100%; text-align: center;">
+<div align="center">
   <img src="README.assets/congratulations.svg" 
     alt="congratulations image" 
-    style="height: 300px; margin-bottom: -75px;">
+    style="width: 20rem;">
   <h1>2024-SEU-Graduates-Big-Data</h1>
   <p>东南大学 2024 届毕业生大数据项目</p>
 </div>
 
 ## :movie_camera: 演示
 
-<div style="text-align: center;">
+<div align="center">
   <img src="README.assets/demo.gif" 
     alt="demo gif" 
-    style="height: 400px">
+    style="width: 15rem;">
 </div>
 
 ## :open_file_folder: 目录结构
