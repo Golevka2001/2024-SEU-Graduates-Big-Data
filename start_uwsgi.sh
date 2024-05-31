@@ -1,0 +1,1 @@
+uwsgi -d --ini /app/uwsgi.ini
