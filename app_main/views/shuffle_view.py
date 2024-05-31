@@ -9,6 +9,8 @@ from app_main.models import (
     SportsCompetitionStat,
 )
 
+from random import randint
+
 # 毕业生总数
 GRADUATE_TOTAL_NUM = -1
 # 显示借阅量排名的阈值（前50%才显示）
@@ -21,11 +23,9 @@ def shuffle_view(request):
     # 从url参数中获取指定毕业生的学号（可选）
     seu_card_id = request.GET.get("id")
     if not seu_card_id:
-        seu_card_id = (
-            GraduatePersonalStat.objects.only("seu_card_id")
-            .order_by("?")[0]
-            .seu_card_id
-        )
+        seu_card_id = GraduatePersonalStat.objects.only("seu_card_id")[
+            randint(0, 10083)
+        ].seu_card_id
     print(seu_card_id)
     # 若不在毕业生数据中，则显示提示信息
     if (
