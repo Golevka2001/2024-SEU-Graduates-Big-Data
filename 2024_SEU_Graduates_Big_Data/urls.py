@@ -23,6 +23,7 @@ from django_cas_ng import views as cas_views
 
 urlpatterns = [
     # path("admin/", admin.site.urls),
+    path("__debug__/", include("debug_toolbar.urls")),
     # ----- STATIC FILES ----- #
     path("favicon.ico", serve, kwargs={"path": "favicon.ico"}),
     # ----- CAS ----- #
