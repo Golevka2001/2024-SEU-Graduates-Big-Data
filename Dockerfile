@@ -15,4 +15,4 @@ RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple some-p
 RUN pip install -r requirements.txt --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
 
 # Start the application
-CMD ["uwsgi", "--ini", "uwsgi.ini"]
+# CMD ["uwsgi", "--ini", "uwsgi.ini"]
