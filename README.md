@@ -1,18 +1,47 @@
 <div align="center">
-  <img src="README.assets/congratulations.svg" 
-    alt="congratulations image" 
+  <img src="README.assets/congratulations.svg"
+    alt="congratulations image"
     style="width: 20rem;">
   <h1>2024-SEU-Graduates-Big-Data</h1>
-  <p>东南大学 2024 届毕业生大数据项目</p>
+  <p style="font-weight: bold;">东南大学 2024 届毕业生大数据项目</p>
+  <p>网页链接：<a href="https://gradudata2024.seu.edu.cn">https://gradudata2024.seu.edu.cn</a></p>
+  <p style="font-size: 0.8rem; font-style: italic;">（本应用仅对东南大学 2024 届全体毕业生开放，非毕业生可访问 <a href="https://gradudata2024.seu.edu.cn/demo">demo 页面</a> 查看效果）</p>
 </div>
 
 ## :movie_camera: 演示
 
 <div align="center">
-  <img src="README.assets/demo.gif" 
-    alt="demo gif" 
+  <img src="README.assets/demo.gif"
+    alt="demo gif"
     style="width: 15rem;">
 </div>
+
+## :clapper: 简介
+
+本项目由东南大学网络与信息中心牵头组织，在毕业之际回顾在东南大学的校园生活，为每位毕业生留下一份独一无二的美好回忆。
+
+插画绘制和UI设计由唐万媛同学完成，文案部分由李蕴晗同学撰写，前后端开发及部署由李光伟完成，感谢各位在此期间的辛勤付出，以及感谢网信中心的老师、同学们提供的原始数据、服务器、域名申请等支持，还有参与内测的同学们所反馈的宝贵意见。
+
+应该是学校首次推出此类数据报告，难免存在考虑不周的地方，但总体上希望这是一个好的尝试和开端，期待未来的同学们能在此基础上产出更好的作品。
+
+**技术栈**：
+
+- 后端
+  - 框架：Django
+  - 数据库：MySQL
+  - 身份认证：基于 django-cas-ng
+  - 性能监测：django-debug-toolbar
+- 前端
+  - HTML + CSS + JavaScript
+  - 轮播插件：Swiper.js
+- 服务部署
+  - Docker + Nginx + uWSGI
+
+## :page_facing_up: 使用许可
+
+项目代码使用 [MIT License](./LICENSE)，欢迎自由使用、修改、分享
+
+项目中的插图、UI 等资源版权归原作者所有，**未经授权勿作它用**
 
 ## :open_file_folder: 目录结构
 
@@ -46,7 +75,8 @@
 |---Dockfile                        # Docker 镜像构建文件
 |---my.cnf                          # MySQL 连接信息（需自行创建）
 |---requirements.txt                # 依赖包列表
-\---uwsgi.ini                       # uWSGI 配置文件
+|---uwsgi.ini                       # uWSGI 配置文件
+\---xxx_uwsgi.sh                    # uWSGI 启动、停止脚本
 ```
 
 ## :compass: 本地开发指导
@@ -233,7 +263,9 @@ docker save graduates-big-data:latest > docker-img-graduates-big-data.tar
 docker load < /path/to/docker-img-graduates-big-data.tar
 ```
 
-进入容器交互模式（个人倾向于将项目目录挂载，方便后续修改），在容器中执行数据库迁移、静态文件收集等操作：
+进入容器交互模式，在容器中执行数据库迁移、静态文件收集等操作。
+
+在这里使用了 `-v` 参数挂载整个项目目录，以便在容器外修改代码：
 
 ```bash
 docker run -it --name graduates-big-data \
@@ -247,7 +279,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic
 python manage.py check --deploy  # 检查部署环境
-uwsgi --ini uwsgi.ini  # 测试 uWSGI
+uwsgi --ini uwsgi.ini  # 测试 uWSGI 配置是否正确
 exit
 ```
 
@@ -262,12 +294,20 @@ docker run -d --name graduates-big-data \
 
 _注：上述各命令中的 `/path/to/xxx` 需要替换为实际路径。_
 
-## :screwdriver: 补充说明
+容器仅用于为 Django 服务提供运行环境，所以保持运行即可。服务的启动、停止可以借助目录下的两个脚本：
 
-项目的 [CAS 认证客户端](./django_cas_ng/) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng)
-和 [python-cas](https://github.com/python-cas/python-cas)，在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
+```bash
+docker exec -it graduates-big-data /bin/bash /app/start_uwsgi.sh  # 启动服务
+docker exec -it graduates-big-data /bin/bash /app/stop_uwsgi.sh   # 停止服务
+```
 
-修改部分在代码中按照以下形式标注：
+代码有变动无须重启容器，将代码推送到服务器后使用上述脚本重启服务即可。
+
+## :ladder: 补充说明
+
+项目的 [CAS 认证客户端](./django_cas_ng/) 部分主要基于 [django-cas-ng](https://github.com/django-cas-ng/django-cas-ng) 和 [python-cas](https://github.com/python-cas/python-cas)（均使用 MIT License），在此基础上进行了一定的修改，以适配东南大学的统一身份认证系统。
+
+修改部分在代码中按照以下形式标注，以便检索：
 
 ```python
 # ----- MODIFIED START ----- #
