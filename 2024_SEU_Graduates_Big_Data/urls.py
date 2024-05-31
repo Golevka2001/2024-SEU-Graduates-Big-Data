@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
+# from django.contrib import admin
+from django.conf import settings
 from django.contrib.staticfiles.views import serve
 from django.urls import include, path
 
@@ -23,7 +24,6 @@ from django_cas_ng import views as cas_views
 
 urlpatterns = [
     # path("admin/", admin.site.urls),
-    path("__debug__/", include("debug_toolbar.urls")),
     # ----- STATIC FILES ----- #
     path("favicon.ico", serve, kwargs={"path": "favicon.ico"}),
     # ----- CAS ----- #
@@ -34,3 +34,8 @@ urlpatterns = [
     path("demo/", include("app_demo.urls")),
     path("", include("app_main.urls")),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
