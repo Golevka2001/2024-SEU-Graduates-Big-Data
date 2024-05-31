@@ -22,7 +22,7 @@ from django.urls import include, path
 from django_cas_ng import views as cas_views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    # path("admin/", admin.site.urls),
     # ----- STATIC FILES ----- #
     path("favicon.ico", serve, kwargs={"path": "favicon.ico"}),
     # ----- CAS ----- #
