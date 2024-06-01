@@ -39,9 +39,9 @@ main {
         width: -moz-fit-content;
         width: fit-content;
     }
-    @media (min-aspect-ratio: 53/100) {
-        font-size: 1.8vh;
-    }
+    /*@media (min-aspect-ratio: 53/100) {*/
+    /*    font-size: 1.8vh;*/
+    /*}*/
 }
 
 /* 遮罩层（用于转场动画） */

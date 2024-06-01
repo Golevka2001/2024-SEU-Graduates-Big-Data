@@ -61,6 +61,52 @@
 </main>
 
 <script>
+    let aspectRatio = window.innerWidth / window.innerHeight;
+
+    // 根元素字体大小适配
+    document.documentElement.style.fontSize = "3.75vw";
+    if (aspectRatio > 53 / 100) {
+        document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
+    }
+
+    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
+    const calcSize = () => {
+        // 宽屏适配
+        if (aspectRatio > 53 / 100) {
+            const fgContent = document.querySelectorAll(".fg-content");
+            fgContent.forEach((item) => {
+                item.style.width = "auto";
+                item.style.aspectRatio = "48/100";
+            });
+        }
+        if (aspectRatio > 75 / 100) {
+            document.documentElement.style.width = "fit-content";
+            const bgImg = document.querySelectorAll(".bg-img");
+            bgImg.forEach((item) => {
+                item.style.width = "auto";
+            });
+        }
+    };
+
+    // 企业微信适配
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf("wxwork") !== -1) {
+        calcSize();
+    }
+
+    window.addEventListener("resize", () => {
+        aspectRatio = window.innerWidth / window.innerHeight;
+        // 根元素字体大小适配
+        document.documentElement.style.fontSize = "3.75vw";
+        if (aspectRatio > 53 / 100) {
+            document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
+        }
+        // 企业微信适配
+        if (ua.indexOf("wxwork") !== -1) {
+            calcSize();
+        }
+    });
+
     window.addEventListener("pageshow", () => {
         // 非本届毕业生提示
         {% if not is_eligible %}
@@ -72,6 +118,7 @@
                 alert("推荐使用竖屏浏览");
             }
         {% endif %}
+
         // 进入页面的转场动画
         document.getElementById("overlay").style.opacity = "0";
     });

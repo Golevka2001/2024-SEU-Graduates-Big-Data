@@ -83,17 +83,159 @@
 {# Swiper JS #}
 <script src="{% static 'swiper-11.1.3/swiper-bundle.min.js' %}"></script>
 <script>
-    let curSlide = null;
-    let prevSlidePos = 0;
-    let curSlidePos = 0;
-    let nextSlidePos = 0;
+    let aspectRatio = window.innerWidth / window.innerHeight;
+
+    // 根元素字体大小适配
+    document.documentElement.style.fontSize = "3.75vw";
+    if (aspectRatio > 53 / 100) {
+        document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
+    }
+
+    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
+    const calcSize = () => {
+        // 宽屏适配
+        if (aspectRatio > 75 / 100) {
+            // 获取 html、body、main
+            const list = [document.documentElement, document.body, document.querySelector("main")];
+            list.forEach((item) => {
+                item.style.width = "fit-content";
+            });
+            const bgImg = document.querySelectorAll(".bg-img");
+            bgImg.forEach((item) => {
+                item.style.width = "auto";
+            });
+        }
+        if (aspectRatio > 53 / 100) {
+            const fgContent = document.querySelectorAll(".fg-content");
+            fgContent.forEach((item) => {
+                item.style.width = "auto";
+                item.style.aspectRatio = "48/100";
+            });
+        }
+        // 宿舍页两段文字间距
+        const bottomTextScenarioDormitory = document.getElementById("bottom-text-scenario-dormitory");
+        bottomTextScenarioDormitory.style.paddingTop = "150%";
+        if (aspectRatio > 30 / 100) {
+            bottomTextScenarioDormitory.style.paddingTop = "80%";
+        }
+        if (aspectRatio > 47 / 100) {
+            bottomTextScenarioDormitory.style.paddingTop = "70%";
+        }
+        if (aspectRatio > 53 / 100) {
+            bottomTextScenarioDormitory.style.paddingTop = "80%";
+        }
+        if (aspectRatio > 60 / 100) {
+            bottomTextScenarioDormitory.style.paddingTop = "95%";
+        }
+        if (aspectRatio > 70 / 100) {
+            bottomTextScenarioDormitory.style.paddingTop = "100%";
+        }
+        if (aspectRatio > 75 / 100) {
+            bottomTextScenarioDormitory.style.paddingTop = "70%";
+        }
+        // 教室页文本框位置
+        const fgContentScenarioClassroom = document.getElementById("fg-content-scenario-classroom");
+        fgContentScenarioClassroom.style.marginTop = "0";
+        if (aspectRatio > 40 / 100) {
+            fgContentScenarioClassroom.style.top = "5%";
+        }
+        if (aspectRatio > 42 / 100) {
+            fgContentScenarioClassroom.style.top = "0";
+        }
+        if (aspectRatio > 45 / 100) {
+            fgContentScenarioClassroom.style.top = "-3%";
+        }
+        if (aspectRatio > 48 / 100) {
+            fgContentScenarioClassroom.style.top = "-6%";
+        }
+        if (aspectRatio > 50 / 100) {
+            fgContentScenarioClassroom.style.top = "-7%";
+        }
+        if (aspectRatio > 53 / 100) {
+            fgContentScenarioClassroom.style.top = "0";
+        }
+        if (aspectRatio > 58 / 100) {
+            fgContentScenarioClassroom.style.top = "2%";
+        }
+        if (aspectRatio > 62 / 100) {
+            fgContentScenarioClassroom.style.top = "4%";
+        }
+        if (aspectRatio > 66 / 100) {
+            fgContentScenarioClassroom.style.top = "6%";
+        }
+        if (aspectRatio > 72 / 100) {
+            fgContentScenarioClassroom.style.top = "8%";
+        }
+        if (aspectRatio > 75 / 100) {
+            fgContentScenarioClassroom.style.top = "-3%";
+        }
+        // 报告厅页文本框位置
+        const fgContentScenarioAuditorium = document.getElementById("fg-content-scenario-auditorium");
+        fgContentScenarioAuditorium.style.top = "0";
+        if (aspectRatio > 40 / 100) {
+            fgContentScenarioAuditorium.style.top = "-10%";
+        }
+        if (aspectRatio > 45 / 100) {
+            fgContentScenarioAuditorium.style.top = "-16%";
+        }
+        if (aspectRatio > 48 / 100) {
+            fgContentScenarioAuditorium.style.top = "-18%";
+        }
+        if (aspectRatio > 50 / 100) {
+            fgContentScenarioAuditorium.style.top = "-21%";
+        }
+        if (aspectRatio > 52 / 100) {
+            fgContentScenarioAuditorium.style.top = "-22%";
+        }
+        if (aspectRatio > 53 / 100) {
+            fgContentScenarioAuditorium.style.top = "-20%";
+        }
+        if (aspectRatio > 75 / 100) {
+            fgContentScenarioAuditorium.style.top = "-16%";
+        }
+        // 结束页左下角照片位置
+        const picEnd = document.getElementById("pic-end");
+        picEnd.style.width = "95%";
+        if (aspectRatio > 47 / 100) {
+            picEnd.style.width = "75%";
+        }
+        if (aspectRatio > 60 / 100) {
+            picEnd.style.width = "60%";
+        }
+        if (aspectRatio > 75 / 100) {
+            picEnd.style.width = "95%";
+        }
+    };
+
+    // 企业微信适配
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf("wxwork") !== -1) {
+        calcSize();
+    }
+
+    window.addEventListener("resize", () => {
+        aspectRatio = window.innerWidth / window.innerHeight;
+        // 根元素字体大小适配
+        document.documentElement.style.fontSize = "3.75vw";
+        if (aspectRatio > 53 / 100) {
+            document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
+        }
+        // 企业微信适配
+        if (ua.indexOf("wxwork") !== -1) {
+            calcSize();
+        }
+    });
 
     window.addEventListener("pageshow", () => {
         // 转场动画 - 进入页面
         document.getElementById("overlay").style.opacity = "0";
     });
 
-    // Initialize Swiper
+    // Swiper配置及动画逻辑
+    let curSlide = null;
+    let prevSlidePos = 0;
+    let curSlidePos = 0;
+    let nextSlidePos = 0;
     const swiper = new Swiper(".swiper", {
         direction: "vertical",
         edgeSwipeDetection: "prevent",
