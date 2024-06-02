@@ -54,6 +54,7 @@
 </main>
 
 <script>
+    // 使用js代替css媒体查询（企业微信不支持aspect-ratio的媒体查询，导致页面显示异常）
     let aspectRatio = window.innerWidth / window.innerHeight;
 
     // 根元素字体大小适配
@@ -61,25 +62,6 @@
     if (aspectRatio > 53 / 100) {
         document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
     }
-
-    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
-    const calcSize = () => {
-        // 宽屏适配
-        if (aspectRatio > 53 / 100) {
-            const fgContent = document.querySelectorAll(".fg-content");
-            fgContent.forEach((item) => {
-                item.style.width = "auto";
-                item.style.aspectRatio = "48/100";
-            });
-        }
-        if (aspectRatio > 75 / 100) {
-            document.documentElement.style.width = "fit-content";
-            const bgImg = document.querySelectorAll(".bg-img");
-            bgImg.forEach((item) => {
-                item.style.width = "auto";
-            });
-        }
-    };
 
     // 企业微信适配
     const ua = window.navigator.userAgent.toLowerCase();
@@ -100,6 +82,26 @@
         }
     });
 
+    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
+    const calcSize = () => {
+        // 宽屏适配
+        if (aspectRatio > 53 / 100) {
+            const fgContent = document.querySelectorAll(".fg-content");
+            fgContent.forEach((item) => {
+                item.style.width = "auto";
+                item.style.aspectRatio = "48/100";
+            });
+        }
+        if (aspectRatio > 75 / 100) {
+            document.documentElement.style.width = "fit-content";
+            const bgImg = document.querySelectorAll(".bg-img");
+            bgImg.forEach((item) => {
+                item.style.width = "auto";
+            });
+        }
+    };
+</script>
+<script>
     window.addEventListener("pageshow", () => {
         // 进入页面的转场动画
         document.getElementById("overlay").style.opacity = "0";

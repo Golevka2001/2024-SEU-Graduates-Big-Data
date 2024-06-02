@@ -61,6 +61,7 @@
 </main>
 
 <script>
+    // 使用js代替css媒体查询（企业微信不支持aspect-ratio的媒体查询，导致页面显示异常）
     let aspectRatio = window.innerWidth / window.innerHeight;
 
     // 根元素字体大小适配
@@ -68,25 +69,6 @@
     if (aspectRatio > 53 / 100) {
         document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
     }
-
-    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
-    const calcSize = () => {
-        // 宽屏适配
-        if (aspectRatio > 53 / 100) {
-            const fgContent = document.querySelectorAll(".fg-content");
-            fgContent.forEach((item) => {
-                item.style.width = "auto";
-                item.style.aspectRatio = "48/100";
-            });
-        }
-        if (aspectRatio > 75 / 100) {
-            document.documentElement.style.width = "fit-content";
-            const bgImg = document.querySelectorAll(".bg-img");
-            bgImg.forEach((item) => {
-                item.style.width = "auto";
-            });
-        }
-    };
 
     // 企业微信适配
     const ua = window.navigator.userAgent.toLowerCase();
@@ -107,11 +89,31 @@
         }
     });
 
+    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
+    const calcSize = () => {
+        // 宽屏适配
+        if (aspectRatio > 53 / 100) {
+            const fgContent = document.querySelectorAll(".fg-content");
+            fgContent.forEach((item) => {
+                item.style.width = "auto";
+                item.style.aspectRatio = "48/100";
+            });
+        }
+        if (aspectRatio > 75 / 100) {
+            document.documentElement.style.width = "fit-content";
+            const bgImg = document.querySelectorAll(".bg-img");
+            bgImg.forEach((item) => {
+                item.style.width = "auto";
+            });
+        }
+    };
+</script>
+<script>
     window.addEventListener("pageshow", () => {
         // 非本届毕业生提示
         {% if not is_eligible %}
-            {#alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");#}
-            alert("测试中，尚未开放，敬请期待！");
+            alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");
+            {#alert("测试中，尚未开放，敬请期待！");#}
         {% else %}
             // 推荐竖屏浏览提示
             if (window.innerWidth > window.innerHeight) {
@@ -127,8 +129,8 @@
     document.getElementById("jump-btn").addEventListener("click", (event) => {
         // 非本届毕业生提示
         {% if not is_eligible %}
-            {#alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");#}
-            alert("测试中，尚未开放，敬请期待！");
+            alert("啊哦！你不是本届毕业生哦～无法查看毕业回忆");
+            {#alert("测试中，尚未开放，敬请期待！");#}
         {% else %}
             // 若用户未勾选同意复选框，弹出提示
             if (!document.getElementById("agree-checkbox").checked) {

@@ -83,6 +83,7 @@
 {# Swiper JS #}
 <script src="{% static 'swiper-11.1.3/swiper-bundle.min.js' %}"></script>
 <script>
+    // 使用js代替css媒体查询（企业微信不支持aspect-ratio的媒体查询，导致页面显示异常）
     let aspectRatio = window.innerWidth / window.innerHeight;
 
     // 根元素字体大小适配
@@ -91,7 +92,6 @@
         document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
     }
 
-    // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
     const calcSize = () => {
         // 宽屏适配
         if (aspectRatio > 75 / 100) {
@@ -135,7 +135,7 @@
         }
         // 教室页文本框位置
         const fgContentScenarioClassroom = document.getElementById("fg-content-scenario-classroom");
-        fgContentScenarioClassroom.style.marginTop = "0";
+        fgContentScenarioClassroom.style.marginTop = "10%";
         if (aspectRatio > 40 / 100) {
             fgContentScenarioClassroom.style.top = "5%";
         }
@@ -225,7 +225,8 @@
             calcSize();
         }
     });
-
+</script>
+<script>
     window.addEventListener("pageshow", () => {
         // 转场动画 - 进入页面
         document.getElementById("overlay").style.opacity = "0";
@@ -236,6 +237,7 @@
     let prevSlidePos = 0;
     let curSlidePos = 0;
     let nextSlidePos = 0;
+
     const swiper = new Swiper(".swiper", {
         direction: "vertical",
         edgeSwipeDetection: "prevent",
