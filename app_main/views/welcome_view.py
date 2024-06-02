@@ -26,11 +26,11 @@ def welcome_view(request):
             .full_name
         )
 
-    # 内测用户检查
-    with open("./test_users.txt", "r") as f:
-        test_users = f.read().splitlines()
-    if seu_card_id not in test_users:
-        is_eligible = False
+    # # 内测用户检查
+    # with open("./test_users.txt", "r") as f:
+    #     test_users = f.read().splitlines()
+    # if seu_card_id not in test_users:
+    #     is_eligible = False
 
     return render(
         request,
