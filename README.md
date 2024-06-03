@@ -39,7 +39,7 @@
 
 ## :page_facing_up: 使用许可
 
-项目代码使用 [MIT License](./LICENSE)，欢迎自由使用、修改、分享
+项目代码使用 [GPL 3.0 License](./LICENSE)，欢迎自由使用、修改、分享
 
 项目中的插图、UI 等资源版权归原作者所有，**未经授权勿作它用**
 
