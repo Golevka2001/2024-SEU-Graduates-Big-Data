@@ -61,7 +61,7 @@
 </main>
 
 <script>
-    // 使用js代替css媒体查询（企业微信不支持aspect-ratio的媒体查询，导致页面显示异常）
+    // 使用js代替css媒体查询（企业微信、QQ不支持aspect-ratio的媒体查询，导致页面显示异常）
     let aspectRatio = window.innerWidth / window.innerHeight;
 
     // 根元素字体大小适配
@@ -69,25 +69,6 @@
     if (aspectRatio > 53 / 100) {
         document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
     }
-
-    // 企业微信适配
-    const ua = window.navigator.userAgent.toLowerCase();
-    if (ua.indexOf("wxwork") !== -1) {
-        calcSize();
-    }
-
-    window.addEventListener("resize", () => {
-        aspectRatio = window.innerWidth / window.innerHeight;
-        // 根元素字体大小适配
-        document.documentElement.style.fontSize = "3.75vw";
-        if (aspectRatio > 53 / 100) {
-            document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
-        }
-        // 企业微信适配
-        if (ua.indexOf("wxwork") !== -1) {
-            calcSize();
-        }
-    });
 
     // 使用js实现媒体查询（企业微信不支持aspect-ratio的媒体查询）
     const calcSize = () => {
@@ -107,6 +88,25 @@
             });
         }
     };
+
+    // 企业微信、QQ适配
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf("wxwork") !== -1 || ua.indexOf("qq") !== -1) {
+        calcSize();
+    }
+
+    window.addEventListener("resize", () => {
+        aspectRatio = window.innerWidth / window.innerHeight;
+        // 根元素字体大小适配
+        document.documentElement.style.fontSize = "3.75vw";
+        if (aspectRatio > 53 / 100) {
+            document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
+        }
+        // 企业微信、QQ适配
+        if (ua.indexOf("wxwork") !== -1 || ua.indexOf("qq") !== -1) {
+            calcSize();
+        }
+    });
 </script>
 <script>
     window.addEventListener("pageshow", () => {
