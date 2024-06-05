@@ -197,9 +197,9 @@
         }
     };
 
-    // 企业微信、QQ适配
+    // 企业微信、QQ、微信适配
     const ua = window.navigator.userAgent.toLowerCase();
-    if (ua.indexOf("wxwork") !== -1 || ua.indexOf("qq") !== -1) {
+    if (ua.indexOf("wxwork") !== -1 || ua.indexOf("qq") !== -1 || ua.indexOf("micromessenger") !== -1) {
         calcSize();
     }
 
@@ -210,8 +210,8 @@
         if (aspectRatio > 53 / 100) {
             document.documentElement.style.fontSize = window.innerHeight * 1.8 / 100 + "px";
         }
-        // 企业微信、QQ适配
-        if (ua.indexOf("wxwork") !== -1 || ua.indexOf("qq") !== -1) {
+        // 企业微信、QQ、微信适配
+        if (ua.indexOf("wxwork") !== -1 || ua.indexOf("qq") !== -1 || ua.indexOf("micromessenger") !== -1) {
             calcSize();
         }
     });
