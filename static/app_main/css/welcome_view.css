@@ -58,3 +58,13 @@ p {
     vertical-align: middle;
     margin-bottom: 0.5rem;
 }
+
+/* 底部数据日期声明 */
+#data-date {
+    margin: 0;
+    margin-top: 1%;
+    padding: 0;
+    font-family: Alibaba-PuHuiTi, sans-serif;
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
